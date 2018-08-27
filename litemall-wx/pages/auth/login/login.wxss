@@ -1,0 +1,26 @@
+.login-box{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 0 40rpx;
+    margin-top: 200rpx;
+    background: #fff;
+}
+
+.wx-login-btn{
+    margin: 60rpx 0 40rpx 0;
+    height: 96rpx;
+    line-height: 96rpx;
+    font-size: 30rpx;
+    width: 100%;
+    border-radius: 6rpx;
+}
+
+.account-login-btn{
+    margin: 60rpx 0 40rpx 0;
+    height: 96rpx;
+    line-height: 96rpx;
+    font-size: 30rpx;
+    width: 100%;
+    border-radius: 6rpx;
+}
