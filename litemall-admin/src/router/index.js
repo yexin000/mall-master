@@ -138,6 +138,23 @@ export const asyncRouterMap = [
   */
 
   {
+    path: '/goods',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'goodsManage',
+    meta: {
+      title: '商品管理',
+      icon: 'chart'
+    },
+    children: [
+      { path: 'list', component: _import('goods/list'), name: 'goodsList', meta: { title: '商品列表', noCache: true }},
+      { path: 'create', component: _import('goods/create'), name: 'goodsCreate', meta: { title: '商品上架', noCache: true }},
+      { path: 'edit', component: _import('goods/edit'), name: 'goodsEdit', meta: { title: '商品编辑', noCache: true }, hidden: true },
+      { path: 'comment', component: _import('goods/comment'), name: 'goodsComment', meta: { title: '商品评论', noCache: true }}
+    ]
+  },
+
+  {
     path: '/sys',
     component: Layout,
     redirect: 'noredirect',
@@ -163,7 +180,8 @@ export const asyncRouterMap = [
     },
     children: [
       { path: 'productList', component: _import('product/productList'), name: 'productList', meta: { title: '产品信息管理', noCache: true }},
-      { path: 'productAppType', component: _import('product/productAppType'), name: 'productAppType', meta: { title: '应用车型管理', noCache: true }}
+      { path: 'productAppType', component: _import('product/productAppType'), name: 'productAppType', meta: { title: '应用车型管理', noCache: true }},
+      { path: 'create', component: _import('product/create'), name: 'create', meta: { title: '产品创建', noCache: true }, hidden: true }
     ]
   },
 

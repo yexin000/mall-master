@@ -88,7 +88,7 @@
         this.goodsTotal = response.data.data.goodsTotal
         this.productTotal = response.data.data.productTotal
         this.orderTotal = response.data.data.orderTotal
-        this.zcProductTotal = response.data.data.zcProductTotal;
+        this.zcProductTotal = response.data.data.zcProductTotal
       })
     }
   }

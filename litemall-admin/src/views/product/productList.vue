@@ -180,7 +180,7 @@
         this.getList()
       },
       handleCreate() {
-        this.$router.push({ path: '/goods/create' })
+        this.$router.push({ path: '/product/create' })
       },
       handleUpdate(row) {
         this.$router.push({ path: '/goods/edit', query: { id: row.id }})
