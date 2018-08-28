@@ -3,18 +3,18 @@
 
     <el-card class="box-card">
       <h3>产品信息</h3>
-      <el-form :rules="rules" ref="goods" :model="goods" label-width="150px">
-        <el-form-item label="物资编号" prop="goodsSn">
-          <el-input v-model="goods.goodsSn"></el-input>
+      <el-form :rules="rules" ref="zcProduct" :model="zcProduct" label-width="150px">
+        <el-form-item label="物资编号" prop="productnum">
+          <el-input v-model="zcProduct.productnum"></el-input>
         </el-form-item>
-        <el-form-item label="产品名称" prop="name">
-          <el-input v-model="goods.name"></el-input>
+        <el-form-item label="产品名称" prop="productname">
+          <el-input v-model="zcProduct.productname"></el-input>
         </el-form-item>
 
         <el-form-item label="实物图">
           <el-upload class="avatar-uploader" :action="uploadPath" list-type="picture-card" :show-file-list="false" :headers="headers"
                      accept=".jpg,.jpeg,.png,.gif" :on-success="uploadPicUrl">
-            <img v-if="goods.picUrl" :src="goods.picUrl" class="avatar">
+            <img v-if="zcProduct.snapshot" :src="zcProduct.snapshot" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -22,17 +22,20 @@
         <el-form-item label="剖面图">
           <el-upload class="avatar-uploader" :action="uploadPath" list-type="picture-card" :show-file-list="false" :headers="headers"
                      accept=".jpg,.jpeg,.png,.gif" :on-success="uploadPicUrl">
-            <img v-if="goods.picUrl" :src="goods.picUrl" class="avatar">
+            <img v-if="zcProduct.realpic" :src="zcProduct.realpic" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
 
-        <el-form-item label="结构形式" prop="name">
-          <el-input v-model="goods.name"></el-input>
+        <el-form-item label="结构形式" prop="structtype">
+          <el-input v-model="zcProduct.structtype"></el-input>
         </el-form-item>
 
         <el-form-item label="产品类型">
-          <el-cascader expand-trigger="hover" :options="categoryList" @change="handleCategoryChange"></el-cascader>
+          <el-select v-model="zcProduct.producttype">
+            <el-option v-for="item in productTypeMap" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
 
         <el-form-item label="产品应用车型">
@@ -40,7 +43,7 @@
         </el-form-item>
 
         <el-form-item label="产品应用平台">
-          <el-select v-model="goods.brandId">
+          <el-select v-model="zcProduct.platform">
             <el-option v-for="item in brandList" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
@@ -50,7 +53,8 @@
 
     <div class="op-container">
       <el-button @click="handleCancel">取消</el-button>
-      <el-button @click="handlePublish" type="primary">上传</el-button>
+      <el-button v-if="isCreate == true" @click="handlePublish" type="primary">创建</el-button>
+      <el-button v-else @click="handleUpdate" type="primary">保存</el-button>
     </div>
 
   </div>
@@ -100,7 +104,7 @@
 </style>
 
 <script>
-  import { publishGoods, listCatAndBrand } from '@/api/goods'
+  import { createProduct, detailProduct, editProduct } from '@/api/product'
   import { createStorage, uploadPath } from '@/api/storage'
   import Editor from '@tinymce/tinymce-vue'
   import { MessageBox } from 'element-ui'
@@ -126,6 +130,8 @@
         categoryList: [],
         brandList: [],
         goods: { picUrl: '', gallery: [] },
+        zcProduct: { snapshot: '', realpic: '' },
+        isCreate: true,
         specVisiable: false,
         specForm: { specification: '', value: '', picUrl: '' },
         multipleSpec: false,
@@ -136,9 +142,23 @@
         attributeVisiable: false,
         attributeForm: { attribute: '', value: '' },
         attributes: [],
+        productTypeMap: [
+          { value: '01', label: '球铰关节' },
+          { value: '02', label: '橡胶垫' },
+          { value: '03', label: '止挡' },
+          { value: '04', label: '空气弹簧' },
+          { value: '05', label: '抗侧滚扭杆' },
+          { value: '06', label: '连杆组件' },
+          { value: '07', label: '牵引装置' },
+          { value: '08', label: '橡胶堆' },
+          { value: '09', label: '锥形簧' },
+          { value: '10', label: 'V形簧' },
+          { value: '11', label: '其他' }
+        ],
         rules: {
-          goodsSn: [{ required: true, message: '商品编号不能为空', trigger: 'blur' }],
-          name: [{ required: true, message: '商品名称不能为空', trigger: 'blur' }]
+          productnum: [{ required: true, message: '请输入物资编号', trigger: 'blur' }],
+          productname: [{ required: true, message: '请输入产品名称', trigger: 'blur' }],
+          producttype: [{ required: true, message: '请选择产品类型', trigger: 'blur' }]
         },
         editorInit: {
           language: 'zh_CN',
@@ -162,10 +182,19 @@
 
     methods: {
       init: function() {
+        /*
         listCatAndBrand().then(response => {
           this.categoryList = response.data.data.categoryList
           this.brandList = response.data.data.brandList
         })
+        */
+        if (this.$route.query.id != null) {
+          const productId = this.$route.query.id
+          detailProduct(productId).then(response => {
+            this.zcProduct = response.data.data.product
+            this.isCreate = false
+          })
+        }
       },
       handleCategoryChange(value) {
         this.goods.categoryId = value[value.length - 1]
@@ -174,20 +203,30 @@
         this.$router.push({ path: '/goods/goods' })
       },
       handlePublish: function() {
-        const finalGoods = {
-          goods: this.goods,
-          specifications: this.specifications,
-          products: this.products,
-          attributes: this.attributes
-        }
-        publishGoods(finalGoods).then(response => {
+        createProduct(this.zcProduct).then(response => {
           this.$notify({
             title: '成功',
             message: '创建成功',
             type: 'success',
             duration: 2000
           })
-          this.$router.push({ path: '/goods/list' })
+          this.$router.push({ path: '/product/productList' })
+        }).catch(response => {
+          MessageBox.alert('业务错误：' + response.data.errmsg, '警告', {
+            confirmButtonText: '确定',
+            type: 'error'
+          })
+        })
+      },
+      handleUpdate: function() {
+        editProduct(this.zcProduct).then(response => {
+          this.$notify({
+            title: '成功',
+            message: '修改成功',
+            type: 'success',
+            duration: 2000
+          })
+          this.$router.push({ path: '/product/productList' })
         }).catch(response => {
           MessageBox.alert('业务错误：' + response.data.errmsg, '警告', {
             confirmButtonText: '确定',

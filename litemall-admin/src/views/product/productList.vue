@@ -183,7 +183,7 @@
         this.$router.push({ path: '/product/create' })
       },
       handleUpdate(row) {
-        this.$router.push({ path: '/goods/edit', query: { id: row.id }})
+        this.$router.push({ path: '/product/create', query: { id: row.id }})
       },
       showDetail(detail) {
         this.goodsDetail = detail

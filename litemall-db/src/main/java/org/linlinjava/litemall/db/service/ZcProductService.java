@@ -46,4 +46,16 @@ public class ZcProductService {
     }
     return (int)zcProductMapper.countByExample(example);
   }
+
+  public void add(ZcProduct product) {
+    zcProductMapper.insertSelective(product);
+  }
+
+  public ZcProduct findById(Integer id) {
+    return zcProductMapper.selectByPrimaryKey(id);
+  }
+
+  public void updateById(ZcProduct product) {
+    zcProductMapper.updateByPrimaryKeySelective(product);
+  }
 }
