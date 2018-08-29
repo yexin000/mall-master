@@ -51,13 +51,13 @@
 
       <el-table-column align="center" property="iconUrl" label="实物图">
         <template slot-scope="scope">
-          <img :src="scope.row.picUrl" width="40"/>
+          <img :src="scope.row.snapshot" width="40"/>
         </template>
       </el-table-column>
 
       <el-table-column align="center" property="iconUrl" label="剖面图">
         <template slot-scope="scope">
-          <img :src="scope.row.shareUrl" width="40"/>
+          <img :src="scope.row.realpic" width="40"/>
         </template>
       </el-table-column>
 

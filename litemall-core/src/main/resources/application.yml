@@ -3,6 +3,11 @@ spring:
     active: core, db
   message:
     encoding: UTF-8
+  servlet:
+    multipart:
+      enabled: true
+      resolve-lazily: true
+      max-file-size: 10MB
 
 logging:
   level:

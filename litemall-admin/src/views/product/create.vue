@@ -13,7 +13,7 @@
 
         <el-form-item label="实物图">
           <el-upload class="avatar-uploader" :action="uploadPath" list-type="picture-card" :show-file-list="false" :headers="headers"
-                     accept=".jpg,.jpeg,.png,.gif" :on-success="uploadPicUrl">
+                     accept=".jpg,.jpeg,.png,.gif" :on-success="uploadSnapshot">
             <img v-if="zcProduct.snapshot" :src="zcProduct.snapshot" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
@@ -21,7 +21,7 @@
 
         <el-form-item label="剖面图">
           <el-upload class="avatar-uploader" :action="uploadPath" list-type="picture-card" :show-file-list="false" :headers="headers"
-                     accept=".jpg,.jpeg,.png,.gif" :on-success="uploadPicUrl">
+                     accept=".jpg,.jpeg,.png,.gif" :on-success="uploadRealPic">
             <img v-if="zcProduct.realpic" :src="zcProduct.realpic" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
@@ -253,13 +253,16 @@
         this.newKeywordVisible = false
         this.newKeyword = ''
       },
-      uploadPicUrl: function(response) {
-        this.goods.picUrl = response.data.url
+      uploadSnapshot: function(response) {
+        this.zcProduct.snapshot = response.data.url
+      },
+      uploadRealPic: function(response) {
+        this.zcProduct.realpic = response.data.url
       },
       uploadOverrun: function() {
         this.$message({
           type: 'error',
-          message: '上传文件个数超出限制!最多上传5张图片!'
+          message: '上传文件个数超出限制!最多上传1张图片!'
         })
       },
       handleGalleryUrl(response, file, fileList) {

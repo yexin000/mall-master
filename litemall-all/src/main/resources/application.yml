@@ -3,6 +3,11 @@ spring:
     active: db, core, admin, wx
   message:
     encoding: UTF-8
+  servlet:
+    multipart:
+      enabled: true
+      resolve-lazily: true
+      max-file-size: 10MB
 
 server:
   port: 8080
