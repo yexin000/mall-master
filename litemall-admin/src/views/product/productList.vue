@@ -111,7 +111,7 @@
 </style>
 
 <script>
-  import { listProducts } from '@/api/product'
+  import { listProducts, deleteProduct } from '@/api/product'
   import BackToTop from '@/components/BackToTop'
 
   const productTypeMap = [
@@ -190,8 +190,7 @@
         this.detailDialogVisible = true
       },
       handleDelete(row) {
-        /*
-        deleteGoods(row).then(response => {
+        deleteProduct(row).then(response => {
           this.$notify({
             title: '成功',
             message: '删除成功',
@@ -201,7 +200,6 @@
           const index = this.list.indexOf(row)
           this.list.splice(index, 1)
         })
-        */
       }
     }
   }

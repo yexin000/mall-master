@@ -31,3 +31,11 @@ export function editProduct(data) {
     data
   })
 }
+
+export function deleteProduct(data) {
+  return request({
+    url: '/product/delete',
+    method: 'post',
+    data
+  })
+}

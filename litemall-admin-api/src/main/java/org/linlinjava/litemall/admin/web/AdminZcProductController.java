@@ -109,4 +109,26 @@ public class AdminZcProductController {
 
     return ResponseUtil.ok();
   }
+
+  @PostMapping("/delete")
+  public Object delete(@LoginAdmin Integer adminId, @RequestBody ZcProduct product) {
+    if (adminId == null) {
+      return ResponseUtil.unlogin();
+    }
+
+    // 开启事务管理
+    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+    TransactionStatus status = txManager.getTransaction(def);
+    try {
+
+      Integer productId = product.getId();
+      zcProductService.deleteById(productId);
+    } catch (Exception ex) {
+      txManager.rollback(status);
+      logger.error("系统内部错误", ex);
+    }
+    txManager.commit(status);
+    return ResponseUtil.ok();
+  }
 }

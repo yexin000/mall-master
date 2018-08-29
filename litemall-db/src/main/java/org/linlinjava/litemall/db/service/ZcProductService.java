@@ -58,4 +58,8 @@ public class ZcProductService {
   public void updateById(ZcProduct product) {
     zcProductMapper.updateByPrimaryKeySelective(product);
   }
+
+  public void deleteById(Integer id) {
+    zcProductMapper.deleteByPrimaryKey(id);
+  }
 }
