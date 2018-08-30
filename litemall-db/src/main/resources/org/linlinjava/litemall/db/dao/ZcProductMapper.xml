@@ -48,6 +48,7 @@
     <result column="gangd" jdbcType="VARCHAR" property="gangd" />
     <result column="vxjd" jdbcType="VARCHAR" property="vxjd" />
     <result column="zyg" jdbcType="VARCHAR" property="zyg" />
+    <result column="hxgd" jdbcType="VARCHAR" property="hxgd" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -123,7 +124,7 @@
     id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
     remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, plhz, 
     xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, kz, 
-    zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg
+    zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd
   </sql>
   <select id="selectByExample" parameterType="org.linlinjava.litemall.db.domain.ZcProductExample" resultMap="BaseResultMap">
     <!--
@@ -163,7 +164,7 @@
         id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
           remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, 
           plhz, xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, 
-          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg
+          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd
       </otherwise>
     </choose>
     from t_e_product
@@ -201,7 +202,7 @@
         id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
           remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, 
           plhz, xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, 
-          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg
+          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd
       </otherwise>
     </choose>
     from t_e_product
@@ -245,7 +246,7 @@
       zongxgd, zpcd, zhouxgd, 
       kz, zdhz, cxgd, ysg, 
       cxhz, syhz, gangd, 
-      vxjd, zyg)
+      vxjd, zyg, hxgd)
     values (#{productnum,jdbcType=VARCHAR}, #{producttype,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, 
       #{snapshot,jdbcType=VARCHAR}, #{realpic,jdbcType=VARCHAR}, #{structtype,jdbcType=VARCHAR}, 
       #{traintype,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
@@ -258,7 +259,7 @@
       #{zongxgd,jdbcType=VARCHAR}, #{zpcd,jdbcType=VARCHAR}, #{zhouxgd,jdbcType=VARCHAR}, 
       #{kz,jdbcType=VARCHAR}, #{zdhz,jdbcType=VARCHAR}, #{cxgd,jdbcType=VARCHAR}, #{ysg,jdbcType=VARCHAR}, 
       #{cxhz,jdbcType=VARCHAR}, #{syhz,jdbcType=VARCHAR}, #{gangd,jdbcType=VARCHAR}, 
-      #{vxjd,jdbcType=VARCHAR}, #{zyg,jdbcType=VARCHAR})
+      #{vxjd,jdbcType=VARCHAR}, #{zyg,jdbcType=VARCHAR}, #{hxgd,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.linlinjava.litemall.db.domain.ZcProduct">
     <!--
@@ -393,6 +394,9 @@
       <if test="zyg != null">
         zyg,
       </if>
+      <if test="hxgd != null">
+        hxgd,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="productnum != null">
@@ -517,6 +521,9 @@
       </if>
       <if test="zyg != null">
         #{zyg,jdbcType=VARCHAR},
+      </if>
+      <if test="hxgd != null">
+        #{hxgd,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -662,6 +669,9 @@
       </if>
       <if test="record.zyg != null">
         zyg = #{record.zyg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hxgd != null">
+        hxgd = #{record.hxgd,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -899,7 +909,8 @@
       syhz = #{syhz,jdbcType=VARCHAR},
       gangd = #{gangd,jdbcType=VARCHAR},
       vxjd = #{vxjd,jdbcType=VARCHAR},
-      zyg = #{zyg,jdbcType=VARCHAR}
+      zyg = #{zyg,jdbcType=VARCHAR},
+      hxgd = #{hxgd,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectOneByExample" parameterType="org.linlinjava.litemall.db.domain.ZcProductExample" resultMap="BaseResultMap">
@@ -936,7 +947,7 @@
         id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
           remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, 
           plhz, xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, 
-          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg
+          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd
       </otherwise>
     </choose>
     from t_e_product
