@@ -1,6 +1,5 @@
 <template>
   <div class="app-container calendar-list-container">
-
     <el-card class="box-card">
       <h3>产品信息</h3>
       <el-form :rules="rules" ref="zcProduct" :model="zcProduct" label-width="150px">
@@ -10,6 +9,98 @@
         <el-form-item label="产品名称" prop="productname">
           <el-input v-model="zcProduct.productname"></el-input>
         </el-form-item>
+        <el-form-item label="产品类型">
+          <el-select v-model="zcProduct.producttype">
+            <el-option v-for="item in productTypeMap" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <div v-if="zcProduct.producttype == '01'">
+          <el-form-item label="外径A/mm" prop="wj"><el-input v-model="zcProduct.wj"></el-input></el-form-item>
+          <el-form-item label="长度B/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
+          <el-form-item label="装配长度C/mm" prop="zpcd"><el-input v-model="zcProduct.zpcd"></el-input></el-form-item>
+          <el-form-item label="径向刚度/kN/mm" prop="jxgd"><el-input v-model="zcProduct.jxgd"></el-input></el-form-item>
+          <el-form-item label="轴向刚度/kN/mm" prop="zhouxgd"><el-input v-model="zcProduct.zhouxgd"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '02'">
+          <el-form-item label="外径A/mm" prop="wj"><el-input v-model="zcProduct.wj"></el-input></el-form-item>
+          <el-form-item label="高度B/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
+          <el-form-item label="受压荷载/kN" prop="syhz"><el-input v-model="zcProduct.syhz"></el-input></el-form-item>
+          <el-form-item label="刚度/kN/mm" prop="gangd"><el-input v-model="zcProduct.gangd"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '03'">
+          <el-form-item label="自由高/mm" prop="zyg"><el-input v-model="zcProduct.zyg"></el-input></el-form-item>
+          <el-form-item label="轴向刚度/kN/mm" prop="zhouxgd"><el-input v-model="zcProduct.zhouxgd"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '04'">
+          <el-form-item label="外径A/mm" prop="wj"><el-input v-model="zcProduct.wj"></el-input></el-form-item>
+          <el-form-item label="标准高度/mm" prop="bzgd"><el-input v-model="zcProduct.bzgd"></el-input></el-form-item>
+          <el-form-item label="空载/kN" prop="kz"><el-input v-model="zcProduct.kz"></el-input></el-form-item>
+          <el-form-item label="超载/kN" prop="cz"><el-input v-model="zcProduct.cz"></el-input></el-form-item>
+          <el-form-item label="重量/kg" prop="weight"><el-input v-model="zcProduct.weight"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '05'">
+          <el-form-item label="连杆加载点间距L1/mm" prop="lgjzdjj"><el-input v-model="zcProduct.lgjzdjj"></el-input></el-form-item>
+          <el-form-item label="支撑座间距L2/mm" prop="zczjj"><el-input v-model="zcProduct.zczjj"></el-input></el-form-item>
+          <el-form-item label="扭杆臂长度L3/mm" prop="ngbcd"><el-input v-model="zcProduct.ngbcd"></el-input></el-form-item>
+          <el-form-item label="极限荷载/kN" prop="jxhz"><el-input v-model="zcProduct.jxhz"></el-input></el-form-item>
+          <el-form-item label="疲劳荷载/kN" prop="plhz"><el-input v-model="zcProduct.plhz"></el-input></el-form-item>
+          <el-form-item label="系统刚度/kN/mm" prop="xtgd"><el-input v-model="zcProduct.xtgd"></el-input></el-form-item>
+          <el-form-item label="重量/kg" prop="weight"><el-input v-model="zcProduct.weight"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '06'">
+          <el-form-item label="连杆中心距L1/mm" prop="lgzxj"><el-input v-model="zcProduct.lgzxj"></el-input></el-form-item>
+          <el-form-item label="杆体球头外径L2/mm" prop="gtqtwj"><el-input v-model="zcProduct.gtqtwj"></el-input></el-form-item>
+          <el-form-item label="孔类型L3/mm" prop="klx"><el-input v-model="zcProduct.klx"></el-input></el-form-item>
+          <el-form-item label="极限荷载/kN" prop="jxhz"><el-input v-model="zcProduct.jxhz"></el-input></el-form-item>
+          <el-form-item label="压装力/kN" prop="yzl"><el-input v-model="zcProduct.yzl"></el-input></el-form-item>
+          <el-form-item label="径向刚度/kN/mm" prop="jxgd"><el-input v-model="zcProduct.jxgd"></el-input></el-form-item>
+          <el-form-item label="重量/kg" prop="weight"><el-input v-model="zcProduct.weight"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '07'">
+          <el-form-item label="长度L1/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
+          <el-form-item label="宽度L2/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
+          <el-form-item label="高度L3/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
+          <el-form-item label="装配尺寸L4/mm" prop="zpcc"><el-input v-model="zcProduct.zpcc"></el-input></el-form-item>
+          <el-form-item label="极限荷载/kN" prop="jxhz"><el-input v-model="zcProduct.jxhz"></el-input></el-form-item>
+          <el-form-item label="纵向刚度/kN/mm" prop="zongxgd"><el-input v-model="zcProduct.zongxgd"></el-input></el-form-item>
+          <el-form-item label="重量/kg" prop="weight"><el-input v-model="zcProduct.weight"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '08'">
+          <el-form-item label="外径A/mm" prop="wj"><el-input v-model="zcProduct.wj"></el-input></el-form-item>
+          <el-form-item label="长度L1/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
+          <el-form-item label="宽度L2/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
+          <el-form-item label="高度L3/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
+          <el-form-item label="垂向荷载/kN" prop="cxhz"><el-input v-model="zcProduct.cxhz"></el-input></el-form-item>
+          <el-form-item label="垂向刚度/kN/mm" prop="cxgd"><el-input v-model="zcProduct.cxgd"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '09'">
+          <el-form-item label="长度L1/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
+          <el-form-item label="宽度L2/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
+          <el-form-item label="高度L3/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
+          <el-form-item label="空载/kN" prop="kz"><el-input v-model="zcProduct.kz"></el-input></el-form-item>
+          <el-form-item label="最大荷载/kN" prop="zdhz"><el-input v-model="zcProduct.zdhz"></el-input></el-form-item>
+          <el-form-item label="垂向刚度/kN/mm" prop="cxgd"><el-input v-model="zcProduct.cxgd"></el-input></el-form-item>
+          <el-form-item label="压缩高（AWO）/mm" prop="ysg"><el-input v-model="zcProduct.ysg"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '10'">
+          <el-form-item label="长度L1/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
+          <el-form-item label="宽度L2/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
+          <el-form-item label="高度L3/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
+          <el-form-item label="V形角度/°" prop="vxjd"><el-input v-model="zcProduct.vxjd"></el-input></el-form-item>
+          <el-form-item label="空载/kN" prop="kz"><el-input v-model="zcProduct.kz"></el-input></el-form-item>
+          <el-form-item label="最大荷载/kN" prop="zdhz"><el-input v-model="zcProduct.zdhz"></el-input></el-form-item>
+          <el-form-item label="垂向刚度/kN/mm" prop="cxgd"><el-input v-model="zcProduct.cxgd"></el-input></el-form-item>
+          <el-form-item label="横向刚度/kN/mm" prop="hxgd"><el-input v-model="zcProduct.hxgd"></el-input></el-form-item>
+          <el-form-item label="纵向刚度/kN/mm" prop="zongxgd"><el-input v-model="zcProduct.zongxgd"></el-input></el-form-item>
+          <el-form-item label="压缩高（AWO）/mm" prop="ysg"><el-input v-model="zcProduct.ysg"></el-input></el-form-item>
+          <el-form-item label="重量/kg" prop="weight"><el-input v-model="zcProduct.weight"></el-input></el-form-item>
+        </div>
+        <div v-if="zcProduct.producttype == '11'">
+          <el-form-item label="长度L1/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
+          <el-form-item label="宽度L2/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
+          <el-form-item label="高度L3/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
+        </div>
 
         <el-form-item label="实物图">
           <el-upload class="avatar-uploader" :action="uploadPath" list-type="picture-card" :show-file-list="false" :headers="headers"
@@ -29,13 +120,6 @@
 
         <el-form-item label="结构形式" prop="structtype">
           <el-input v-model="zcProduct.structtype"></el-input>
-        </el-form-item>
-
-        <el-form-item label="产品类型">
-          <el-select v-model="zcProduct.producttype">
-            <el-option v-for="item in productTypeMap" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
         </el-form-item>
 
         <el-form-item label="产品应用车型">
