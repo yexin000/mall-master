@@ -13,11 +13,14 @@
       </el-select>
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button class="filter-item" type="primary" @click="handleCreate" icon="el-icon-edit">添加</el-button>
-    </div>
 
+      <el-upload class="filter-item" :action="importExcel" :show-file-list="false" :headers="headers"
+                 accept=".xls,.xlsx">
+        <el-button type="primary" :loading="downloadLoading" icon="el-icon-download">导入</el-button>
+      </el-upload>
+    </div>
     <!-- 查询结果 -->
     <el-table size="small" :data="list" v-loading="listLoading" element-loading-text="正在查询中。。。" border fit highlight-current-row>
-
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form v-if="props.row.producttype == '01'" label-position="left" class="table-expand">
@@ -108,13 +111,10 @@
           </el-form>
         </template>
       </el-table-column>
-
       <el-table-column align="center" label="物资编号" prop="productnum">
       </el-table-column>
-
       <el-table-column align="center" min-width="100" label="产品名称" prop="productname">
       </el-table-column>
-
       <el-table-column align="center" property="iconUrl" label="实物图">
         <template slot-scope="scope">
           <img :src="scope.row.snapshot" width="40"/>
@@ -169,8 +169,9 @@
 </style>
 
 <script>
-  import { listProducts, deleteProduct } from '@/api/product'
+  import { listProducts, deleteProduct, importExcel } from '@/api/product'
   import BackToTop from '@/components/BackToTop'
+  import { getToken } from '@/utils/auth'
 
   const productTypeMap = [
     { key: '01', value: '球铰关节' },
@@ -189,8 +190,16 @@
   export default {
     name: 'ProductList',
     components: { BackToTop },
+    computed: {
+      headers() {
+        return {
+          'Admin-Token': getToken()
+        }
+      }
+    },
     data() {
       return {
+        importExcel,
         list: [],
         total: 0,
         listLoading: true,

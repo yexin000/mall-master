@@ -39,3 +39,6 @@ export function deleteProduct(data) {
     data
   })
 }
+
+const importExcel = process.env.BASE_API + '/product/import'
+export { importExcel }

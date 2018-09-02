@@ -15,8 +15,10 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,5 +132,17 @@ public class AdminZcProductController {
     }
     txManager.commit(status);
     return ResponseUtil.ok();
+  }
+
+  @PostMapping("/import")
+  public Object create(@LoginAdmin Integer adminId, @RequestParam("file") MultipartFile file) throws Exception {
+    if (adminId == null) {
+      return ResponseUtil.unlogin();
+    }
+    String fileName = file.getOriginalFilename();
+    zcProductService.batchImport(fileName, file);
+
+    Map<String, Object> data = new HashMap<>();
+    return ResponseUtil.ok(data);
   }
 }
