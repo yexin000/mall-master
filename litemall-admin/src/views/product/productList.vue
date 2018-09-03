@@ -15,8 +15,8 @@
       <el-button class="filter-item" type="primary" @click="handleCreate" icon="el-icon-edit">添加</el-button>
 
       <el-upload class="filter-item" :action="importExcel" :show-file-list="false" :headers="headers"
-                 accept=".xls,.xlsx">
-        <el-button type="primary" :loading="downloadLoading" icon="el-icon-download">导入</el-button>
+                 accept=".xls,.xlsx" :before-upload="handlePreview" :on-success="handleSuccess">
+        <el-button type="primary" :loading="importing" icon="el-icon-download">导入</el-button>
       </el-upload>
     </div>
     <!-- 查询结果 -->
@@ -215,7 +215,7 @@
         productTypeMap,
         goodsDetail: '',
         detailDialogVisible: false,
-        downloadLoading: false
+        importing: false
       }
     },
     created() {
@@ -255,6 +255,19 @@
       showDetail(detail) {
         this.goodsDetail = detail
         this.detailDialogVisible = true
+      },
+      handlePreview() {
+        this.importing = true
+      },
+      handleSuccess() {
+        this.importing = false
+        this.getList()
+        this.$notify({
+          title: '成功',
+          message: '导入成功',
+          type: 'success',
+          duration: 2000
+        })
       },
       handleDelete(row) {
         deleteProduct(row).then(response => {

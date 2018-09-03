@@ -312,7 +312,6 @@ public class ZcProductService {
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setYsg(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
-                  product.setTraintype(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (VXH_TYPE.equals(producyType)) {
@@ -335,7 +334,6 @@ public class ZcProductService {
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setTraintype(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
-                  product.setPlatform(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setHxgd(value);
@@ -355,7 +353,7 @@ public class ZcProductService {
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setPlatform(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
-                  product.setProvider(value);
+                  product.setTraintype(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setZongxgd(value);
@@ -374,6 +372,7 @@ public class ZcProductService {
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
+                  product.setPlatform(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setYsg(value);
@@ -383,6 +382,8 @@ public class ZcProductService {
               } else if (j == 16) {
                 if (VXH_TYPE.equals(producyType)) {
                   product.setWeight(value);
+                } else if (XJDUI_TYPE.equals(producyType)) {
+                  product.setProvider(value);
                 }
               } else if (j == 17) {
                 if (VXH_TYPE.equals(producyType)) {
