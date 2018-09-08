@@ -127,9 +127,9 @@
       </el-table-column>
       <el-table-column align="center" label="结构形式" prop="structtype">
       </el-table-column>
-      <el-table-column align="center" label="产品应用车型" prop="traintype">
+      <el-table-column align="center" label="产品应用车型" prop="traintypename">
       </el-table-column>
-      <el-table-column align="center" label="产品应用平台" prop="platform">
+      <el-table-column align="center" label="产品应用平台" prop="platformname">
       </el-table-column>
       <el-table-column align="center" label="操作" width="200" class-name="small-padding fixed-width">
         <template slot-scope="scope">

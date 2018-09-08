@@ -207,7 +207,7 @@
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
             <columnOverride javaType="java.time.LocalDateTime" column="add_time"/>
         </table>
-        <table tableName="t_e_product">
+        <table tableName="t_e_category">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

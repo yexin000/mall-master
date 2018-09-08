@@ -3,37 +3,39 @@
 
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-      <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入对象KEY" v-model="listQuery.key">
+      <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入ID" v-model="listQuery.id">
       </el-input>
-      <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入对象名称" v-model="listQuery.name">
+      <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入平台/车型名称" v-model="listQuery.name">
       </el-input>
-      <el-button class="filter-item" type="primary"  icon="el-icon-search" @click="handleFilter">查找</el-button>
+      <el-select style="width: 200px" class="filter-item" placeholder="请选择平台" v-model="listQuery.pid">
+        <el-option label="请选择平台" value="0">
+        </el-option>
+        <el-option v-for="(item, index) in catL1" :key="index" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button class="filter-item" type="primary" @click="handleCreate" icon="el-icon-edit">添加</el-button>
-      <el-button class="filter-item" type="primary" :loading="downloadLoading" icon="el-icon-download" @click="handleDownload">导出</el-button>
     </div>
 
     <!-- 查询结果 -->
     <el-table size="small" :data="list" v-loading="listLoading" element-loading-text="正在查询中。。。" border fit highlight-current-row>
-
-      <el-table-column align="center" label="对象KEY" prop="key">
+      <el-table-column align="center" label="ID" prop="id">
       </el-table-column>
 
-      <el-table-column align="center" label="对象名称" prop="name">
+      <el-table-column align="center" label="名称" prop="name">
       </el-table-column>
 
-      <el-table-column align="center" label="对象类型" prop="type">
+      <el-table-column align="center" label="代码" prop="code">
       </el-table-column>
 
-      <el-table-column align="center" label="对象大小" prop="size">
-      </el-table-column>
-
-      <el-table-column align="center" property="url" label="图片">
+      <el-table-column align="center" label="类型" prop="level"
+                       :filters="[{ text: '产品应用平台', value: 'L1' }, { text: '产品应用车型', value: 'L2' }]" :filter-method="filterLevel">
         <template slot-scope="scope">
-          <img :src="scope.row.url" width="40"/>
+          <el-tag :type="scope.row.level === 'L1' ? 'primary' : 'info' ">{{scope.row.level === 'L1' ? '产品应用平台' : '产品应用车型'}}</el-tag>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="图片链接" prop="url">
+      <el-table-column align="center" label="父类型ID" prop="pid">
       </el-table-column>
 
       <el-table-column align="center" label="操作" width="200" class-name="small-padding fixed-width">
@@ -51,66 +53,125 @@
       </el-pagination>
     </div>
 
-    <!-- 添加对话框 -->
-    <el-dialog title="上传对象" :visible.sync="createDialogVisible">
-      <el-upload action="#" list-type="picture" :show-file-list="false" :limit="1" :http-request="handleUpload">
-        <el-button size="small" type="primary">点击上传</el-button>
-      </el-upload>
-    </el-dialog>
-
-    <!-- 修改对话框 -->
-    <el-dialog title="修改对象名称" :visible.sync="updateDialogVisible">
+    <!-- 添加或修改对话框 -->
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form :rules="rules" ref="dataForm" :model="dataForm" status-icon label-position="left" label-width="100px" style='width: 400px; margin-left:50px;'>
-        <el-form-item label="对象名称" prop="name">
+        <el-form-item label="名称" prop="name">
           <el-input v-model="dataForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="代码" prop="code">
+          <el-input v-model="dataForm.code"></el-input>
+        </el-form-item>
+        <el-form-item label="类型" prop="level">
+          <el-select v-model="dataForm.level" @change="onLevelChange">
+            <el-option label="产品应用平台" value="L1">
+            </el-option>
+            <el-option label="产品应用车型" value="L2">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="父类型" prop="pid" v-if="dataForm.level === 'L2'">
+          <el-select v-model="dataForm.pid">
+            <el-option v-for="item in catL1" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="updateDialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="updateData">确定</el-button>
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button v-if="dialogStatus=='create'" type="primary" @click="createData">确定</el-button>
+        <el-button v-else type="primary" @click="updateData">确定</el-button>
       </div>
     </el-dialog>
 
   </div>
 </template>
 
+<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #20a0ff;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+  }
+  .avatar {
+    width: 120px;
+    height: 120px;
+    display: block;
+  }
+</style>
+
 <script>
-  import { listStorage, createStorage, updateStorage, deleteStorage } from '@/api/storage'
+  import { listCategory, createCategory, listCatL1, deleteCategory, updateCategory } from '@/api/zcCategory'
+  import { uploadPath } from '@/api/storage'
+  import { getToken } from '@/utils/auth'
 
   export default {
-    name: 'Storage',
+    name: 'Category',
+    computed: {
+      headers() {
+        return {
+          'Admin-Token': getToken()
+        }
+      }
+    },
     data() {
       return {
-        list: null,
-        total: null,
+        uploadPath,
+        list: undefined,
+        total: undefined,
         listLoading: true,
         listQuery: {
           page: 1,
           limit: 20,
-          key: undefined,
+          id: undefined,
           name: undefined,
           sort: 'add_time',
           order: 'desc'
         },
-        createDialogVisible: false,
+        catL1: {},
         dataForm: {
           id: undefined,
-          name: ''
+          name: '',
+          keyword: '',
+          level: 'L2',
+          pid: undefined,
+          desc: '',
+          iconUrl: undefined,
+          picUrl: undefined
         },
-        updateDialogVisible: false,
+        dialogFormVisible: false,
+        dialogStatus: '',
+        textMap: {
+          update: '编辑',
+          create: '创建'
+        },
         rules: {
-          name: [{ required: true, message: '对象名称不能为空', trigger: 'blur' }]
+          name: [{ required: true, message: '类目名不能为空', trigger: 'blur' }]
         },
         downloadLoading: false
       }
     },
     created() {
       this.getList()
+      this.getCatL1()
     },
     methods: {
       getList() {
         this.listLoading = true
-        listStorage(this.listQuery).then(response => {
+        listCategory(this.listQuery).then(response => {
           this.list = response.data.data.items
           this.total = response.data.data.total
           this.listLoading = false
@@ -118,6 +179,11 @@
           this.list = []
           this.total = 0
           this.listLoading = false
+        })
+      },
+      getCatL1() {
+        listCatL1().then(response => {
+          this.catL1 = response.data.data
         })
       },
       handleFilter() {
@@ -135,31 +201,59 @@
       resetForm() {
         this.dataForm = {
           id: undefined,
-          name: ''
+          name: '',
+          keyword: '',
+          level: 'L1',
+          pid: undefined,
+          desc: '',
+          iconUrl: undefined,
+          picUrl: undefined
+        }
+      },
+      filterLevel: function(value, row) {
+        return row.level === value
+      },
+      onLevelChange: function(value) {
+        if (value === 'L1') {
+          this.pid = undefined
         }
       },
       handleCreate() {
-        this.createDialogVisible = true
+        this.resetForm()
+        this.dialogStatus = 'create'
+        this.dialogFormVisible = true
+        this.$nextTick(() => {
+          this.$refs['dataForm'].clearValidate()
+        })
       },
-      handleUpload(item) {
-        const formData = new FormData()
-        formData.append('file', item.file)
-        createStorage(formData).then(response => {
-          this.list.unshift(response.data.data)
-          this.createDialogVisible = false
-          this.$notify({
-            title: '成功',
-            message: '创建成功',
-            type: 'success',
-            duration: 2000
-          })
-        }).catch(() => {
-          this.$message.error('上传失败，请重新上传')
+      uploadIconUrl: function(response) {
+        this.dataForm.iconUrl = response.data.url
+      },
+      uploadPicUrl: function(response) {
+        this.dataForm.picUrl = response.data.url
+      },
+      createData() {
+        this.$refs['dataForm'].validate((valid) => {
+          if (valid) {
+            createCategory(this.dataForm).then(response => {
+              this.list.unshift(response.data.data)
+              this.dialogFormVisible = false
+              this.$notify({
+                title: '成功',
+                message: '创建成功',
+                type: 'success',
+                duration: 2000
+              })
+              this.getList()
+              this.getCatL1()
+            })
+          }
         })
       },
       handleUpdate(row) {
         this.dataForm = Object.assign({}, row)
-        this.updateDialogVisible = true
+        this.dialogStatus = 'update'
+        this.dialogFormVisible = true
         this.$nextTick(() => {
           this.$refs['dataForm'].clearValidate()
         })
@@ -167,7 +261,7 @@
       updateData() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
-            updateStorage(this.dataForm).then(() => {
+            updateCategory(this.dataForm).then(() => {
               for (const v of this.list) {
                 if (v.id === this.dataForm.id) {
                   const index = this.list.indexOf(v)
@@ -175,7 +269,7 @@
                   break
                 }
               }
-              this.updateDialogVisible = false
+              this.dialogFormVisible = false
               this.$notify({
                 title: '成功',
                 message: '更新成功',
@@ -187,7 +281,7 @@
         })
       },
       handleDelete(row) {
-        deleteStorage(row).then(response => {
+        deleteCategory(row).then(response => {
           this.$notify({
             title: '成功',
             message: '删除成功',
@@ -201,9 +295,9 @@
       handleDownload() {
         this.downloadLoading = true
         import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['ID', '对象KEY', '对象名称', '对象类型', '对象大小', '访问链接']
-          const filterVal = ['id', 'key', 'name', 'type', 'size', 'url']
-          excel.export_json_to_excel2(tHeader, this.list, filterVal, '对象存储信息')
+          const tHeader = ['类目ID', '名称', '关键字', '级别', '父类目ID', '类目图标', '类目图片', '简介']
+          const filterVal = ['id', 'name', 'keyword', 'level', 'pid', 'iconUrl', 'picUrl', 'desc']
+          excel.export_json_to_excel2(tHeader, this.list, filterVal, '商品类目信息')
           this.downloadLoading = false
         })
       }

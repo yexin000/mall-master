@@ -122,16 +122,14 @@
           <el-input v-model="zcProduct.structtype"></el-input>
         </el-form-item>
 
-        <el-form-item label="产品应用车型">
-          <el-cascader expand-trigger="hover" :options="categoryList" @change="handleCategoryChange"></el-cascader>
+        <el-form-item label="产品应用平台">
+          <el-cascader expand-trigger="hover" :options="platformMap" @change="handlePlatformChange"></el-cascader>
         </el-form-item>
 
-        <el-form-item label="产品应用平台">
-          <el-select v-model="zcProduct.platform">
-            <el-option v-for="item in brandList" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
+        <el-form-item label="产品应用车型">
+          <el-cascader expand-trigger="hover" :options="trainTypeList" @change="handleTrainTypeChange"></el-cascader>
         </el-form-item>
+
       </el-form>
     </el-card>
 
@@ -190,6 +188,7 @@
 <script>
   import { createProduct, detailProduct, editProduct } from '@/api/product'
   import { createStorage, uploadPath } from '@/api/storage'
+  import { listCatL1, listCatL2 } from '@/api/zcCategory'
   import Editor from '@tinymce/tinymce-vue'
   import { MessageBox } from 'element-ui'
   import { getToken } from '@/utils/auth'
@@ -211,7 +210,7 @@
         newKeywordVisible: false,
         newKeyword: '',
         keywords: [],
-        categoryList: [],
+        trainTypeList: [],
         brandList: [],
         goods: { picUrl: '', gallery: [] },
         zcProduct: { snapshot: '', realpic: '' },
@@ -239,6 +238,8 @@
           { value: '10', label: 'V形簧' },
           { value: '11', label: '其他' }
         ],
+        trainTypeMap: [],
+        platformMap: [],
         rules: {
           productnum: [{ required: true, message: '请输入物资编号', trigger: 'blur' }],
           productname: [{ required: true, message: '请输入产品名称', trigger: 'blur' }],
@@ -266,12 +267,8 @@
 
     methods: {
       init: function() {
-        /*
-        listCatAndBrand().then(response => {
-          this.categoryList = response.data.data.categoryList
-          this.brandList = response.data.data.brandList
-        })
-        */
+        this.getCatL1()
+        this.getCatL2()
         if (this.$route.query.id != null) {
           const productId = this.$route.query.id
           detailProduct(productId).then(response => {
@@ -280,8 +277,28 @@
           })
         }
       },
-      handleCategoryChange(value) {
-        this.goods.categoryId = value[value.length - 1]
+      getCatL1() {
+        listCatL1().then(response => {
+          this.platformMap = response.data.data
+        })
+      },
+      getCatL2() {
+        listCatL2().then(response => {
+          this.trainTypeMap = response.data.data
+        })
+      },
+      handlePlatformChange(value) {
+        this.zcProduct.platform = value.toString()
+        for (var i = 0; i < this.trainTypeMap.length; i++) {
+          const trainType = this.trainTypeMap[i]
+          if (trainType.value === value.toString()) {
+            this.trainTypeList = trainType.list
+            break
+          }
+        }
+      },
+      handleTrainTypeChange(value) {
+        this.zcProduct.traintype = value.toString()
       },
       handleCancel: function() {
         this.$router.push({ path: '/goods/goods' })

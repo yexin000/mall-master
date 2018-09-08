@@ -135,7 +135,6 @@ export const asyncRouterMap = [
       { path: 'topic', component: _import('promotion/topic'), name: 'topic', meta: { title: '专题管理', noCache: true }}
     ]
   },
-  */
 
   {
     path: '/goods',
@@ -151,6 +150,25 @@ export const asyncRouterMap = [
       { path: 'create', component: _import('goods/create'), name: 'goodsCreate', meta: { title: '商品上架', noCache: true }},
       { path: 'edit', component: _import('goods/edit'), name: 'goodsEdit', meta: { title: '商品编辑', noCache: true }, hidden: true },
       { path: 'comment', component: _import('goods/comment'), name: 'goodsComment', meta: { title: '商品评论', noCache: true }}
+    ]
+  },
+  */
+  {
+    path: '/mall',
+    component: Layout,
+    redirect: 'noredirect',
+    name: 'mallManage',
+    meta: {
+      title: '商场管理',
+      icon: 'chart'
+    },
+    children: [
+      { path: 'region', component: _import('mall/region'), name: 'region', meta: { title: '行政区域', noCache: true }},
+      { path: 'brand', component: _import('mall/brand'), name: 'brand', meta: { title: '品牌制造商', noCache: true }},
+      { path: 'category', component: _import('mall/category'), name: 'category', meta: { title: '商品类目', noCache: true }},
+      { path: 'order', component: _import('mall/order'), name: 'order', meta: { title: '订单管理', noCache: true }},
+      { path: 'issue', component: _import('mall/issue'), name: 'issue', meta: { title: '通用问题', noCache: true }},
+      { path: 'keyword', component: _import('mall/keyword'), name: 'keyword', meta: { title: '关键词', noCache: true }}
     ]
   },
 
@@ -180,7 +198,7 @@ export const asyncRouterMap = [
     },
     children: [
       { path: 'productList', component: _import('product/productList'), name: 'productList', meta: { title: '产品信息管理', noCache: true }},
-      { path: 'productAppType', component: _import('product/productAppType'), name: 'productAppType', meta: { title: '应用车型管理', noCache: true }},
+      { path: 'productAppType', component: _import('product/productAppType'), name: 'productAppType', meta: { title: '平台/车型管理', noCache: true }},
       { path: 'create', component: _import('product/create'), name: 'create', meta: { title: '产品创建', noCache: true }, hidden: true }
     ]
   },

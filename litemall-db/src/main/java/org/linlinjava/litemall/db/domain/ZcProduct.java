@@ -75,6 +75,7 @@ public class ZcProduct {
      * @mbg.generated
      */
     private String traintype;
+    private String traintypename;
 
     /**
      *
@@ -93,6 +94,7 @@ public class ZcProduct {
      * @mbg.generated
      */
     private String platform;
+    private String platformname;
 
     /**
      *
@@ -1405,6 +1407,22 @@ public class ZcProduct {
 
     public void setHxgd(String hxgd) {
         this.hxgd = hxgd;
+    }
+
+    public String getTraintypename() {
+        return traintypename;
+    }
+
+    public void setTraintypename(String traintypename) {
+        this.traintypename = traintypename;
+    }
+
+    public String getPlatformname() {
+        return platformname;
+    }
+
+    public void setPlatformname(String platformname) {
+        this.platformname = platformname;
     }
 
     /**
