@@ -139,8 +139,8 @@
     </if>
     t.*, t1.name as traintypename, t2.name as platformname
     from t_e_product t
-    left join t_e_category t1 on t1.id = traintype
-    left join t_e_category t2 on t2.id = platform
+    left join t_e_category t1 on t1.code = traintype
+    left join t_e_category t2 on t2.code = platform
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>

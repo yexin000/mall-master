@@ -85,6 +85,7 @@ public class AdminZcCategoryController {
     List<Map<String, Object>> data = new ArrayList<>(l1CatList.size());
     for (ZcCategory category : l1CatList){
       Map<String, Object> d = new HashMap<>(2);
+      d.put("code", category.getCode());
       d.put("value", category.getId());
       d.put("label", category.getName());
       data.add(d);
@@ -104,7 +105,8 @@ public class AdminZcCategoryController {
     Map<String, Object> dataMap = new HashMap<>();
     for (ZcCategory category : l2CatList){
       String keyId = String.valueOf(category.getPid());
-      Map<String, Object> d = new HashMap<>(2);
+      Map<String, Object> d = new HashMap<>(3);
+      d.put("code", category.getCode());
       d.put("value", category.getId());
       d.put("label", category.getName());
       if (dataMap.containsKey(keyId)) {
@@ -119,7 +121,12 @@ public class AdminZcCategoryController {
     }
 
     for (Map.Entry<String, Object> entry : dataMap.entrySet()) {
-      Map<String, Object> d = new HashMap<>(2);
+      Map<String, Object> d = new HashMap<>(3);
+      Integer id = Integer.valueOf(entry.getKey());
+      ZcCategory pCategory = zcCategoryService.queryById(id);
+      if (null != pCategory) {
+        d.put("code", pCategory.getCode());
+      }
       d.put("value", entry.getKey());
       d.put("list", entry.getValue());
       data.add(d);

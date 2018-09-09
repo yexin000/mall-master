@@ -73,6 +73,10 @@ public class ZcCategoryService {
     return zcCategoryMapper.selectByExample(example);
   }
 
+  public ZcCategory queryById(Integer id) {
+    return zcCategoryMapper.selectByPrimaryKey(id);
+  }
+
   public void deleteById(Integer id) {
     zcCategoryMapper.deleteByPrimaryKey(id);
   }

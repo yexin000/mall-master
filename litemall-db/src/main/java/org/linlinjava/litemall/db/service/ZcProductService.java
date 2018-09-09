@@ -132,13 +132,13 @@ public class ZcProductService {
     Map<String, Object> platformMap = new HashMap<>();
     List<ZcCategory> platformList = zcCategoryService.queryL1();
     for (ZcCategory platform : platformList) {
-      platformMap.put(platform.getName(), platform.getId());
+      platformMap.put(platform.getName(), platform.getCode());
     }
 
     Map<String, Object> trainTypeMap = new HashMap<>();
     List<ZcCategory> trainTypeList = zcCategoryService.queryL2();
     for (ZcCategory trainType : trainTypeList) {
-      trainTypeMap.put(trainType.getName(), trainType.getId());
+      trainTypeMap.put(trainType.getName(), trainType.getCode());
     }
 
     boolean isExcel2003 = true;

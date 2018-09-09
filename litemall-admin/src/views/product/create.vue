@@ -288,17 +288,23 @@
         })
       },
       handlePlatformChange(value) {
-        this.zcProduct.platform = value.toString()
         for (var i = 0; i < this.trainTypeMap.length; i++) {
           const trainType = this.trainTypeMap[i]
           if (trainType.value === value.toString()) {
             this.trainTypeList = trainType.list
+            this.zcProduct.platform = trainType.code
             break
           }
         }
       },
       handleTrainTypeChange(value) {
-        this.zcProduct.traintype = value.toString()
+        for (var i = 0; i < this.trainTypeList.length; i++) {
+          const trainType = this.trainTypeList[i]
+          if (trainType.value.toString() === value.toString()) {
+            this.zcProduct.traintype = trainType.code
+            break
+          }
+        }
       },
       handleCancel: function() {
         this.$router.push({ path: '/goods/goods' })
