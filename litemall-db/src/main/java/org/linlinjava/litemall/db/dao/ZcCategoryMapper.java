@@ -129,4 +129,10 @@ public interface ZcCategoryMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(ZcCategory record);
+
+    /**
+     * 查询二级类型
+     * @return
+     */
+    List<ZcCategory> selectL2WithPcode();
 }

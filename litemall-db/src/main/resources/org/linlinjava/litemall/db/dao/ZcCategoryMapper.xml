@@ -12,6 +12,7 @@
     <result column="value" jdbcType="VARCHAR" property="value" />
     <result column="level" jdbcType="VARCHAR" property="level" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pcode" jdbcType="VARCHAR" property="pcode" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -104,6 +105,16 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+  </select>
+
+  <select id="selectL2WithPcode" parameterType="org.linlinjava.litemall.db.domain.ZcCategoryExample" resultMap="BaseResultMap">
+    SELECT
+      t.*, t1.code AS pcode
+    FROM
+      t_e_category t
+    JOIN t_e_category t1 ON t.pid = t1.id
+    WHERE
+      t.level = 'L2'
   </select>
   <select id="selectByExampleSelective" parameterType="map" resultMap="BaseResultMap">
     <!--

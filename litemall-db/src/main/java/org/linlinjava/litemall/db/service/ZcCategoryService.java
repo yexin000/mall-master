@@ -73,6 +73,10 @@ public class ZcCategoryService {
     return zcCategoryMapper.selectByExample(example);
   }
 
+  public List<ZcCategory> queryL2WithPcode() {
+    return zcCategoryMapper.selectL2WithPcode();
+  }
+
   public ZcCategory queryById(Integer id) {
     return zcCategoryMapper.selectByPrimaryKey(id);
   }
