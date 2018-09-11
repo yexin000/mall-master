@@ -39,7 +39,7 @@ public class AdminDashbordController {
         int goodsTotal = goodsService.count();
         int productTotal = productService.count();
         int orderTotal = orderService.count();
-        int zcProductTotal = zcProductService.countSelective(null, null, null);
+        int zcProductTotal = zcProductService.countSelective(null, null, null, null, null);
         Map<String, Integer> data = new HashMap<>();
         data.put("userTotal", userTotal);
         data.put("goodsTotal", goodsTotal);

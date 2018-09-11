@@ -7,7 +7,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.linlinjava.litemall.db.dao.ZcCategoryMapper;
 import org.linlinjava.litemall.db.dao.ZcProductMapper;
 import org.linlinjava.litemall.db.domain.ZcCategory;
 import org.linlinjava.litemall.db.domain.ZcProduct;
@@ -20,7 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 中车产品查询service
@@ -32,7 +34,7 @@ public class ZcProductService {
 
   @Resource
   private ZcCategoryService zcCategoryService;
-  
+
   public static final Map<String, String> PRODUCT_TYPE_MAP = new HashMap<String, String>() {
     {
       put( "01", "球铰关节" );
@@ -75,7 +77,9 @@ public class ZcProductService {
   public static final String VXH_TYPE = "10"; // V形簧
   public static final String QT_TYPE = "11"; // 其他
 
-  public List<ZcProduct> querySelective(String productNum, String productName, String productType, Integer page, Integer limit, String sort, String order) {
+  public List<ZcProduct> querySelective(String productNum, String productName, String productType,
+                                        String platform, String trainType,
+                                        Integer page, Integer limit, String sort, String order) {
     ZcProductExample example = new ZcProductExample();
     ZcProductExample.Criteria criteria = example.createCriteria();
 
@@ -90,16 +94,40 @@ public class ZcProductService {
     if (!StringUtils.isEmpty(productName)) {
       criteria.andProductnameLike("%" + productName + "%");
     }
+
+    if (!StringUtils.isEmpty(platform)) {
+      criteria.andPlatformEqualTo(platform);
+    }
+
+    if (!StringUtils.isEmpty(trainType)) {
+      criteria.andTraintypeEqualTo(trainType);
+    }
     PageHelper.startPage(page, limit);
     return zcProductMapper.selectByExample(example);
   }
 
-  public int countSelective(String productNum, String productName, String productType) {
+  public int countSelective(String productNum, String productName, String productType,
+                            String platform, String trainType) {
     ZcProductExample example = new ZcProductExample();
     ZcProductExample.Criteria criteria = example.createCriteria();
 
     if (!StringUtils.isEmpty(productType)) {
       criteria.andProducttypeEqualTo(productType);
+    }
+    if (!StringUtils.isEmpty(productNum)) {
+      criteria.andProductnumLike("%" + productNum + "%");
+    }
+
+    if (!StringUtils.isEmpty(productName)) {
+      criteria.andProductnameLike("%" + productName + "%");
+    }
+
+    if (!StringUtils.isEmpty(platform)) {
+      criteria.andPlatformEqualTo(platform);
+    }
+
+    if (!StringUtils.isEmpty(trainType)) {
+      criteria.andTraintypeEqualTo(trainType);
     }
     return (int)zcProductMapper.countByExample(example);
   }

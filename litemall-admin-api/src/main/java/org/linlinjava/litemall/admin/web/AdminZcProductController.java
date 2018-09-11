@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +44,8 @@ public class AdminZcProductController {
                      @Sort @RequestParam(defaultValue = "add_time") String sort,
                      @Order @RequestParam(defaultValue = "desc") String order) {
 
-    List<ZcProduct> productList = zcProductService.querySelective(productNum, productName, productType, page, limit, sort, order);
-    int total = zcProductService.countSelective(productNum, productName, productType);
+    List<ZcProduct> productList = zcProductService.querySelective(productNum, productName, productType, null, null, page, limit, sort, order);
+    int total = zcProductService.countSelective(productNum, productName, productType, null, null);
     Map<String, Object> data = new HashMap<>();
     data.put("total", total);
     data.put("items", productList);
