@@ -11,6 +11,7 @@ import org.linlinjava.litemall.db.dao.ZcProductMapper;
 import org.linlinjava.litemall.db.domain.ZcCategory;
 import org.linlinjava.litemall.db.domain.ZcProduct;
 import org.linlinjava.litemall.db.domain.ZcProductExample;
+import org.linlinjava.litemall.db.domain.ZcProducttype;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -106,6 +107,37 @@ public class ZcProductService {
     return zcProductMapper.selectByExample(example);
   }
 
+  public List<ZcProduct> queryByTrainType(String trainType, String sort, String order) {
+    ZcProductExample example = new ZcProductExample();
+    ZcProductExample.Criteria criteria = example.createCriteria();
+
+    if (!StringUtils.isEmpty(trainType)) {
+      criteria.andTraintypeEqualTo(trainType);
+    }
+
+    if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
+      example.setOrderByClause(sort + " " + order);
+    }
+
+    return zcProductMapper.selectByExample(example);
+  }
+
+  public List<ZcProduct> queryByProductType(String productType, String sort, String order) {
+
+    ZcProductExample example = new ZcProductExample();
+    ZcProductExample.Criteria criteria = example.createCriteria();
+
+    if (!StringUtils.isEmpty(productType)) {
+      criteria.andProducttypeEqualTo(productType);
+    }
+
+    if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
+      example.setOrderByClause(sort + " " + order);
+    }
+
+    return zcProductMapper.selectByExample(example);
+  }
+
   public int countSelective(String productNum, String productName, String productType,
                             String platform, String trainType) {
     ZcProductExample example = new ZcProductExample();
@@ -130,6 +162,23 @@ public class ZcProductService {
       criteria.andTraintypeEqualTo(trainType);
     }
     return (int)zcProductMapper.countByExample(example);
+  }
+
+  public List<ZcProducttype> queryProductType(String productName, String platform, String trainType) {
+    ZcProductExample example = new ZcProductExample();
+    ZcProductExample.Criteria criteria = example.createCriteria();
+    if (!StringUtils.isEmpty(productName)) {
+      criteria.andProductnameLike("%" + productName + "%");
+    }
+
+    if (!StringUtils.isEmpty(platform)) {
+      criteria.andPlatformEqualTo(platform);
+    }
+
+    if (!StringUtils.isEmpty(trainType)) {
+      criteria.andTraintypeEqualTo(trainType);
+    }
+    return zcProductMapper.selectProductTypeByExample(example);
   }
 
   public void add(ZcProduct product) {

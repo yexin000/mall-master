@@ -152,7 +152,7 @@ export const asyncRouterMap = [
       { path: 'comment', component: _import('goods/comment'), name: 'goodsComment', meta: { title: '商品评论', noCache: true }}
     ]
   },
-  */
+
   {
     path: '/mall',
     component: Layout,
@@ -171,7 +171,7 @@ export const asyncRouterMap = [
       { path: 'keyword', component: _import('mall/keyword'), name: 'keyword', meta: { title: '关键词', noCache: true }}
     ]
   },
-
+  */
   {
     path: '/sys',
     component: Layout,
@@ -199,6 +199,7 @@ export const asyncRouterMap = [
     children: [
       { path: 'productList', component: _import('product/productList'), name: 'productList', meta: { title: '产品信息管理', noCache: true }},
       { path: 'productAppType', component: _import('product/productAppType'), name: 'productAppType', meta: { title: '平台/车型管理', noCache: true }},
+      { path: 'messageList', component: _import('product/messageList'), name: 'messageList', meta: { title: '客户留言', noCache: true }},
       { path: 'create', component: _import('product/create'), name: 'create', meta: { title: '产品创建', noCache: true }, hidden: true }
     ]
   },

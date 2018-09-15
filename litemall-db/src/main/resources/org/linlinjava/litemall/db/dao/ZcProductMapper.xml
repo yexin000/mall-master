@@ -52,6 +52,13 @@
     <result column="zyg" jdbcType="VARCHAR" property="zyg" />
     <result column="hxgd" jdbcType="VARCHAR" property="hxgd" />
   </resultMap>
+
+  <resultMap id="TypeResultMap" type="org.linlinjava.litemall.db.domain.ZcProducttype">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="producttype" jdbcType="VARCHAR" property="producttype" />
+    <result column="typename" jdbcType="VARCHAR" property="typename" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated
@@ -147,6 +154,19 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+  </select>
+
+  <select id="selectProductTypeByExample" parameterType="org.linlinjava.litemall.db.domain.ZcProductExample" resultMap="TypeResultMap">
+    SELECT DISTINCT
+      pt.*
+    FROM
+      t_e_product p
+    LEFT JOIN t_e_producttype pt ON p.producttype = pt.producttype
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    ORDER BY
+      pt.producttype ASC
   </select>
   <select id="selectByExampleSelective" parameterType="map" resultMap="BaseResultMap">
     <!--
