@@ -8,12 +8,12 @@
       <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入产品名称" v-model="listQuery.productName">
       </el-input>
       <el-select style="width: 200px" class="filter-item" placeholder="请选择产品类型" v-model="listQuery.productType">
+        <el-option label="请选择产品类型" value=""></el-option>
         <el-option v-for="(item, index) in productTypeMap" :key="index" :label="item.value" :value="item.key">
         </el-option>
       </el-select>
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button class="filter-item" type="primary" @click="handleCreate" icon="el-icon-edit">添加</el-button>
-
       <el-upload class="filter-item" :action="importExcel" :show-file-list="false" :headers="headers"
                  accept=".xls,.xlsx" :before-upload="handlePreview" :on-success="handleSuccess">
         <el-button type="primary" :loading="importing" icon="el-icon-download">导入</el-button>
@@ -83,8 +83,7 @@
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '09'" label-position="left" class="table-expand">
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
+            <el-form-item label="直径A/mm"><span>{{ props.row.zhij }}</span></el-form-item>
             <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="空载/kN"><span>{{ props.row.kz }}</span></el-form-item>
             <el-form-item label="最大荷载/kN"><span>{{ props.row.zdhz }}</span></el-form-item>

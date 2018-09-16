@@ -75,8 +75,7 @@
           <el-form-item label="垂向刚度/kN/mm" prop="cxgd"><el-input v-model="zcProduct.cxgd"></el-input></el-form-item>
         </div>
         <div v-if="zcProduct.producttype == '09'">
-          <el-form-item label="长度L1/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
-          <el-form-item label="宽度L2/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
+          <el-form-item label="直径A/mm" prop="zhij"><el-input v-model="zcProduct.zhij"></el-input></el-form-item>
           <el-form-item label="高度L3/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
           <el-form-item label="空载/kN" prop="kz"><el-input v-model="zcProduct.kz"></el-input></el-form-item>
           <el-form-item label="最大荷载/kN" prop="zdhz"><el-input v-model="zcProduct.zdhz"></el-input></el-form-item>
@@ -307,7 +306,7 @@
         }
       },
       handleCancel: function() {
-        this.$router.push({ path: '/goods/goods' })
+        this.$router.push({ path: '/product/productList' })
       },
       handlePublish: function() {
         createProduct(this.zcProduct).then(response => {

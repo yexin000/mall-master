@@ -238,7 +238,14 @@ public class ZcProductService {
         if (sheet != null) {
         }
         String sheetName = sheet.getSheetName();
-        if (SHEET_NAME_LIST.contains(sheetName) && sheet.getLastRowNum() > 2) {
+        boolean isImportSheet = false;
+        for (String sname : SHEET_NAME_LIST) {
+          if (sheetName.contains(sname)) {
+            isImportSheet = true;
+            break;
+          }
+        }
+        if (isImportSheet && sheet.getLastRowNum() > 2) {
           // 跳过第一第二行
           for (int r = 2; r <= sheet.getLastRowNum(); r++) {
             Row row = sheet.getRow(r);
@@ -270,9 +277,11 @@ public class ZcProductService {
                   product.setLgjzdjj(value);
                 } else if (LGZJ_TYPE.equals(producyType)) {
                   product.setLgzxj(value);
-                } else if (QYZZ_TYPE.equals(producyType) || ZXH_TYPE.equals(producyType) || VXH_TYPE.equals(producyType)
+                } else if (QYZZ_TYPE.equals(producyType) || VXH_TYPE.equals(producyType)
                     || QT_TYPE.equals(producyType)) {
                   product.setCd(value);
+                } else if (ZXH_TYPE.equals(producyType)) {
+                  product.setZhij(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
                   product.setZyg(value);
                 }
@@ -288,7 +297,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                   product.setCd(value);
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setKd(value);
+                  product.setGd(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setCd(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
@@ -312,7 +321,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                   product.setZpcd(value);
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setGd(value);
+                  product.setKz(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setKd(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
@@ -336,7 +345,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                   product.setJxgd(value);
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setKz(value);
+                  product.setZdhz(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setGd(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
@@ -360,7 +369,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                   product.setZhouxgd(value);
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setZdhz(value);
+                  product.setCxgd(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setCxhz(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
@@ -384,7 +393,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setCxgd(value);
+                  product.setYsg(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setCxgd(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
@@ -396,6 +405,7 @@ public class ZcProductService {
                 }
               } else if (j == 12) {
                 if (KQTH_TYPE.equals(producyType)) {
+                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (KCGNG_TYPE.equals(producyType)) {
                   product.setWeight(value);
                 } else if (LGZJ_TYPE.equals(producyType)) {
@@ -405,7 +415,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                   product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setYsg(value);
+                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (XJDUI_TYPE.equals(producyType)) {
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                   product.setProvider(value);
@@ -417,7 +427,7 @@ public class ZcProductService {
                 }
               } else if (j == 13) {
                 if (KQTH_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setProvider(value);
                 } else if (KCGNG_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (LGZJ_TYPE.equals(producyType)) {
@@ -427,7 +437,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (XJDUI_TYPE.equals(producyType)) {
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
@@ -437,7 +447,6 @@ public class ZcProductService {
                 }
               } else if (j == 14) {
                 if (KQTH_TYPE.equals(producyType)) {
-                  product.setProvider(value);
                 } else if (KCGNG_TYPE.equals(producyType)) {
                   product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (LGZJ_TYPE.equals(producyType)) {
@@ -446,7 +455,7 @@ public class ZcProductService {
                   product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (QJGX_TYPE.equals(producyType)) {
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setProvider(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (XJDIAN_TYPE.equals(producyType)) {
@@ -465,7 +474,6 @@ public class ZcProductService {
                   product.setProvider(value);
                 } else if (QJGX_TYPE.equals(producyType)) {
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setProvider(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (XJDIAN_TYPE.equals(producyType)) {
@@ -511,7 +519,7 @@ public class ZcProductService {
   private String getProductTypeBySheetname(String sheetName) {
     String productType = "11";
     for (Map.Entry<String, String> entry : PRODUCT_TYPE_MAP.entrySet()) {
-      if (sheetName.equals(entry.getValue())) {
+      if (sheetName.contains(entry.getValue())) {
         productType = entry.getKey();
       }
     }

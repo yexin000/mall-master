@@ -51,6 +51,7 @@
     <result column="vxjd" jdbcType="VARCHAR" property="vxjd" />
     <result column="zyg" jdbcType="VARCHAR" property="zyg" />
     <result column="hxgd" jdbcType="VARCHAR" property="hxgd" />
+    <result column="zhij" jdbcType="VARCHAR" property="zhij" />
   </resultMap>
 
   <resultMap id="TypeResultMap" type="org.linlinjava.litemall.db.domain.ZcProducttype">
@@ -133,7 +134,7 @@
     id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
     remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, plhz, 
     xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, kz, 
-    zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd
+    zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd, zhij
   </sql>
   <select id="selectByExample" parameterType="org.linlinjava.litemall.db.domain.ZcProductExample" resultMap="BaseResultMap">
     <!--
@@ -188,7 +189,7 @@
         id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
           remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, 
           plhz, xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, 
-          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd
+          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd, zhij
       </otherwise>
     </choose>
     from t_e_product
@@ -226,7 +227,7 @@
         id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
           remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, 
           plhz, xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, 
-          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd
+          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd, zhij
       </otherwise>
     </choose>
     from t_e_product
@@ -270,7 +271,7 @@
       zongxgd, zpcd, zhouxgd, 
       kz, zdhz, cxgd, ysg, 
       cxhz, syhz, gangd, 
-      vxjd, zyg, hxgd)
+      vxjd, zyg, hxgd, zhij)
     values (#{productnum,jdbcType=VARCHAR}, #{producttype,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, 
       #{snapshot,jdbcType=VARCHAR}, #{realpic,jdbcType=VARCHAR}, #{structtype,jdbcType=VARCHAR}, 
       #{traintype,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
@@ -283,7 +284,7 @@
       #{zongxgd,jdbcType=VARCHAR}, #{zpcd,jdbcType=VARCHAR}, #{zhouxgd,jdbcType=VARCHAR}, 
       #{kz,jdbcType=VARCHAR}, #{zdhz,jdbcType=VARCHAR}, #{cxgd,jdbcType=VARCHAR}, #{ysg,jdbcType=VARCHAR}, 
       #{cxhz,jdbcType=VARCHAR}, #{syhz,jdbcType=VARCHAR}, #{gangd,jdbcType=VARCHAR}, 
-      #{vxjd,jdbcType=VARCHAR}, #{zyg,jdbcType=VARCHAR}, #{hxgd,jdbcType=VARCHAR})
+      #{vxjd,jdbcType=VARCHAR}, #{zyg,jdbcType=VARCHAR}, #{hxgd,jdbcType=VARCHAR}, #{zhij,jdbcType=VARCHAR})
   </insert>
 
   <insert id="batchInsert" parameterType="java.util.List">
@@ -306,7 +307,7 @@
     zongxgd, zpcd, zhouxgd,
     kz, zdhz, cxgd, ysg,
     cxhz, syhz, gangd,
-    vxjd, zyg, hxgd)
+    vxjd, zyg, hxgd, zhij)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.productnum,jdbcType=VARCHAR}, #{item.producttype,jdbcType=VARCHAR}, #{item.productname,jdbcType=VARCHAR},
@@ -321,7 +322,7 @@
       #{item.zongxgd,jdbcType=VARCHAR}, #{item.zpcd,jdbcType=VARCHAR}, #{item.zhouxgd,jdbcType=VARCHAR},
       #{item.kz,jdbcType=VARCHAR}, #{item.zdhz,jdbcType=VARCHAR}, #{item.cxgd,jdbcType=VARCHAR}, #{item.ysg,jdbcType=VARCHAR},
       #{item.cxhz,jdbcType=VARCHAR}, #{item.syhz,jdbcType=VARCHAR}, #{item.gangd,jdbcType=VARCHAR},
-      #{item.vxjd,jdbcType=VARCHAR}, #{item.zyg,jdbcType=VARCHAR}, #{item.hxgd,jdbcType=VARCHAR})
+      #{item.vxjd,jdbcType=VARCHAR}, #{item.zyg,jdbcType=VARCHAR}, #{item.hxgd,jdbcType=VARCHAR}, #{item.zhij,jdbcType=VARCHAR})
     </foreach>
   </insert>
 
@@ -461,6 +462,9 @@
       <if test="hxgd != null">
         hxgd,
       </if>
+      <if test="zhij != null">
+        zhij,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="productnum != null">
@@ -588,6 +592,9 @@
       </if>
       <if test="hxgd != null">
         #{hxgd,jdbcType=VARCHAR},
+      </if>
+      <if test="zhij != null">
+        #{zhij,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -736,6 +743,9 @@
       </if>
       <if test="record.hxgd != null">
         hxgd = #{record.hxgd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhij != null">
+        zhij = #{record.zhij,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -974,7 +984,8 @@
       gangd = #{gangd,jdbcType=VARCHAR},
       vxjd = #{vxjd,jdbcType=VARCHAR},
       zyg = #{zyg,jdbcType=VARCHAR},
-      hxgd = #{hxgd,jdbcType=VARCHAR}
+      hxgd = #{hxgd,jdbcType=VARCHAR},
+      zhij = #{zhij,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectOneByExample" parameterType="org.linlinjava.litemall.db.domain.ZcProductExample" resultMap="BaseResultMap">
@@ -1011,7 +1022,7 @@
         id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
           remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, 
           plhz, xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, 
-          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd
+          kz, zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd, zhij
       </otherwise>
     </choose>
     from t_e_product
