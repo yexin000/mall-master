@@ -115,9 +115,9 @@ public class AdminAdminController {
         }
 
         Integer anotherAdminId = admin.getId();
-        if(anotherAdminId == 1){
+        /*if(anotherAdminId == 1){
             return ResponseUtil.fail(403, "超级管理员不能修改");
-        }
+        }*/
 
         String rawPassword = admin.getPassword();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

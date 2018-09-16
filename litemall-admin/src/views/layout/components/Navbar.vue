@@ -21,16 +21,6 @@
               主页
             </router-link>
           </el-dropdown-item>
-          <el-dropdown-item>
-            <a target='_blank' href="https://github.com/linlinjava/litemall">
-              GitHub
-            </a>
-          </el-dropdown-item>
-          <el-dropdown-item>
-            <a target='_blank' href="https://gitee.com/linlinjava/litemall">
-              码云
-            </a>
-          </el-dropdown-item>
           <el-dropdown-item divided>
             <span @click="logout" style="display:block;">退出登录</span>
           </el-dropdown-item>
