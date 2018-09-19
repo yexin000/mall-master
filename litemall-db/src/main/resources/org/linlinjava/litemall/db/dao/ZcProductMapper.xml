@@ -752,6 +752,149 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <update id="batchUpdate" parameterType="java.util.List">
+    <foreach collection="list" item="record" separator=";">
+      update t_e_product
+      <set>
+        <if test="record.id != null">
+          id = #{record.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.productnum != null">
+          productnum = #{record.productnum,jdbcType=VARCHAR},
+        </if>
+        <if test="record.producttype != null">
+          producttype = #{record.producttype,jdbcType=VARCHAR},
+        </if>
+        <if test="record.productname != null">
+          productname = #{record.productname,jdbcType=VARCHAR},
+        </if>
+        <if test="record.snapshot != null">
+          snapshot = #{record.snapshot,jdbcType=VARCHAR},
+        </if>
+        <if test="record.realpic != null">
+          realpic = #{record.realpic,jdbcType=VARCHAR},
+        </if>
+        <if test="record.structtype != null">
+          structtype = #{record.structtype,jdbcType=VARCHAR},
+        </if>
+        <if test="record.traintype != null">
+          traintype = #{record.traintype,jdbcType=VARCHAR},
+        </if>
+        <if test="record.remark != null">
+          remark = #{record.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.platform != null">
+          platform = #{record.platform,jdbcType=VARCHAR},
+        </if>
+        <if test="record.provider != null">
+          provider = #{record.provider,jdbcType=VARCHAR},
+        </if>
+        <if test="record.wj != null">
+          wj = #{record.wj,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bzgd != null">
+          bzgd = #{record.bzgd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cz != null">
+          cz = #{record.cz,jdbcType=VARCHAR},
+        </if>
+        <if test="record.weight != null">
+          weight = #{record.weight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.lgjzdjj != null">
+          lgjzdjj = #{record.lgjzdjj,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zczjj != null">
+          zczjj = #{record.zczjj,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ngbcd != null">
+          ngbcd = #{record.ngbcd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.jxhz != null">
+          jxhz = #{record.jxhz,jdbcType=VARCHAR},
+        </if>
+        <if test="record.plhz != null">
+          plhz = #{record.plhz,jdbcType=VARCHAR},
+        </if>
+        <if test="record.xtgd != null">
+          xtgd = #{record.xtgd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.lgzxj != null">
+          lgzxj = #{record.lgzxj,jdbcType=VARCHAR},
+        </if>
+        <if test="record.gtqtwj != null">
+          gtqtwj = #{record.gtqtwj,jdbcType=VARCHAR},
+        </if>
+        <if test="record.klx != null">
+          klx = #{record.klx,jdbcType=VARCHAR},
+        </if>
+        <if test="record.yzl != null">
+          yzl = #{record.yzl,jdbcType=VARCHAR},
+        </if>
+        <if test="record.jxgd != null">
+          jxgd = #{record.jxgd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cd != null">
+          cd = #{record.cd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.kd != null">
+          kd = #{record.kd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.gd != null">
+          gd = #{record.gd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zpcc != null">
+          zpcc = #{record.zpcc,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zongxgd != null">
+          zongxgd = #{record.zongxgd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zpcd != null">
+          zpcd = #{record.zpcd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zhouxgd != null">
+          zhouxgd = #{record.zhouxgd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.kz != null">
+          kz = #{record.kz,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zdhz != null">
+          zdhz = #{record.zdhz,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cxgd != null">
+          cxgd = #{record.cxgd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ysg != null">
+          ysg = #{record.ysg,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cxhz != null">
+          cxhz = #{record.cxhz,jdbcType=VARCHAR},
+        </if>
+        <if test="record.syhz != null">
+          syhz = #{record.syhz,jdbcType=VARCHAR},
+        </if>
+        <if test="record.gangd != null">
+          gangd = #{record.gangd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.vxjd != null">
+          vxjd = #{record.vxjd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zyg != null">
+          zyg = #{record.zyg,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hxgd != null">
+          hxgd = #{record.hxgd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.zhij != null">
+          zhij = #{record.zhij,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where productnum = #{record.productnum,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+
+
   <update id="updateByExample" parameterType="map">
     <!--
       WARNING - @mbg.generated
@@ -1033,5 +1176,9 @@
       order by ${example.orderByClause}
     </if>
     limit 1
+  </select>
+
+  <select id="queryProductNumList" parameterType="map" resultType="java.lang.String">
+      select productnum from t_e_product
   </select>
 </mapper>

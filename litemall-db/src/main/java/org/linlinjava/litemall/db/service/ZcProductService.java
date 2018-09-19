@@ -510,7 +510,25 @@ public class ZcProductService {
       }
 
       if (!CollectionUtils.isEmpty(productList)) {
-        zcProductMapper.batchInsert(productList);
+        // 查询物资编号列表
+        List<String> productNumList = zcProductMapper.queryProductNumList();
+        // 得到插入列表
+        List<ZcProduct> insertProductList = new ArrayList<>();
+        // 得到更新列表
+        List<ZcProduct> updateProductList = new ArrayList<>();
+        for (ZcProduct product : productList) {
+          if (productNumList.contains(product.getProductnum())) {
+            updateProductList.add(product);
+          } else {
+            insertProductList.add(product);
+          }
+        }
+        if (!CollectionUtils.isEmpty(insertProductList)) {
+          zcProductMapper.batchInsert(insertProductList);
+        }
+        if (!CollectionUtils.isEmpty(updateProductList)) {
+          zcProductMapper.batchUpdate(updateProductList);
+        }
       }
     }
     return data;

@@ -7,7 +7,7 @@ pagehelper:
 spring:
   datasource:
     druid:
-      url:  jdbc:mysql://132.232.70.70:3306/litemall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&verifyServerCertificate=false&useSSL=false
+      url:  jdbc:mysql://132.232.70.70:3306/litemall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&verifyServerCertificate=false&useSSL=false&allowMultiQueries=true
       driver-class-name:  com.mysql.jdbc.Driver
       username:  litemall
       password:  Litemall0808!
@@ -22,5 +22,5 @@ spring:
       test-on-return:  false
       test-while-idle:  true
       time-between-eviction-runs-millis:  60000
-      filters:  stat,wall,log4j
+      filters:  stat,log4j
 

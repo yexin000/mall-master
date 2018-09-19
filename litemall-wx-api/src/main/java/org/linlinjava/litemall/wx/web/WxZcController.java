@@ -130,7 +130,7 @@ public class WxZcController {
   @GetMapping("list")
   public Object list(String productName, String platform, String trainType,
                      @RequestParam(defaultValue = "1") Integer page,
-                     @RequestParam(defaultValue = "20") Integer size,
+                     @RequestParam(defaultValue = "2000") Integer size,
                      @Sort(accepts = {"productnum"}) @RequestParam(defaultValue = "productnum") String sort,
                      @Order @RequestParam(defaultValue = "asc") String order) {
     // TODO 添加到搜索历史
@@ -145,11 +145,9 @@ public class WxZcController {
     result.put("data", productList);
     result.put("total", total);
 
-    if (!StringUtils.isEmpty(trainType)) {
-      // 产品列表包含产品类型列表
-      List<ZcProducttype> producttypeList = zcProductService.queryProductType(productName, platform, trainType);
-      result.put("typeList", producttypeList);
-    }
+    // 产品列表包含产品类型列表
+    List<ZcProducttype> producttypeList = zcProductService.queryProductType(productName, platform, trainType);
+    result.put("typeList", producttypeList);
     return ResponseUtil.ok(result);
   }
 
@@ -217,4 +215,12 @@ public class WxZcController {
     return ResponseUtil.ok(result);
   }
 
+  @GetMapping("getById")
+  public Object getById(Integer productId) {
+    ZcProduct productInfo = zcProductService.findById(productId);
+    Map<String, Object> result = new HashMap<String, Object>();
+    result.put("productInfo", productInfo);
+
+    return ResponseUtil.ok(result);
+  }
 }
