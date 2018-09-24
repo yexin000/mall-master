@@ -1,8 +1,10 @@
 package org.linlinjava.litemall.admin.web;
 
+import jodd.util.StringUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.linlinjava.litemall.admin.annotation.LoginAdmin;
+import org.linlinjava.litemall.core.storage.StorageService;
 import org.linlinjava.litemall.core.util.ResponseUtil;
 import org.linlinjava.litemall.core.validator.Order;
 import org.linlinjava.litemall.core.validator.Sort;
@@ -34,6 +36,8 @@ public class AdminZcProductController {
 
   @Autowired
   private ZcProductService zcProductService;
+  @Autowired
+  private StorageService storageService;
   @Autowired
   private PlatformTransactionManager txManager;
 
@@ -140,6 +144,40 @@ public class AdminZcProductController {
     }
     String fileName = file.getOriginalFilename();
     zcProductService.batchImport(fileName, file);
+
+    Map<String, Object> data = new HashMap<>();
+    return ResponseUtil.ok(data);
+  }
+
+
+  @PostMapping("/importPics")
+  public Object importPics(@LoginAdmin Integer adminId, @RequestParam("file") MultipartFile file) throws Exception {
+    if (adminId == null) {
+      return ResponseUtil.unlogin();
+    }
+
+    String originalFilename = file.getOriginalFilename();
+    String extUpp = StringUtil.toUpperCase(originalFilename.substring(originalFilename.lastIndexOf(".") + 1));
+    if (!extUpp.matches("^[(JPG)|(PNG)]+$")) {
+      return ResponseUtil.fail();
+    }
+
+    if (file.getSize() > 5 * 1024 * 1024) {
+      return ResponseUtil.fail();
+    }
+
+    String fileName = originalFilename.substring(0, originalFilename.lastIndexOf("."));
+    String[] fileNameFilters = fileName.split("_");
+    if (fileNameFilters.length == 2 && ("1".equals(fileNameFilters[1]) || "2".equals(fileNameFilters[1]))) {
+      String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), originalFilename);
+      if ("1".equals(fileNameFilters[1])) {
+        zcProductService.updateRealpicByProductNum(fileNameFilters[0], url);
+      } else if ("2".equals(fileNameFilters[1])) {
+        zcProductService.updateSnapshotByProductNum(fileNameFilters[0], url);
+      }
+    } else {
+      return ResponseUtil.fail();
+    }
 
     Map<String, Object> data = new HashMap<>();
     return ResponseUtil.ok(data);

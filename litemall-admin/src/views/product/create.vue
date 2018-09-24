@@ -103,16 +103,16 @@
 
         <el-form-item label="实物图">
           <el-upload class="avatar-uploader" :action="uploadPath" list-type="picture-card" :show-file-list="false" :headers="headers"
-                     accept=".jpg,.jpeg,.png,.gif" :on-success="uploadSnapshot">
-            <img v-if="zcProduct.snapshot" :src="zcProduct.snapshot" class="avatar">
+                     accept=".jpg,.jpeg,.png" :on-success="uploadRealPic">
+            <img v-if="zcProduct.realpic" :src="zcProduct.realpic" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
 
         <el-form-item label="剖面图">
           <el-upload class="avatar-uploader" :action="uploadPath" list-type="picture-card" :show-file-list="false" :headers="headers"
-                     accept=".jpg,.jpeg,.png,.gif" :on-success="uploadRealPic">
-            <img v-if="zcProduct.realpic" :src="zcProduct.realpic" class="avatar">
+                     accept=".jpg,.jpeg,.png" :on-success="uploadSnapshot">
+            <img v-if="zcProduct.snapshot" :src="zcProduct.snapshot" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -122,11 +122,11 @@
         </el-form-item>
 
         <el-form-item label="产品应用平台">
-          <el-cascader expand-trigger="hover" :options="platformMap" @change="handlePlatformChange"></el-cascader>
+          <el-cascader expand-trigger="hover" :options="platformMap" v-model="selectedPlatform" @change="handlePlatformChange"></el-cascader>
         </el-form-item>
 
         <el-form-item label="产品应用车型">
-          <el-cascader expand-trigger="hover" :options="trainTypeList" @change="handleTrainTypeChange"></el-cascader>
+          <el-cascader expand-trigger="hover" :options="trainTypeList" v-model="selectedTrainType" @change="handleTrainTypeChange"></el-cascader>
         </el-form-item>
 
       </el-form>
@@ -224,6 +224,8 @@
         attributeVisiable: false,
         attributeForm: { attribute: '', value: '' },
         attributes: [],
+        selectedPlatform: [],
+        selectedTrainType: [],
         productTypeMap: [
           { value: '01', label: '球铰关节' },
           { value: '02', label: '橡胶垫' },
@@ -267,23 +269,46 @@
     methods: {
       init: function() {
         this.getCatL1()
-        this.getCatL2()
-        if (this.$route.query.id != null) {
-          const productId = this.$route.query.id
-          detailProduct(productId).then(response => {
-            this.zcProduct = response.data.data.product
-            this.isCreate = false
-          })
-        }
       },
       getCatL1() {
         listCatL1().then(response => {
           this.platformMap = response.data.data
+          this.getCatL2()
         })
       },
       getCatL2() {
         listCatL2().then(response => {
           this.trainTypeMap = response.data.data
+          if (this.$route.query.id != null) {
+            const productId = this.$route.query.id
+            detailProduct(productId).then(response => {
+              this.zcProduct = response.data.data.product
+
+              this.isCreate = false
+              for (var i = 0; i < this.platformMap.length; i++) {
+                if (this.zcProduct.platform === this.platformMap[i].code.toString()) {
+                  this.selectedPlatform = []
+                  this.selectedPlatform.push(this.platformMap[i].value)
+                  for (var j = 0; j < this.trainTypeMap.length; j++) {
+                    const trainType = this.trainTypeMap[j]
+                    if (trainType.value === this.platformMap[i].value.toString()) {
+                      this.trainTypeList = trainType.list
+                      for (var k = 0; k < this.trainTypeList.length; k++) {
+                        const trainTypeItem = this.trainTypeList[k]
+                        if (this.zcProduct.traintype === trainTypeItem.code.toString()) {
+                          this.selectedTrainType = []
+                          this.selectedTrainType.push(trainTypeItem.value)
+                          break
+                        }
+                      }
+                      break
+                    }
+                  }
+                  break
+                }
+              }
+            })
+          }
         })
       },
       handlePlatformChange(value) {

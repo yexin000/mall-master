@@ -47,7 +47,7 @@ public class ZcProduct {
      *
      * @mbg.generated
      */
-    private String snapshot;
+    private String snapshot = "";
 
     /**
      *
@@ -56,7 +56,7 @@ public class ZcProduct {
      *
      * @mbg.generated
      */
-    private String realpic;
+    private String realpic = "";
 
     /**
      *

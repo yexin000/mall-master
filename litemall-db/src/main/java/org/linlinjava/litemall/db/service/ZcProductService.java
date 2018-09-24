@@ -197,6 +197,20 @@ public class ZcProductService {
     zcProductMapper.deleteByPrimaryKey(id);
   }
 
+  public void updateRealpicByProductNum(String productNum, String url) {
+    Map<String, Object> params = new HashMap<>(2);
+    params.put("productNum", productNum);
+    params.put("url", url);
+    zcProductMapper.updateRealpicByProductNum(params);
+  }
+
+  public void updateSnapshotByProductNum(String productNum, String url) {
+    Map<String, Object> params = new HashMap<>(2);
+    params.put("productNum", productNum);
+    params.put("url", url);
+    zcProductMapper.updateSnapshotByProductNum(params);
+  }
+
   @Transactional(rollbackFor = Exception.class)
   public Map batchImport(String fileName, MultipartFile file) throws Exception {
     Map<String, Object> data = new HashMap<>();

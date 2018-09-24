@@ -47,18 +47,24 @@ public class StorageService {
      */
     public String store(InputStream inputStream, long contentLength, String contentType, String fileName) {
         String key = generateKey(fileName);
-        storage.store(inputStream, contentLength, contentType, key);
+        storage.store(inputStream, contentLength, contentType, fileName);
 
-        String url = generateUrl(key);
+        String url = generateUrl(fileName);
         LitemallStorage storageInfo = new LitemallStorage();
         storageInfo.setName(fileName);
         storageInfo.setSize((int) contentLength);
         storageInfo.setType(contentType);
         storageInfo.setAddTime(LocalDateTime.now());
         storageInfo.setModified(LocalDateTime.now());
-        storageInfo.setKey(key);
+        storageInfo.setKey(fileName);
         storageInfo.setUrl(url);
-        litemallStorageService.add(storageInfo);
+
+        LitemallStorage orgStorageInfo = litemallStorageService.findByKey(fileName);
+        if (null != orgStorageInfo) {
+            litemallStorageService.update(storageInfo);
+        } else {
+            litemallStorageService.add(storageInfo);
+        }
 
         return url;
     }

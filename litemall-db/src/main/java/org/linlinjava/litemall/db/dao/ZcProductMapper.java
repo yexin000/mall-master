@@ -1,6 +1,8 @@
 package org.linlinjava.litemall.db.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.linlinjava.litemall.db.domain.ZcProduct;
 import org.linlinjava.litemall.db.domain.ZcProductExample;
@@ -155,4 +157,16 @@ public interface ZcProductMapper {
      * @return
      */
     List<String> queryProductNumList();
+
+    /**
+     * 根据物资编号更新实物图地址
+     * @param params
+     */
+    void  updateRealpicByProductNum(Map<String, Object> params);
+
+    /**
+     * 根据物资编号更新简图地址
+     * @param params
+     */
+    void updateSnapshotByProductNum(Map<String, Object> params);
 }

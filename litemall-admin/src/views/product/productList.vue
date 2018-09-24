@@ -1,25 +1,31 @@
 <template>
   <div class="app-container calendar-list-container">
-
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-      <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入物资编号" v-model="listQuery.productNum">
-      </el-input>
-      <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入产品名称" v-model="listQuery.productName">
-      </el-input>
+      <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入物资编号" v-model="listQuery.productNum"></el-input>
+      <el-input clearable class="filter-item" style="width: 200px;" placeholder="请输入产品名称" v-model="listQuery.productName"></el-input>
       <el-select style="width: 200px" class="filter-item" placeholder="请选择产品类型" v-model="listQuery.productType">
         <el-option label="请选择产品类型" value=""></el-option>
-        <el-option v-for="(item, index) in productTypeMap" :key="index" :label="item.value" :value="item.key">
-        </el-option>
+        <el-option v-for="(item, index) in productTypeMap" :key="index" :label="item.value" :value="item.key"></el-option>
       </el-select>
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button class="filter-item" type="primary" @click="handleCreate" icon="el-icon-edit">添加</el-button>
       <el-upload class="filter-item" :action="importExcel" :show-file-list="false" :headers="headers"
                  accept=".xls,.xlsx" :before-upload="handlePreview" :on-success="handleSuccess">
-        <el-button type="primary" :loading="importing" icon="el-icon-download">导入</el-button>
+        <el-button type="primary" :loading="importing" icon="el-icon-download">导入产品</el-button>
       </el-upload>
+      <el-button class="filter-item" type="primary" icon="el-icon-download" @click="handleUploadPics">上传产品图片</el-button>
     </div>
     <!-- 查询结果 -->
+    <el-dialog :visible.sync="dialogVisible"><img width="100%" :src="dialogImageUrl" alt=""></el-dialog>
+    <el-dialog :visible.sync="uploadVisible" :before-close="handleClose">
+      <el-upload class="filter-item" :action="importPics" :show-file-list="true" :headers="headers" multiple
+                 accept=".jpg,.png" :before-upload="handleImportingPics" :on-success="handleImportingPicsSuccess">
+        <el-tooltip class="item" effect="dark" content="可多选,只处理jpg/png文件,且不超过5MB,'物资编号_1'匹配实物图,'物资编号_2'匹配剖面图" placement="bottom">
+          <el-button type="primary" :loading="importingPics" icon="el-icon-download">上传产品图片</el-button>
+        </el-tooltip>
+      </el-upload>
+    </el-dialog>
     <el-table size="small" :data="list" v-loading="listLoading" element-loading-text="正在查询中。。。" border fit highlight-current-row>
       <el-table-column type="expand">
         <template slot-scope="props">
@@ -110,19 +116,15 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="物资编号" prop="productnum">
-      </el-table-column>
-      <el-table-column align="center" min-width="100" label="产品名称" prop="productname">
-      </el-table-column>
+      <el-table-column align="center" label="物资编号" prop="productnum"></el-table-column>
+      <el-table-column align="center" min-width="100" label="产品名称" prop="productname"></el-table-column>
       <el-table-column align="center" property="iconUrl" label="实物图">
         <template slot-scope="scope">
-          <img :src="scope.row.snapshot" width="40"/>
+          <img :src="scope.row.realpic" width="40" @click="handlePictureCardPreview"/>
         </template>
       </el-table-column>
       <el-table-column align="center" property="iconUrl" label="剖面图">
-        <template slot-scope="scope">
-          <img :src="scope.row.realpic" width="40"/>
-        </template>
+        <template slot-scope="scope"><img :src="scope.row.snapshot" width="40" @click="handlePictureCardPreview"/></template>
       </el-table-column>
       <el-table-column align="center" label="结构形式" prop="structtype">
       </el-table-column>
@@ -143,9 +145,7 @@
                      :page-sizes="[10,20,30,50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
-    <el-tooltip placement="top" content="返回顶部">
-      <back-to-top :visibilityHeight="100" ></back-to-top>
-    </el-tooltip>
+    <el-tooltip placement="top" content="返回顶部"><back-to-top :visibilityHeight="100" ></back-to-top></el-tooltip>
   </div>
 </template>
 
@@ -168,7 +168,7 @@
 </style>
 
 <script>
-  import { listProducts, deleteProduct, importExcel } from '@/api/product'
+  import { listProducts, deleteProduct, importExcel, importPics } from '@/api/product'
   import BackToTop from '@/components/BackToTop'
   import { getToken } from '@/utils/auth'
 
@@ -199,6 +199,7 @@
     data() {
       return {
         importExcel,
+        importPics,
         list: [],
         total: 0,
         listLoading: true,
@@ -211,10 +212,14 @@
           sort: 'add_time',
           order: 'desc'
         },
+        dialogImageUrl: '',
+        dialogVisible: false,
+        uploadVisible: false,
         productTypeMap,
         goodsDetail: '',
         detailDialogVisible: false,
-        importing: false
+        importing: false,
+        importingPics: false
       }
     },
     created() {
@@ -255,8 +260,18 @@
         this.goodsDetail = detail
         this.detailDialogVisible = true
       },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.currentTarget.currentSrc
+        this.dialogVisible = true
+      },
+      handleUploadPics() {
+        this.uploadVisible = true
+      },
       handlePreview() {
         this.importing = true
+      },
+      handleImportingPics() {
+        this.importingPics = true
       },
       handleSuccess() {
         this.importing = false
@@ -267,6 +282,28 @@
           type: 'success',
           duration: 2000
         })
+      },
+      handleImportingPicsSuccess(response, file, fileList) {
+        this.importingPics = false
+        if (response.errno === -1) {
+          file.status = 'fail'
+          this.$notify.error({
+            title: '错误',
+            message: '导入失败',
+            duration: 2000
+          })
+        } else {
+          this.$notify({
+            title: '成功',
+            message: '导入成功',
+            type: 'success',
+            duration: 2000
+          })
+        }
+      },
+      handleClose() {
+        this.uploadVisible = false
+        this.getList()
       },
       handleDelete(row) {
         deleteProduct(row).then(response => {
