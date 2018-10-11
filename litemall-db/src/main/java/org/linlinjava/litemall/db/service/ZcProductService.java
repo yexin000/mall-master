@@ -8,10 +8,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.linlinjava.litemall.db.dao.ZcProductMapper;
-import org.linlinjava.litemall.db.domain.ZcCategory;
-import org.linlinjava.litemall.db.domain.ZcProduct;
-import org.linlinjava.litemall.db.domain.ZcProductExample;
-import org.linlinjava.litemall.db.domain.ZcProducttype;
+import org.linlinjava.litemall.db.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -78,9 +75,12 @@ public class ZcProductService {
   public static final String VXH_TYPE = "10"; // V形簧
   public static final String QT_TYPE = "11"; // 其他
 
+  public static final String[] CONDITION_KEY_LIST = {"wj", "bzgd", "lgjzdjj", "zczjj", "ngbcd", "lgzxj", "gtqtwj", "klx", "zongxgd", "jxgd",
+      "gd", "gangd", "zyg", "zhouxgd", "cxgd", "vxjd", "cd", "kd"};
+
   public List<ZcProduct> querySelective(String productNum, String productName, String productType,
                                         String platform, String trainType,
-                                        Integer page, Integer limit, String sort, String order) {
+                                        Integer page, Integer limit, String sort, String order, List<ZcProductSearchCondition> conditionList) {
     ZcProductExample example = new ZcProductExample();
     ZcProductExample.Criteria criteria = example.createCriteria();
 
@@ -103,6 +103,9 @@ public class ZcProductService {
     if (!StringUtils.isEmpty(trainType)) {
       criteria.andTraintypeEqualTo(trainType);
     }
+
+    setSearchCondition(criteria, conditionList);
+
     PageHelper.startPage(page, limit);
     return zcProductMapper.selectByExample(example);
   }
@@ -139,7 +142,7 @@ public class ZcProductService {
   }
 
   public int countSelective(String productNum, String productName, String productType,
-                            String platform, String trainType) {
+                            String platform, String trainType, List<ZcProductSearchCondition> conditionList) {
     ZcProductExample example = new ZcProductExample();
     ZcProductExample.Criteria criteria = example.createCriteria();
 
@@ -161,6 +164,8 @@ public class ZcProductService {
     if (!StringUtils.isEmpty(trainType)) {
       criteria.andTraintypeEqualTo(trainType);
     }
+
+    setSearchCondition(criteria, conditionList);
     return (int)zcProductMapper.countByExample(example);
   }
 
@@ -209,6 +214,133 @@ public class ZcProductService {
     params.put("productNum", productNum);
     params.put("url", url);
     zcProductMapper.updateSnapshotByProductNum(params);
+  }
+
+  private void setSearchCondition(ZcProductExample.Criteria criteria, List<ZcProductSearchCondition> conditionList) {
+    if(!CollectionUtils.isEmpty(conditionList)) {
+      for(ZcProductSearchCondition condition : conditionList) {
+        if("wj".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andWjGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andWjLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("bzgd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andBzgdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andBzgdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("lgjzdjj".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andLgjzdjjGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andLgjzdjjLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("zczjj".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andZczjjGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andZczjjLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("ngbcd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andNgbcdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andNgbcdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("lgzxj".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andLgzxjGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andLgzxjLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("gtqtwj".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andGtqtwjGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andGtqtwjLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("zongxgd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andZongxgdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andZongxgdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("jxgd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andJxgdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andJxgdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("gd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andGdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andGdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("gangd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andGangdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andGangdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("zyg".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andZygGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andZygLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("zhouxgd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andZhouxgdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andZhouxgdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("cxgd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andCxgdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andCxgdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("vxjd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andVxjdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andVxjdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("cd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andCdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andCdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("kd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andKdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andKdLessThanOrEqualTo(condition.getHigh());
+          }
+        }
+      }
+    }
   }
 
   @Transactional(rollbackFor = Exception.class)

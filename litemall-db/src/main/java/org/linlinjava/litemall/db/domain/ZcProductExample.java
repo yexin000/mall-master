@@ -1839,7 +1839,7 @@ public class ZcProductExample {
         }
 
         public Criteria andWjGreaterThanOrEqualTo(String value) {
-            addCriterion("wj >=", value, "wj");
+            addCriterion("wj >=", Double.valueOf(value), "wj");
             return (Criteria) this;
         }
 
@@ -1873,7 +1873,7 @@ public class ZcProductExample {
         }
 
         public Criteria andWjLessThanOrEqualTo(String value) {
-            addCriterion("wj <=", value, "wj");
+            addCriterion("wj <=", Double.valueOf(value), "wj");
             return (Criteria) this;
         }
 
@@ -1981,7 +1981,7 @@ public class ZcProductExample {
         }
 
         public Criteria andBzgdGreaterThanOrEqualTo(String value) {
-            addCriterion("bzgd >=", value, "bzgd");
+            addCriterion("bzgd >=", Double.valueOf(value), "bzgd");
             return (Criteria) this;
         }
 
@@ -2015,7 +2015,7 @@ public class ZcProductExample {
         }
 
         public Criteria andBzgdLessThanOrEqualTo(String value) {
-            addCriterion("bzgd <=", value, "bzgd");
+            addCriterion("bzgd <=", Double.valueOf(value), "bzgd");
             return (Criteria) this;
         }
 
@@ -2407,7 +2407,7 @@ public class ZcProductExample {
         }
 
         public Criteria andLgjzdjjGreaterThanOrEqualTo(String value) {
-            addCriterion("lgjzdjj >=", value, "lgjzdjj");
+            addCriterion("lgjzdjj >=", Double.valueOf(value), "lgjzdjj");
             return (Criteria) this;
         }
 
@@ -2441,7 +2441,7 @@ public class ZcProductExample {
         }
 
         public Criteria andLgjzdjjLessThanOrEqualTo(String value) {
-            addCriterion("lgjzdjj <=", value, "lgjzdjj");
+            addCriterion("lgjzdjj <=", Double.valueOf(value), "lgjzdjj");
             return (Criteria) this;
         }
 
@@ -2549,7 +2549,7 @@ public class ZcProductExample {
         }
 
         public Criteria andZczjjGreaterThanOrEqualTo(String value) {
-            addCriterion("zczjj >=", value, "zczjj");
+            addCriterion("zczjj >=", Double.valueOf(value), "zczjj");
             return (Criteria) this;
         }
 
@@ -2583,7 +2583,7 @@ public class ZcProductExample {
         }
 
         public Criteria andZczjjLessThanOrEqualTo(String value) {
-            addCriterion("zczjj <=", value, "zczjj");
+            addCriterion("zczjj <=", Double.valueOf(value), "zczjj");
             return (Criteria) this;
         }
 
@@ -2691,7 +2691,7 @@ public class ZcProductExample {
         }
 
         public Criteria andNgbcdGreaterThanOrEqualTo(String value) {
-            addCriterion("ngbcd >=", value, "ngbcd");
+            addCriterion("ngbcd >=", Double.valueOf(value), "ngbcd");
             return (Criteria) this;
         }
 
@@ -2725,7 +2725,7 @@ public class ZcProductExample {
         }
 
         public Criteria andNgbcdLessThanOrEqualTo(String value) {
-            addCriterion("ngbcd <=", value, "ngbcd");
+            addCriterion("ngbcd <=", Double.valueOf(value), "ngbcd");
             return (Criteria) this;
         }
 
@@ -3259,7 +3259,7 @@ public class ZcProductExample {
         }
 
         public Criteria andLgzxjGreaterThanOrEqualTo(String value) {
-            addCriterion("lgzxj >=", value, "lgzxj");
+            addCriterion("lgzxj >=", Double.valueOf(value), "lgzxj");
             return (Criteria) this;
         }
 
@@ -3293,7 +3293,7 @@ public class ZcProductExample {
         }
 
         public Criteria andLgzxjLessThanOrEqualTo(String value) {
-            addCriterion("lgzxj <=", value, "lgzxj");
+            addCriterion("lgzxj <=", Double.valueOf(value), "lgzxj");
             return (Criteria) this;
         }
 
@@ -3401,7 +3401,7 @@ public class ZcProductExample {
         }
 
         public Criteria andGtqtwjGreaterThanOrEqualTo(String value) {
-            addCriterion("gtqtwj >=", value, "gtqtwj");
+            addCriterion("gtqtwj >=", Double.valueOf(value), "gtqtwj");
             return (Criteria) this;
         }
 
@@ -3435,7 +3435,7 @@ public class ZcProductExample {
         }
 
         public Criteria andGtqtwjLessThanOrEqualTo(String value) {
-            addCriterion("gtqtwj <=", value, "gtqtwj");
+            addCriterion("gtqtwj <=", Double.valueOf(value), "gtqtwj");
             return (Criteria) this;
         }
 
@@ -3827,7 +3827,7 @@ public class ZcProductExample {
         }
 
         public Criteria andJxgdGreaterThanOrEqualTo(String value) {
-            addCriterion("jxgd >=", value, "jxgd");
+            addCriterion("jxgd >=", Double.valueOf(value), "jxgd");
             return (Criteria) this;
         }
 
@@ -3861,7 +3861,7 @@ public class ZcProductExample {
         }
 
         public Criteria andJxgdLessThanOrEqualTo(String value) {
-            addCriterion("jxgd <=", value, "jxgd");
+            addCriterion("jxgd <=", Double.valueOf(value), "jxgd");
             return (Criteria) this;
         }
 
@@ -3969,7 +3969,7 @@ public class ZcProductExample {
         }
 
         public Criteria andCdGreaterThanOrEqualTo(String value) {
-            addCriterion("cd >=", value, "cd");
+            addCriterion("cd >=", Double.valueOf(value), "cd");
             return (Criteria) this;
         }
 
@@ -4003,7 +4003,7 @@ public class ZcProductExample {
         }
 
         public Criteria andCdLessThanOrEqualTo(String value) {
-            addCriterion("cd <=", value, "cd");
+            addCriterion("cd <=", Double.valueOf(value), "cd");
             return (Criteria) this;
         }
 
@@ -4111,7 +4111,7 @@ public class ZcProductExample {
         }
 
         public Criteria andKdGreaterThanOrEqualTo(String value) {
-            addCriterion("kd >=", value, "kd");
+            addCriterion("kd >=", Double.valueOf(value), "kd");
             return (Criteria) this;
         }
 
@@ -4145,7 +4145,7 @@ public class ZcProductExample {
         }
 
         public Criteria andKdLessThanOrEqualTo(String value) {
-            addCriterion("kd <=", value, "kd");
+            addCriterion("kd <=", Double.valueOf(value), "kd");
             return (Criteria) this;
         }
 
@@ -4253,7 +4253,7 @@ public class ZcProductExample {
         }
 
         public Criteria andGdGreaterThanOrEqualTo(String value) {
-            addCriterion("gd >=", value, "gd");
+            addCriterion("gd >=", Double.valueOf(value), "gd");
             return (Criteria) this;
         }
 
@@ -4287,7 +4287,7 @@ public class ZcProductExample {
         }
 
         public Criteria andGdLessThanOrEqualTo(String value) {
-            addCriterion("gd <=", value, "gd");
+            addCriterion("gd <=", Double.valueOf(value), "gd");
             return (Criteria) this;
         }
 
@@ -4537,7 +4537,7 @@ public class ZcProductExample {
         }
 
         public Criteria andZongxgdGreaterThanOrEqualTo(String value) {
-            addCriterion("zongxgd >=", value, "zongxgd");
+            addCriterion("zongxgd >=", Double.valueOf(value), "zongxgd");
             return (Criteria) this;
         }
 
@@ -4571,7 +4571,7 @@ public class ZcProductExample {
         }
 
         public Criteria andZongxgdLessThanOrEqualTo(String value) {
-            addCriterion("zongxgd <=", value, "zongxgd");
+            addCriterion("zongxgd <=", Double.valueOf(value), "zongxgd");
             return (Criteria) this;
         }
 
@@ -4821,7 +4821,7 @@ public class ZcProductExample {
         }
 
         public Criteria andZhouxgdGreaterThanOrEqualTo(String value) {
-            addCriterion("zhouxgd >=", value, "zhouxgd");
+            addCriterion("zhouxgd >=", Double.valueOf(value), "zhouxgd");
             return (Criteria) this;
         }
 
@@ -4855,7 +4855,7 @@ public class ZcProductExample {
         }
 
         public Criteria andZhouxgdLessThanOrEqualTo(String value) {
-            addCriterion("zhouxgd <=", value, "zhouxgd");
+            addCriterion("zhouxgd <=", Double.valueOf(value), "zhouxgd");
             return (Criteria) this;
         }
 
@@ -5247,7 +5247,7 @@ public class ZcProductExample {
         }
 
         public Criteria andCxgdGreaterThanOrEqualTo(String value) {
-            addCriterion("cxgd >=", value, "cxgd");
+            addCriterion("cxgd >=", Double.valueOf(value), "cxgd");
             return (Criteria) this;
         }
 
@@ -5281,7 +5281,7 @@ public class ZcProductExample {
         }
 
         public Criteria andCxgdLessThanOrEqualTo(String value) {
-            addCriterion("cxgd <=", value, "cxgd");
+            addCriterion("cxgd <=", Double.valueOf(value), "cxgd");
             return (Criteria) this;
         }
 
@@ -5815,7 +5815,7 @@ public class ZcProductExample {
         }
 
         public Criteria andGangdGreaterThanOrEqualTo(String value) {
-            addCriterion("gangd >=", value, "gangd");
+            addCriterion("gangd >=", Double.valueOf(value), "gangd");
             return (Criteria) this;
         }
 
@@ -5849,7 +5849,7 @@ public class ZcProductExample {
         }
 
         public Criteria andGangdLessThanOrEqualTo(String value) {
-            addCriterion("gangd <=", value, "gangd");
+            addCriterion("gangd <=", Double.valueOf(value), "gangd");
             return (Criteria) this;
         }
 
@@ -5957,7 +5957,7 @@ public class ZcProductExample {
         }
 
         public Criteria andVxjdGreaterThanOrEqualTo(String value) {
-            addCriterion("vxjd >=", value, "vxjd");
+            addCriterion("vxjd >=", Double.valueOf(value), "vxjd");
             return (Criteria) this;
         }
 
@@ -5991,7 +5991,7 @@ public class ZcProductExample {
         }
 
         public Criteria andVxjdLessThanOrEqualTo(String value) {
-            addCriterion("vxjd <=", value, "vxjd");
+            addCriterion("vxjd <=", Double.valueOf(value), "vxjd");
             return (Criteria) this;
         }
 
@@ -6099,7 +6099,7 @@ public class ZcProductExample {
         }
 
         public Criteria andZygGreaterThanOrEqualTo(String value) {
-            addCriterion("zyg >=", value, "zyg");
+            addCriterion("zyg >=", Double.valueOf(value), "zyg");
             return (Criteria) this;
         }
 
@@ -6133,7 +6133,7 @@ public class ZcProductExample {
         }
 
         public Criteria andZygLessThanOrEqualTo(String value) {
-            addCriterion("zyg <=", value, "zyg");
+            addCriterion("zyg <=", Double.valueOf(value), "zyg");
             return (Criteria) this;
         }
 

@@ -1,23 +1,19 @@
 package org.linlinjava.litemall.wx.web;
 
+import net.sf.json.JSONArray;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.linlinjava.litemall.core.util.ResponseUtil;
 import org.linlinjava.litemall.core.validator.Order;
 import org.linlinjava.litemall.core.validator.Sort;
-import org.linlinjava.litemall.db.domain.ZcCategory;
-import org.linlinjava.litemall.db.domain.ZcProduct;
-import org.linlinjava.litemall.db.domain.ZcProducttype;
+import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.db.service.ZcCategoryService;
 import org.linlinjava.litemall.db.service.ZcProductService;
 import org.linlinjava.litemall.db.service.ZcProducttypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,18 +124,30 @@ public class WxZcController {
    * @return
    */
   @GetMapping("list")
-  public Object list(String productName, String platform, String trainType, String productType,
+  public Object list(String productName, String platform, String trainType, String productType, String conditionText,
                      @RequestParam(defaultValue = "1") Integer page,
                      @RequestParam(defaultValue = "2000") Integer size,
                      @Sort(accepts = {"productnum"}) @RequestParam(defaultValue = "productnum") String sort,
                      @Order @RequestParam(defaultValue = "asc") String order) {
-    // TODO 添加到搜索历史
-
+    List<ZcProductSearchCondition> conditionList = new ArrayList<>();
+    if(!StringUtils.isEmpty(conditionText)) {
+      String[] conditionTextList = conditionText.split("\\|");
+      for(int i = 0; i < conditionTextList.length; i ++) {
+        String[] condition = conditionTextList[i].split("#");
+        if(condition.length == 3) {
+          ZcProductSearchCondition c = new ZcProductSearchCondition();
+          c.setKey(condition[0]);
+          c.setLow(condition[1].equals("null") ? "" : condition[1]);
+          c.setHigh(condition[2].equals("null") ? "" : condition[2]);
+          conditionList.add(c);
+        }
+      }
+    }
     // 产品列表
     List<ZcProduct> productList = zcProductService.querySelective(null , productName, productType,
-        platform, trainType, page, size, sort, order);
+        platform, trainType, page, size, sort, order, conditionList);
     // 产品总数
-    int total = zcProductService.countSelective(null, productName, productType, platform, trainType);
+    int total = zcProductService.countSelective(null, productName, productType, platform, trainType, conditionList);
 
     Map<String, Object> result = new HashMap<String, Object>();
     result.put("data", productList);
@@ -160,12 +168,12 @@ public class WxZcController {
    */
   @GetMapping("listByTrainType")
   public Object listByTrainType(String trainType,
-                     @Sort(accepts = {"productnum"}) @RequestParam(defaultValue = "productnum") String sort,
-                     @Order @RequestParam(defaultValue = "asc") String order) {
+                                @Sort(accepts = {"productnum"}) @RequestParam(defaultValue = "productnum") String sort,
+                                @Order @RequestParam(defaultValue = "asc") String order) {
     // 产品列表
     List<ZcProduct> productList = zcProductService.queryByTrainType(trainType, sort, order);
     // 产品总数
-    int total = zcProductService.countSelective(null, null, null, null, trainType);
+    int total = zcProductService.countSelective(null, null, null, null, trainType, null);
     List<ZcProducttype> producttypeList = zcProductService.queryProductType(null, null, trainType);
 
     Map<String, Object> result = new HashMap<String, Object>();
@@ -178,10 +186,10 @@ public class WxZcController {
 
   @GetMapping("listByProductType")
   public Object listByProductType(String productType,
-                                @Sort(accepts = {"productnum"}) @RequestParam(defaultValue = "productnum") String sort,
-                                @Order @RequestParam(defaultValue = "asc") String order) {
+                                  @Sort(accepts = {"productnum"}) @RequestParam(defaultValue = "productnum") String sort,
+                                  @Order @RequestParam(defaultValue = "asc") String order) {
     // 产品总数
-    int total = zcProductService.countSelective(null, null, productType, null, null);
+    int total = zcProductService.countSelective(null, null, productType, null, null, null);
     // 产品列表
     List<ZcProduct> productList = zcProductService.queryByProductType(productType, sort, order);
     List<Map<String, Object>> productPropList = new ArrayList<>();
