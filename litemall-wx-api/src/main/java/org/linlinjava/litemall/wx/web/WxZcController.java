@@ -128,7 +128,7 @@ public class WxZcController {
    * @return
    */
   @GetMapping("list")
-  public Object list(String productName, String platform, String trainType,
+  public Object list(String productName, String platform, String trainType, String productType,
                      @RequestParam(defaultValue = "1") Integer page,
                      @RequestParam(defaultValue = "2000") Integer size,
                      @Sort(accepts = {"productnum"}) @RequestParam(defaultValue = "productnum") String sort,
@@ -136,10 +136,10 @@ public class WxZcController {
     // TODO 添加到搜索历史
 
     // 产品列表
-    List<ZcProduct> productList = zcProductService.querySelective(null , productName, null,
+    List<ZcProduct> productList = zcProductService.querySelective(null , productName, productType,
         platform, trainType, page, size, sort, order);
     // 产品总数
-    int total = zcProductService.countSelective(null, productName, null, platform, trainType);
+    int total = zcProductService.countSelective(null, productName, productType, platform, trainType);
 
     Map<String, Object> result = new HashMap<String, Object>();
     result.put("data", productList);

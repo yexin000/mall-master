@@ -182,7 +182,8 @@ export const asyncRouterMap = [
       icon: 'chart'
     },
     children: [
-      { path: 'admin', component: _import('sys/admin'), name: 'admin', meta: { title: '管理员', noCache: true }}
+      { path: 'admin', component: _import('sys/admin'), name: 'admin', meta: { title: '管理员', noCache: true }},
+      { path: 'os', component: _import('sys/os'), name: 'os', meta: { title: '对象存储', noCache: true }}
     ]
   },
 
