@@ -6178,6 +6178,12 @@ public class ZcProductExample {
             addCriterion("zyg not between", value1, value2, "zyg");
             return (Criteria) this;
         }
+
+
+        public Criteria andOrNameOrNum(String value) {
+            addCriterion("(" + "productname" + " like '" + value + "' or " + "productnum" + " like '"+ value + "')");
+            return (Criteria) this;
+        }
     }
 
     /**

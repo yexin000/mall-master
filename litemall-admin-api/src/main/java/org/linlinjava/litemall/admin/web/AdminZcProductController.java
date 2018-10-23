@@ -48,8 +48,8 @@ public class AdminZcProductController {
                      @Sort @RequestParam(defaultValue = "add_time") String sort,
                      @Order @RequestParam(defaultValue = "desc") String order) {
 
-    List<ZcProduct> productList = zcProductService.querySelective(productNum, productName, productType, null, null, page, limit, sort, order, null);
-    int total = zcProductService.countSelective(productNum, productName, productType, null, null, null);
+    List<ZcProduct> productList = zcProductService.querySelective(productNum, productName, productType, null, null, page, limit, sort, order, null, null);
+    int total = zcProductService.countSelective(productNum, productName, productType, null, null, null, null);
     Map<String, Object> data = new HashMap<>();
     data.put("total", total);
     data.put("items", productList);

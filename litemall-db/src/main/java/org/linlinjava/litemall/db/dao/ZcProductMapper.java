@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.linlinjava.litemall.db.domain.ZcAttrRange;
 import org.linlinjava.litemall.db.domain.ZcProduct;
 import org.linlinjava.litemall.db.domain.ZcProductExample;
 import org.linlinjava.litemall.db.domain.ZcProducttype;
@@ -169,4 +170,10 @@ public interface ZcProductMapper {
      * @param params
      */
     void updateSnapshotByProductNum(Map<String, Object> params);
+
+    /**
+     * 查询产品属性范围
+     * @return
+     */
+    List<ZcAttrRange> queryAttrsRangeList();
 }

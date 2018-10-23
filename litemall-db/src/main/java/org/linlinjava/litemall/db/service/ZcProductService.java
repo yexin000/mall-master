@@ -80,7 +80,8 @@ public class ZcProductService {
 
   public List<ZcProduct> querySelective(String productNum, String productName, String productType,
                                         String platform, String trainType,
-                                        Integer page, Integer limit, String sort, String order, List<ZcProductSearchCondition> conditionList) {
+                                        Integer page, Integer limit, String sort, String order,
+                                        List<ZcProductSearchCondition> conditionList, String nameOrNum) {
     ZcProductExample example = new ZcProductExample();
     ZcProductExample.Criteria criteria = example.createCriteria();
 
@@ -94,6 +95,10 @@ public class ZcProductService {
 
     if (!StringUtils.isEmpty(productName)) {
       criteria.andProductnameLike("%" + productName + "%");
+    }
+
+    if (!StringUtils.isEmpty(nameOrNum)) {
+      criteria.andOrNameOrNum("%" + nameOrNum + "%");
     }
 
     if (!StringUtils.isEmpty(platform)) {
@@ -142,7 +147,8 @@ public class ZcProductService {
   }
 
   public int countSelective(String productNum, String productName, String productType,
-                            String platform, String trainType, List<ZcProductSearchCondition> conditionList) {
+                            String platform, String trainType, List<ZcProductSearchCondition> conditionList,
+                            String nameOrNum) {
     ZcProductExample example = new ZcProductExample();
     ZcProductExample.Criteria criteria = example.createCriteria();
 
@@ -155,6 +161,10 @@ public class ZcProductService {
 
     if (!StringUtils.isEmpty(productName)) {
       criteria.andProductnameLike("%" + productName + "%");
+    }
+
+    if (!StringUtils.isEmpty(nameOrNum)) {
+      criteria.andOrNameOrNum("%" + nameOrNum + "%");
     }
 
     if (!StringUtils.isEmpty(platform)) {
@@ -709,5 +719,9 @@ public class ZcProductService {
       }
     }
     return obj;
+  }
+
+  public List<ZcAttrRange> queryAttrsRange() {
+    return zcProductMapper.queryAttrsRangeList();
   }
 }

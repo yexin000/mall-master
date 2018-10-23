@@ -1192,4 +1192,9 @@
       update t_e_product set snapshot = #{url,jdbcType=VARCHAR} where productnum = #{productNum,jdbcType=VARCHAR}
   </update>
 
+
+  <select id="queryAttrsRangeList" parameterType="map" resultType="org.linlinjava.litemall.db.domain.ZcAttrRange">
+      select productnum from t_e_product
+  </select>
+
 </mapper>
