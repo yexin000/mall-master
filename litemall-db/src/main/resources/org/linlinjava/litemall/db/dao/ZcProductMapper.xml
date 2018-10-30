@@ -52,6 +52,35 @@
     <result column="zyg" jdbcType="VARCHAR" property="zyg" />
     <result column="hxgd" jdbcType="VARCHAR" property="hxgd" />
     <result column="zhij" jdbcType="VARCHAR" property="zhij" />
+
+    <result column="ppggxh" jdbcType="VARCHAR" property="ppggxh" />
+    <result column="azkj" jdbcType="VARCHAR" property="azkj" />
+    <result column="jgd" jdbcType="VARCHAR" property="jgd" />
+    <result column="djgdb" jdbcType="VARCHAR" property="djgdb" />
+    <result column="cskd" jdbcType="VARCHAR" property="cskd" />
+    <result column="azkw" jdbcType="VARCHAR" property="azkw" />
+    <result column="qfhgd" jdbcType="VARCHAR" property="qfhgd" />
+    <result column="qfl" jdbcType="VARCHAR" property="qfl" />
+    <result column="spdxgd" jdbcType="VARCHAR" property="spdxgd" />
+    <result column="dxznb" jdbcType="VARCHAR" property="dxznb" />
+    <result column="sxczl" jdbcType="VARCHAR" property="sxczl" />
+    <result column="spczl" jdbcType="VARCHAR" property="spczl" />
+    <result column="dfz" jdbcType="VARCHAR" property="dfz" />
+    <result column="wdwy" jdbcType="VARCHAR" property="wdwy" />
+    <result column="sypd" jdbcType="VARCHAR" property="sypd" />
+    <result column="sywd" jdbcType="VARCHAR" property="sywd" />
+    <result column="znxs" jdbcType="VARCHAR" property="znxs" />
+    <result column="sdzs" jdbcType="VARCHAR" property="sdzs" />
+    <result column="znl" jdbcType="VARCHAR" property="znl" />
+    <result column="xc" jdbcType="VARCHAR" property="xc" />
+    <result column="qfwy" jdbcType="VARCHAR" property="qfwy" />
+    <result column="znwy" jdbcType="VARCHAR" property="znwy" />
+    <result column="sdl" jdbcType="VARCHAR" property="sdl" />
+    <result column="bj" jdbcType="VARCHAR" property="bj" />
+    <result column="azlwgg" jdbcType="VARCHAR" property="azlwgg" />
+    <result column="dhzj" jdbcType="VARCHAR" property="dhzj" />
+    <result column="nj" jdbcType="VARCHAR" property="nj" />
+    <result column="azls" jdbcType="VARCHAR" property="azls" />
   </resultMap>
 
   <resultMap id="TypeResultMap" type="org.linlinjava.litemall.db.domain.ZcProducttype">
@@ -134,7 +163,9 @@
     id, productnum, producttype, productname, snapshot, realpic, structtype, traintype, 
     remark, platform, provider, wj, bzgd, cz, weight, lgjzdjj, zczjj, ngbcd, jxhz, plhz, 
     xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, kz, 
-    zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd, zhij
+    zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd, zhij,ppggxh,azkj,jgd,djgdb,cskd,
+    azkw,qfhgd,qfl,spdxgd,dxznb,sxczl,spczl,dfz,wdwy,sypd,sywd,znxs,sdzs,znl,xc,qfwy,znwy,
+    sdl,bj,azlwgg,dhzj,nj,azls
   </sql>
   <select id="selectByExample" parameterType="org.linlinjava.litemall.db.domain.ZcProductExample" resultMap="BaseResultMap">
     <!--
@@ -309,7 +340,9 @@
     zongxgd, zpcd, zhouxgd,
     kz, zdhz, cxgd, ysg,
     cxhz, syhz, gangd,
-    vxjd, zyg, hxgd, zhij)
+    vxjd, zyg, hxgd, zhij,ppggxh,azkj,jgd,djgdb,cskd,
+    azkw,qfhgd,qfl,spdxgd,dxznb,sxczl,spczl,dfz,wdwy,sypd,sywd,znxs,sdzs,znl,xc,qfwy,znwy,
+    sdl,bj,azlwgg,dhzj,nj,azls)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.productnum,jdbcType=VARCHAR}, #{item.producttype,jdbcType=VARCHAR}, #{item.productname,jdbcType=VARCHAR},
@@ -324,7 +357,14 @@
       #{item.zongxgd,jdbcType=VARCHAR}, #{item.zpcd,jdbcType=VARCHAR}, #{item.zhouxgd,jdbcType=VARCHAR},
       #{item.kz,jdbcType=VARCHAR}, #{item.zdhz,jdbcType=VARCHAR}, #{item.cxgd,jdbcType=VARCHAR}, #{item.ysg,jdbcType=VARCHAR},
       #{item.cxhz,jdbcType=VARCHAR}, #{item.syhz,jdbcType=VARCHAR}, #{item.gangd,jdbcType=VARCHAR},
-      #{item.vxjd,jdbcType=VARCHAR}, #{item.zyg,jdbcType=VARCHAR}, #{item.hxgd,jdbcType=VARCHAR}, #{item.zhij,jdbcType=VARCHAR})
+      #{item.vxjd,jdbcType=VARCHAR}, #{item.zyg,jdbcType=VARCHAR}, #{item.hxgd,jdbcType=VARCHAR}, #{item.zhij,jdbcType=VARCHAR}
+      , #{item.ppggxh,jdbcType=VARCHAR}, #{item.azkj,jdbcType=VARCHAR}, #{item.jgd,jdbcType=VARCHAR}, #{item.djgdb,jdbcType=VARCHAR}
+      , #{item.cskd,jdbcType=VARCHAR}, #{item.azkw,jdbcType=VARCHAR}, #{item.qfhgd,jdbcType=VARCHAR}, #{item.qfl,jdbcType=VARCHAR}
+      , #{item.spdxgd,jdbcType=VARCHAR}, #{item.dxznb,jdbcType=VARCHAR}, #{item.sxczl,jdbcType=VARCHAR}, #{item.spczl,jdbcType=VARCHAR}
+      , #{item.dfz,jdbcType=VARCHAR}, #{item.wdwy,jdbcType=VARCHAR}, #{item.sypd,jdbcType=VARCHAR}, #{item.sywd,jdbcType=VARCHAR}
+      , #{item.znxs,jdbcType=VARCHAR}, #{item.sdzs,jdbcType=VARCHAR}, #{item.znl,jdbcType=VARCHAR}, #{item.xc,jdbcType=VARCHAR}
+      , #{item.qfwy,jdbcType=VARCHAR}, #{item.znwy,jdbcType=VARCHAR}, #{item.sdl,jdbcType=VARCHAR}, #{item.bj,jdbcType=VARCHAR}
+      , #{item.azlwgg,jdbcType=VARCHAR}, #{item.dhzj,jdbcType=VARCHAR}, #{item.nj,jdbcType=VARCHAR}, #{item.azls,jdbcType=VARCHAR})
     </foreach>
   </insert>
 
