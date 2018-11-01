@@ -21,4 +21,8 @@ public class ZcProducttypeService {
     example.setOrderByClause("producttype asc");
     return zcProducttypeMapper.selectByExample(example);
   }
+
+  public List<ZcProducttype> queryTypesByPlatforms(List<String> platFormList) {
+    return zcProducttypeMapper.selectByPlatforms(platFormList);
+  }
 }

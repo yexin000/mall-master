@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 小程序中车产品接口
@@ -51,6 +48,29 @@ public class WxZcController {
       d.put("text", category.getName());
       data.add(d);
     }
+    return ResponseUtil.ok(data);
+  }
+
+  /**
+   * 查询产品应用平台下拥有的产品类型
+   * @return
+   */
+  @GetMapping("getProductTypesByPlatforms")
+  public Object getProductTypesByPlatforms(String platforms) {
+    List<Map<String, Object>> data = new ArrayList<>();
+    if(!StringUtils.isEmpty(platforms)) {
+      List<String> platFormList = Arrays.asList(platforms.split(","));
+      if(platFormList.size() > 0) {
+        List<ZcProducttype> typeList = zcProducttypeService.queryTypesByPlatforms(platFormList);
+        for (ZcProducttype zcProducttype : typeList){
+          Map<String, Object> d = new HashMap<>(2);
+          d.put("producttype", zcProducttype.getProducttype());
+          d.put("typename", zcProducttype.getTypename());
+          data.add(d);
+        }
+      }
+    }
+
     return ResponseUtil.ok(data);
   }
 

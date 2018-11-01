@@ -694,7 +694,7 @@ public class ZcProductService {
                   product.setCxgd(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
                 } else if (QT_TYPE.equals(producyType)) {
-                  product.setProvider(value);
+
                 } else if (AQZZ_TYPE.equals(producyType) || FDJTXZC_TYPE.equals(producyType) || QTFD_TYPE.equals(producyType)) {
                   product.setRemark(value);
                 } else if (XJZZ_TYPE.equals(producyType)) {
@@ -724,6 +724,7 @@ public class ZcProductService {
                   product.setHxgd(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
                 } else if (QT_TYPE.equals(producyType)) {
+                  product.setProvider(value);
                 } else if (XJZZ_TYPE.equals(producyType)) {
                   product.setDxznb(value);
                 } else if (QLZZ_TYPE.equals(producyType)) {
