@@ -191,7 +191,7 @@ public class WxZcController {
     result.put("total", total);
 
     // 产品列表包含产品类型列表
-    List<ZcProducttype> producttypeList = zcProductService.queryProductType(productName, platform, trainType);
+    List<ZcProducttype> producttypeList = zcProductService.queryProductType(productName, platform, trainType, productType);
     result.put("typeList", producttypeList);
     return ResponseUtil.ok(result);
   }
@@ -211,7 +211,7 @@ public class WxZcController {
     List<ZcProduct> productList = zcProductService.queryByTrainType(trainType, sort, order);
     // 产品总数
     int total = zcProductService.countSelective(null, null, null, null, trainType, null, null);
-    List<ZcProducttype> producttypeList = zcProductService.queryProductType(null, null, trainType);
+    List<ZcProducttype> producttypeList = zcProductService.queryProductType(null, null, trainType, null);
 
     Map<String, Object> result = new HashMap<String, Object>();
     result.put("data", productList);

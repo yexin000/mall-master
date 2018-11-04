@@ -17,10 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 中车产品查询service
@@ -144,7 +141,11 @@ public class ZcProductService {
     }
 
     if (!StringUtils.isEmpty(platform)) {
-      criteria.andPlatformEqualTo(platform);
+      String[] platforms = platform.split(",");
+      if(platforms != null && platforms.length > 0) {
+        List<String> platformList = Arrays.asList(platforms);
+        criteria.andPlatformIn(platformList);
+      }
     }
 
     if (!StringUtils.isEmpty(trainType)) {
@@ -210,7 +211,11 @@ public class ZcProductService {
     }
 
     if (!StringUtils.isEmpty(platform)) {
-      criteria.andPlatformEqualTo(platform);
+      String[] platforms = platform.split(",");
+      if(platforms != null && platforms.length > 0) {
+        List<String> platformList = Arrays.asList(platforms);
+        criteria.andPlatformIn(platformList);
+      }
     }
 
     if (!StringUtils.isEmpty(trainType)) {
@@ -221,7 +226,7 @@ public class ZcProductService {
     return (int)zcProductMapper.countByExample(example);
   }
 
-  public List<ZcProducttype> queryProductType(String productName, String platform, String trainType) {
+  public List<ZcProducttype> queryProductType(String productName, String platform, String trainType, String productType) {
     ZcProductExample example = new ZcProductExample();
     ZcProductExample.Criteria criteria = example.createCriteria();
     if (!StringUtils.isEmpty(productName)) {
@@ -229,11 +234,19 @@ public class ZcProductService {
     }
 
     if (!StringUtils.isEmpty(platform)) {
-      criteria.andPlatformEqualTo(platform);
+      String[] platforms = platform.split(",");
+      if(platforms != null && platforms.length > 0) {
+        List<String> platformList = Arrays.asList(platforms);
+        criteria.andPlatformIn(platformList);
+      }
     }
 
     if (!StringUtils.isEmpty(trainType)) {
       criteria.andTraintypeEqualTo(trainType);
+    }
+
+    if (!StringUtils.isEmpty(productType)) {
+      criteria.andProducttypeEqualToWithTable(productType);
     }
     return zcProductMapper.selectProductTypeByExample(example);
   }
