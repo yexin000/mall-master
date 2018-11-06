@@ -9,7 +9,9 @@ import org.linlinjava.litemall.core.util.ResponseUtil;
 import org.linlinjava.litemall.core.validator.Order;
 import org.linlinjava.litemall.core.validator.Sort;
 import org.linlinjava.litemall.db.domain.ZcProduct;
+import org.linlinjava.litemall.db.domain.ZcProducttype;
 import org.linlinjava.litemall.db.service.ZcProductService;
+import org.linlinjava.litemall.db.service.ZcProducttypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -38,6 +40,8 @@ public class AdminZcProductController {
   private ZcProductService zcProductService;
   @Autowired
   private StorageService storageService;
+  @Autowired
+  private ZcProducttypeService zcProducttypeService;
   @Autowired
   private PlatformTransactionManager txManager;
 
@@ -181,5 +185,15 @@ public class AdminZcProductController {
 
     Map<String, Object> data = new HashMap<>();
     return ResponseUtil.ok(data);
+  }
+
+  /**
+   * 查询产品类型列表
+   * @return
+   */
+  @GetMapping("getProductTypes")
+  public Object getProductTypes() {
+    List<ZcProducttype> producttypes = zcProducttypeService.queryAllType();
+    return ResponseUtil.ok(producttypes);
   }
 }

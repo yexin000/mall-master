@@ -45,3 +45,11 @@ export { importExcel }
 
 const importPics = process.env.BASE_API + '/product/importPics'
 export { importPics }
+
+export function getProductTypes() {
+  return request({
+    url: '/product/getProductTypes',
+    method: 'get',
+    params: null
+  })
+}
