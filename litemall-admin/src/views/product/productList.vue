@@ -89,7 +89,7 @@
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '09'" label-position="left" class="table-expand">
-            <el-form-item label="直径A/mm"><span>{{ props.row.zhij }}</span></el-form-item>
+            <el-form-item label="外径A/mm"><span>{{ props.row.wj }}</span></el-form-item>
             <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="空载/kN"><span>{{ props.row.kz }}</span></el-form-item>
             <el-form-item label="最大荷载/kN"><span>{{ props.row.zdhz }}</span></el-form-item>
