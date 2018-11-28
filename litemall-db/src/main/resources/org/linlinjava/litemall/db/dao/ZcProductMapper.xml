@@ -1237,4 +1237,8 @@
       select productnum from t_e_product
   </select>
 
+  <select id="queryPlatformsByType" parameterType="java.lang.String" resultType="java.lang.String">
+    select DISTINCT platform from t_e_product where producttype=#{productType,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

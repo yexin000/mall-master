@@ -75,6 +75,16 @@ public class WxZcController {
   }
 
   /**
+   * 查询产品类型下拥有的产品应用平台
+   * @return
+   */
+  @GetMapping("getPlatformsByProductType")
+  public Object getPlatformsByProductType(String productType) {
+    List<String> platforms = zcProductService.queryPlatformsByType(productType);
+    return platforms;
+  }
+
+  /**
    * 查询产品应用车型列表
    * @return
    */

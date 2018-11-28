@@ -176,4 +176,6 @@ public interface ZcProductMapper {
      * @return
      */
     List<ZcAttrRange> queryAttrsRangeList();
+
+    List<String> queryPlatformsByType(String productType);
 }

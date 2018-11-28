@@ -878,4 +878,8 @@ public class ZcProductService {
   public List<ZcAttrRange> queryAttrsRange() {
     return zcProductMapper.queryAttrsRangeList();
   }
+
+  public List<String> queryPlatformsByType(String productType) {
+    return zcProductMapper.queryPlatformsByType(productType);
+  }
 }
