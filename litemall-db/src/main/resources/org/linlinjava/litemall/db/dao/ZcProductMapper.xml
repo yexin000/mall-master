@@ -81,6 +81,11 @@
     <result column="dhzj" jdbcType="VARCHAR" property="dhzj" />
     <result column="nj" jdbcType="VARCHAR" property="nj" />
     <result column="azls" jdbcType="VARCHAR" property="azls" />
+
+    <result column="vd" jdbcType="VARCHAR" property="vd" />
+    <result column="ve" jdbcType="VARCHAR" property="ve" />
+    <result column="vf" jdbcType="VARCHAR" property="vf" />
+    <result column="azjd" jdbcType="VARCHAR" property="azjd" />
   </resultMap>
 
   <resultMap id="TypeResultMap" type="org.linlinjava.litemall.db.domain.ZcProducttype">

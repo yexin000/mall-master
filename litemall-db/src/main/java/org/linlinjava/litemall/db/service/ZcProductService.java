@@ -403,6 +403,63 @@ public class ZcProductService {
           if(!StringUtils.isEmpty(condition.getHigh())) {
             criteria.andKdLessThanOrEqualTo(condition.getHigh());
           }
+        } else if("dhzj".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andDhzjGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andDhzjLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("nj".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andNjGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andNjLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("jgd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andJgdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andJgdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("cskd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andCskdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andCskdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("sxczl".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andSxczlGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andSxczlLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("znl".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andZnlGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andZnlLessThanOrEqualTo(condition.getHigh());
+          }
+        }
+        else if("znxs".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andZnxsGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andZnxslLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("sdzs".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andSdzsGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andSdzsLessThanOrEqualTo(condition.getHigh());
+          }
         }
       }
     }
@@ -482,7 +539,7 @@ public class ZcProductService {
                 product.setStructtype(value);
               } else if (j == 6) {
                 if (KQTH_TYPE.equals(producyType) || QJGX_TYPE.equals(producyType) || XJDUI_TYPE.equals(producyType)
-                    || XJDIAN_TYPE.equals(producyType)) {
+                    || XJDIAN_TYPE.equals(producyType) || SLH_TYPE.equals(producyType)) {
                   product.setWj(value);
                 } else if (KCGNG_TYPE.equals(producyType)) {
                   product.setLgjzdjj(value);
@@ -521,7 +578,7 @@ public class ZcProductService {
                   product.setGd(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setCd(value);
-                } else if (XJDIAN_TYPE.equals(producyType)) {
+                } else if (XJDIAN_TYPE.equals(producyType) || SLH_TYPE.equals(producyType)) {
                   product.setGd(value);
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setKd(value);
@@ -581,6 +638,8 @@ public class ZcProductService {
                   product.setCd(value);
                 } else if (QTFD_TYPE.equals(producyType)) {
                   product.setAzls(value);
+                } else if (SLH_TYPE.equals(producyType)) {
+                  product.setCxhz(value);
                 }
               } else if (j == 9) {
                 if (KQTH_TYPE.equals(producyType)) {
@@ -609,7 +668,7 @@ public class ZcProductService {
                 } else if (GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType) || TXDB_TYPE.equals(producyType)
                     || TX_TYPE.equals(producyType)) {
                   product.setJgd(value);
-                } else if (XJZZ_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)) {
+                } else if (XJZZ_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType) || SLH_TYPE.equals(producyType)) {
                   product.setCxgd(value);
                 } else if (QLZZ_TYPE.equals(producyType)) {
                   product.setSxczl(value);
@@ -636,7 +695,7 @@ public class ZcProductService {
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setCxhz(value);
                 } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType)
-                    || ZWSCLX_TYPE.equals(producyType)) {
+                    || ZWSCLX_TYPE.equals(producyType) || SLH_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setKz(value);
@@ -671,7 +730,8 @@ public class ZcProductService {
                   product.setYsg(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setCxgd(value);
-                } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)) {
+                } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)
+                    || SLH_TYPE.equals(producyType)) {
                   product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setZdhz(value);
@@ -701,7 +761,8 @@ public class ZcProductService {
                 } else if (ZXH_TYPE.equals(producyType) || DC_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (XJDUI_TYPE.equals(producyType)) {
-                } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)) {
+                } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)
+                    || SLH_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setCxgd(value);
