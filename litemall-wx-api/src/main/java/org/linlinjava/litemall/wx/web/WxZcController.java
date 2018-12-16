@@ -34,6 +34,13 @@ public class WxZcController {
   @Autowired
   private ZcProducttypeService zcProducttypeService;
 
+  private static final List<String> ATTIBUTE_CHANGE_PRODUCTS = Arrays.asList(
+      "0010767","0010751","0001705","0010682","0010739","0010676","0010797","0010728",
+      "0010742","0010733","0001769","0010786","0010821","0010775","0010671","0010690",
+      "0010774","0010717","0010686","0010691","0010737","0010745","0010777","0010800",
+      "0010665","0010657","0010754","0010687","0010700","0010716","0010684","0010692",
+      "0010693","0010729","0010685","0010735","0010683","0010451");
+
   /**
    * 查询产品应用平台列表
    * @return
@@ -273,6 +280,10 @@ public class WxZcController {
   @GetMapping("getById")
   public Object getById(Integer productId) {
     ZcProduct productInfo = zcProductService.findById(productId);
+    if(ATTIBUTE_CHANGE_PRODUCTS.contains(productInfo.getProductnum())) {
+      productInfo.setNj(productInfo.getCd());
+      productInfo.setCd(null);
+    }
     Map<String, Object> result = new HashMap<String, Object>();
     result.put("productInfo", productInfo);
 
