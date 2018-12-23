@@ -294,8 +294,8 @@
           productNum: undefined,
           productName: undefined,
           productType: undefined,
-          sort: 'add_time',
-          order: 'desc'
+          sort: 'productnum',
+          order: 'asc'
         },
         dialogImageUrl: '',
         dialogVisible: false,

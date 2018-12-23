@@ -154,6 +154,10 @@ public class ZcProductService {
 
     setSearchCondition(criteria, conditionList);
 
+    if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
+      example.setOrderByClause(sort + "*1" + " " + order);
+    }
+
     PageHelper.startPage(page, limit);
     return zcProductMapper.selectByExample(example);
   }

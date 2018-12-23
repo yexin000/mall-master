@@ -49,8 +49,8 @@ public class AdminZcProductController {
   public Object list(String productNum, String productName, String productType,
                      @RequestParam(defaultValue = "1") Integer page,
                      @RequestParam(defaultValue = "10") Integer limit,
-                     @Sort @RequestParam(defaultValue = "add_time") String sort,
-                     @Order @RequestParam(defaultValue = "desc") String order) {
+                     @Sort @RequestParam(defaultValue = "productnum") String sort,
+                     @Order @RequestParam(defaultValue = "asc") String order) {
 
     List<ZcProduct> productList = zcProductService.querySelective(productNum, productName, productType, null, null, page, limit, sort, order, null, null);
     int total = zcProductService.countSelective(productNum, productName, productType, null, null, null, null);
