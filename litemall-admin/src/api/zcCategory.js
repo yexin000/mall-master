@@ -30,6 +30,13 @@ export function listCatL2() {
   })
 }
 
+export function listProductTypes() {
+  return request({
+    url: '/product/getProductTypes',
+    method: 'get'
+  })
+}
+
 export function deleteCategory(data) {
   return request({
     url: '/zcCategory/delete',

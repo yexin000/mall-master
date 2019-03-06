@@ -59,13 +59,13 @@
             <el-form-item label="扭杆臂长度L3/mm"><span>{{ props.row.ngbcd }}</span></el-form-item>
             <el-form-item label="极限荷载/kN"><span>{{ props.row.jxhz }}</span></el-form-item>
             <el-form-item label="疲劳荷载/kN"><span>{{ props.row.plhz }}</span></el-form-item>
-            <el-form-item label="系统刚度/kN/mm"><span>{{ props.row.xtgd }}</span></el-form-item>
+            <el-form-item label="系统刚度MN.m/rad"><span>{{ props.row.xtgd }}</span></el-form-item>
             <el-form-item label="重量/kg"><span>{{ props.row.weight }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '06'" label-position="left" class="table-expand">
             <el-form-item label="连杆中心距L1/mm"><span>{{ props.row.lgzxj }}</span></el-form-item>
-            <el-form-item label="杆体球头外径L2/mm"><span>{{ props.row.gtqtwj }}</span></el-form-item>
-            <el-form-item label="孔类型L3/mm"><span>{{ props.row.klx }}</span></el-form-item>
+            <el-form-item label="杆体球头外径D1/mm"><span>{{ props.row.gtqtwj }}</span></el-form-item>
+            <el-form-item label="孔类型"><span>{{ props.row.klx }}</span></el-form-item>
             <el-form-item label="极限荷载/kN"><span>{{ props.row.jxhz }}</span></el-form-item>
             <el-form-item label="压装力/kN"><span>{{ props.row.yzl }}</span></el-form-item>
             <el-form-item label="径向刚度/kN/mm"><span>{{ props.row.jxgd }}</span></el-form-item>
@@ -82,25 +82,29 @@
           </el-form>
           <el-form v-else-if="props.row.producttype == '08'" label-position="left" class="table-expand">
             <el-form-item label="外径A/mm"><span>{{ props.row.wj }}</span></el-form-item>
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="垂向荷载/kN"><span>{{ props.row.cxhz }}</span></el-form-item>
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
+            <el-form-item label="剪切X向刚度/kN/mm"><span>{{ props.row.jqxxgd }}</span></el-form-item>
+            <el-form-item label="剪切Y向刚度/kN/mm"><span>{{ props.row.jqyxgd }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '09'" label-position="left" class="table-expand">
             <el-form-item label="外径A/mm"><span>{{ props.row.wj }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="高度B/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="空载/kN"><span>{{ props.row.kz }}</span></el-form-item>
             <el-form-item label="最大荷载/kN"><span>{{ props.row.zdhz }}</span></el-form-item>
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
-            <el-form-item label="压缩高（AWO）/mm"><span>{{ props.row.ysg }}</span></el-form-item>
+            <el-form-item label="压缩高/mm"><span>{{ props.row.ysg }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '10'" label-position="left" class="table-expand">
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="B/mm"><span>{{ props.row.kd }}</span></el-form-item>
+            <el-form-item label="C/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="D/mm"><span>{{ props.row.vd }}</span></el-form-item>
+            <el-form-item label="E/mm"><span>{{ props.row.ve }}</span></el-form-item>
+            <el-form-item label="F/mm"><span>{{ props.row.vf }}</span></el-form-item>
             <el-form-item label="V形角度/°"><span>{{ props.row.vxjd }}</span></el-form-item>
+            <el-form-item label="安装角度α/°"><span>{{ props.row.azjd }}</span></el-form-item>
             <el-form-item label="空载/kN"><span>{{ props.row.kz }}</span></el-form-item>
             <el-form-item label="最大荷载/kN"><span>{{ props.row.zdhz }}</span></el-form-item>
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
@@ -110,49 +114,50 @@
             <el-form-item label="重量/kg"><span>{{ props.row.weight }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '11'" label-position="left" class="table-expand">
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="宽度B/mm"><span>{{ props.row.kd }}</span></el-form-item>
+            <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '12'" label-position="left" class="table-expand">
-            <el-form-item label="外径/mm"><span>{{ props.row.wj }}</span></el-form-item>
-            <el-form-item label="高度/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="外径A/mm"><span>{{ props.row.wj }}</span></el-form-item>
+            <el-form-item label="高度B/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
             <el-form-item label="垂向荷载/kN"><span>{{ props.row.cxhz }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '13' || props.row.producttype == '14'" label-position="left" class="table-expand">
             <el-form-item label="自由高/mm"><span>{{ props.row.zyg }}</span></el-form-item>
             <el-form-item label="匹配钢轨型号"><span>{{ props.row.ppggxh }}</span></el-form-item>
-            <el-form-item label="安装孔距/mm"><span>{{ props.row.azkj }}</span></el-form-item>
+            <el-form-item label="安装孔距L/mm"><span>{{ props.row.azkj }}</span></el-form-item>
             <el-form-item label="静刚度/kN/mm"><span>{{ props.row.jgd }}</span></el-form-item>
             <el-form-item label="动静刚度比"><span>{{ props.row.djgdb }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '15'" label-position="left" class="table-expand">
-            <el-form-item label="长度/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="齿梳宽度/mm"><span>{{ props.row.cskd }}</span></el-form-item>
-            <el-form-item label="安装孔位/mm"><span>{{ props.row.azkw }}</span></el-form-item>
+            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="齿梳宽度B/mm"><span>{{ props.row.cskd }}</span></el-form-item>
+            <el-form-item label="安装孔位L/mm"><span>{{ props.row.azkw }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '16' || props.row.producttype == '17'" label-position="left" class="table-expand">
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="宽度B/mm"><span>{{ props.row.kd }}</span></el-form-item>
+            <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="静刚度/kN/mm"><span>{{ props.row.jgd }}</span></el-form-item>
             <el-form-item label="动静刚度比"><span>{{ props.row.djgdb }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '18'" label-position="left" class="table-expand">
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="宽度B/mm"><span>{{ props.row.kd }}</span></el-form-item>
+            <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
+            <el-form-item label="直径D/mm"><span>{{ props.row.zhij }}</span></el-form-item>
             <el-form-item label="屈服后刚度/kN/mm"><span>{{ props.row.qfhgd }}</span></el-form-item>
             <el-form-item label="屈服力/kN"><span>{{ props.row.qfl }}</span></el-form-item>
             <el-form-item label="水平等效刚度/kN/mm"><span>{{ props.row.spdxgd }}</span></el-form-item>
             <el-form-item label="等效阻尼比"><span>{{ props.row.dxznb }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '19'" label-position="left" class="table-expand">
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="宽度B/mm"><span>{{ props.row.kd }}</span></el-form-item>
+            <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="竖向承载力/kN"><span>{{ props.row.sxczl }}</span></el-form-item>
             <el-form-item label="水平承载力/kN"><span>{{ props.row.spczl }}</span></el-form-item>
             <el-form-item label="动峰值"><span>{{ props.row.dfz }}</span></el-form-item>
@@ -171,33 +176,33 @@
             <el-form-item label="锁定力/kN"><span>{{ props.row.sdl }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '21'" label-position="left" class="table-expand">
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="宽度B/mm"><span>{{ props.row.kd }}</span></el-form-item>
+            <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="半径/mm"><span>{{ props.row.bj }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '22'" label-position="left" class="table-expand">
-            <el-form-item label="高度/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="高度A/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
             <el-form-item label="安装螺纹规格"><span>{{ props.row.azlwgg }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '23'" label-position="left" class="table-expand">
-            <el-form-item label="长度L1/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度L2/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度L3/mm"><span>{{ props.row.gd }}</span></el-form-item>
+            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="宽度B/mm"><span>{{ props.row.kd }}</span></el-form-item>
+            <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
-            <el-form-item label="叠簧直径/mm"><span>{{ props.row.dhzj }}</span></el-form-item>
+            <el-form-item label="叠簧直径F/mm"><span>{{ props.row.dhzj }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '24'" label-position="left" class="table-expand">
-            <el-form-item label="外径/mm"><span>{{ props.row.wj }}</span></el-form-item>
-            <el-form-item label="长度/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="外径D/mm"><span>{{ props.row.wj }}</span></el-form-item>
+            <el-form-item label="内径d/mm"><span>{{ props.row.nj }}</span></el-form-item>
             <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
-            <el-form-item label="内径/mm"><span>{{ props.row.nj }}</span></el-form-item>
+            <el-form-item label="长度L/mm"><span>{{ props.row.cd }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '25'" label-position="left" class="table-expand">
-            <el-form-item label="长度/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="直径/mm"><span>{{ props.row.zhij }}</span></el-form-item>
-            <el-form-item label="安装螺栓/mm"><span>{{ props.row.azls }}</span></el-form-item>
+            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
+            <el-form-item label="直径B/mm"><span>{{ props.row.zhij }}</span></el-form-item>
+            <el-form-item label="安装螺栓C/mm"><span>{{ props.row.azls }}</span></el-form-item>
           </el-form>
         </template>
       </el-table-column>
@@ -205,11 +210,13 @@
       <el-table-column align="center" min-width="100" label="产品名称" prop="productname"></el-table-column>
       <el-table-column align="center" property="iconUrl" label="实物图">
         <template slot-scope="scope">
-          <img :src="scope.row.realpic" width="40" @click="handlePictureCardPreview"/>
+          <el-button type="primary" size="mini" @click="handlePicturePreview(scope.row.realpic)">查看</el-button>
         </template>
       </el-table-column>
-      <el-table-column align="center" property="iconUrl" label="剖面图">
-        <template slot-scope="scope"><img :src="scope.row.snapshot" width="40" @click="handlePictureCardPreview"/></template>
+      <el-table-column align="center" property="iconUrl" label="示意图">
+        <template slot-scope="scope">
+          <el-button type="primary" size="mini" @click="handlePicturePreview(scope.row.snapshot)">查看</el-button>
+        </template>
       </el-table-column>
       <el-table-column align="center" label="结构形式" prop="structtype">
       </el-table-column>
@@ -354,6 +361,10 @@
       },
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.currentTarget.currentSrc
+        this.dialogVisible = true
+      },
+      handlePicturePreview(picSrc) {
+        this.dialogImageUrl = picSrc
         this.dialogVisible = true
       },
       handleUploadPics() {

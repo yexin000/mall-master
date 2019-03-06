@@ -517,7 +517,7 @@ public class ZcProductService {
             break;
           }
         }
-        if (isImportSheet && sheet.getLastRowNum() > 2) {
+        if (isImportSheet && sheet.getLastRowNum() > 1) {
           // 跳过第一第二行
           for (int r = 2; r <= sheet.getLastRowNum(); r++) {
             Row row = sheet.getRow(r);
@@ -555,7 +555,7 @@ public class ZcProductService {
                     || ZSCP_TYPE.equals(producyType) || DHSCLX_TYPE.equals(producyType) || QTFD_TYPE.equals(producyType)) {
                   product.setCd(value);
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setZhij(value);
+                  product.setWj(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
                   product.setZyg(value);
                 } else if (GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType)) {
@@ -765,6 +765,7 @@ public class ZcProductService {
                 } else if (ZXH_TYPE.equals(producyType) || DC_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (XJDUI_TYPE.equals(producyType)) {
+                  product.setJqxxgd(value);
                 } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)
                     || SLH_TYPE.equals(producyType)) {
                   product.setProvider(value);
@@ -797,6 +798,7 @@ public class ZcProductService {
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (XJDUI_TYPE.equals(producyType)) {
+                  product.setJqyxgd(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setHxgd(value);
