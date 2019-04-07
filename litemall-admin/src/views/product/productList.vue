@@ -21,7 +21,7 @@
     <el-dialog :visible.sync="uploadVisible" :before-close="handleClose">
       <el-upload class="filter-item" :action="importPics" :show-file-list="true" :headers="headers" multiple
                  accept=".jpg,.png" :before-upload="handleImportingPics" :on-success="handleImportingPicsSuccess">
-        <el-tooltip class="item" effect="dark" content="可多选,只处理jpg/png文件,且不超过5MB,'物资编号_1'匹配实物图,'物资编号_2'匹配剖面图" placement="bottom">
+        <el-tooltip class="item" effect="dark" content="可多选,只处理jpg/png文件,且不超过5MB,'物资编号_1'匹配实物图,'物资编号_2'匹配示意图" placement="bottom">
           <el-button type="primary" :loading="importingPics" icon="el-icon-download">上传产品图片</el-button>
         </el-tooltip>
       </el-upload>

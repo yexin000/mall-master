@@ -35,6 +35,10 @@ public class ZcMessageService {
       criteria.andNameLike("%" + name + "%");
     }
 
+    if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
+      example.setOrderByClause(sort + " " + order);
+    }
+
     PageHelper.startPage(page, limit);
     return zcMessageMapper.selectByExample(example);
   }

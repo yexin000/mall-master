@@ -199,7 +199,7 @@
           </el-upload>
         </el-form-item>
 
-        <el-form-item label="剖面图">
+        <el-form-item label="示意图">
           <el-upload class="avatar-uploader" :action="uploadPath" list-type="picture-card" :show-file-list="false" :headers="headers"
                      accept=".jpg,.jpeg,.png" :on-success="uploadSnapshot">
             <img v-if="zcProduct.snapshot" :src="zcProduct.snapshot" class="avatar">
