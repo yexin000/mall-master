@@ -147,17 +147,10 @@
             <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
             <el-form-item label="宽度B/mm"><span>{{ props.row.kd }}</span></el-form-item>
             <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
-            <el-form-item label="垂向刚度/kN/mm"><span>{{ props.row.cxgd }}</span></el-form-item>
             <el-form-item label="直径D/mm"><span>{{ props.row.zhij }}</span></el-form-item>
-            <el-form-item label="屈服后刚度/kN/mm"><span>{{ props.row.qfhgd }}</span></el-form-item>
-            <el-form-item label="屈服力/kN"><span>{{ props.row.qfl }}</span></el-form-item>
-            <el-form-item label="水平等效刚度/kN/mm"><span>{{ props.row.spdxgd }}</span></el-form-item>
             <el-form-item label="等效阻尼比"><span>{{ props.row.dxznb }}</span></el-form-item>
           </el-form>
           <el-form v-else-if="props.row.producttype == '19'" label-position="left" class="table-expand">
-            <el-form-item label="长度A/mm"><span>{{ props.row.cd }}</span></el-form-item>
-            <el-form-item label="宽度B/mm"><span>{{ props.row.kd }}</span></el-form-item>
-            <el-form-item label="高度C/mm"><span>{{ props.row.gd }}</span></el-form-item>
             <el-form-item label="竖向承载力/kN"><span>{{ props.row.sxczl }}</span></el-form-item>
             <el-form-item label="水平承载力/kN"><span>{{ props.row.spczl }}</span></el-form-item>
             <el-form-item label="动峰值"><span>{{ props.row.dfz }}</span></el-form-item>

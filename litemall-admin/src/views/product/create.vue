@@ -133,17 +133,10 @@
           <el-form-item label="长度A/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
           <el-form-item label="宽度B/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
           <el-form-item label="高度C/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
-          <el-form-item label="垂向刚度/kN/mm" prop="cxgd"><el-input v-model="zcProduct.cxgd"></el-input></el-form-item>
           <el-form-item label="直径D/mm" prop="zhij"><el-input v-model="zcProduct.zhij"></el-input></el-form-item>
-          <el-form-item label="屈服后刚度/kN/mm" prop="qfhgd"><el-input v-model="zcProduct.qfhgd"></el-input></el-form-item>
-          <el-form-item label="屈服力/kN" prop="qfl"><el-input v-model="zcProduct.qfl"></el-input></el-form-item>
-          <el-form-item label="水平等效刚度/kN/mm" prop="spdxgd"><el-input v-model="zcProduct.spdxgd"></el-input></el-form-item>
           <el-form-item label="等效阻尼比" prop="dxznb"><el-input v-model="zcProduct.dxznb"></el-input></el-form-item>
         </div>
         <div v-if="zcProduct.producttype == '19'">
-          <el-form-item label="长度A/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
-          <el-form-item label="宽度B/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
-          <el-form-item label="高度C/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
           <el-form-item label="竖向承载力/kN" prop="sxczl"><el-input v-model="zcProduct.sxczl"></el-input></el-form-item>
           <el-form-item label="水平承载力/kN" prop="spczl"><el-input v-model="zcProduct.spczl"></el-input></el-form-item>
           <el-form-item label="动峰值" prop="dfz"><el-input v-model="zcProduct.dfz"></el-input></el-form-item>

@@ -88,31 +88,106 @@ public class ZcProductService {
     add("其它风电");
   }};
 
-  public static final String QJGX_TYPE = "01"; // 球铰关节
-  public static final String XJDIAN_TYPE = "02"; // 橡胶垫
-  public static final String ZHID_TYPE = "03"; // 止挡
-  public static final String KQTH_TYPE = "04"; // 空气弹簧
-  public static final String KCGNG_TYPE = "05"; // 抗侧滚扭杆
-  public static final String LGZJ_TYPE = "06"; // 连杆组件
-  public static final String QYZZ_TYPE = "07"; // 牵引装置
-  public static final String XJDUI_TYPE = "08"; // 橡胶堆
-  public static final String ZXH_TYPE = "09"; // 锥形簧
-  public static final String VXH_TYPE = "10"; // V形簧
-  public static final String QT_TYPE = "11"; // 其他
-  public static final String SLH_TYPE = "12"; // 沙漏簧
-  public static final String GDJZQ_TYPE = "13"; // 轨道减振器
-  public static final String DC_TYPE = "14"; // 道岔
-  public static final String AQZZ_TYPE = "15"; // 安全装置
-  public static final String TXDB_TYPE = "16"; // 弹性垫板
-  public static final String TX_TYPE = "17"; // 套靴
-  public static final String XJZZ_TYPE = "18"; // 橡胶支座
-  public static final String QLZZ_TYPE = "19"; // 桥梁支座
-  public static final String ZNQ_TYPE = "20"; // 阻尼器
-  public static final String ZSCP_TYPE = "21"; // 止水产品
-  public static final String FDJTXZC_TYPE = "22"; // 发电机弹性支撑
-  public static final String DHSCLX_TYPE = "23"; // 叠簧式齿轮箱弹性支撑总成
-  public static final String ZWSCLX_TYPE = "24"; // 轴瓦式齿轮箱弹性支撑
-  public static final String QTFD_TYPE = "25"; // 其它风电
+  /**
+   * 球铰关节
+    */
+  public static final String QJGX_TYPE = "01";
+  /**
+   * 橡胶垫
+   */
+  public static final String XJDIAN_TYPE = "02";
+  /**
+   * 止挡
+   */
+  public static final String ZHID_TYPE = "03";
+  /**
+   * 空气弹簧
+   */
+  public static final String KQTH_TYPE = "04";
+  /**
+   * 抗侧滚扭杆
+   */
+  public static final String KCGNG_TYPE = "05";
+  /**
+   * 连杆组件
+   */
+  public static final String LGZJ_TYPE = "06";
+  /**
+   * 牵引装置
+   */
+  public static final String QYZZ_TYPE = "07";
+  /**
+   * 橡胶堆
+   */
+  public static final String XJDUI_TYPE = "08";
+  /**
+   * 锥形簧
+   */
+  public static final String ZXH_TYPE = "09";
+  /**
+   * V形簧
+   */
+  public static final String VXH_TYPE = "10";
+  /**
+   * 其他
+   */
+  public static final String QT_TYPE = "11";
+  /**
+   * 沙漏簧
+   */
+  public static final String SLH_TYPE = "12";
+  /**
+   * 轨道减振器
+   */
+  public static final String GDJZQ_TYPE = "13";
+  /**
+   * 道岔
+   */
+  public static final String DC_TYPE = "14";
+  /**
+   * 安全装置
+   */
+  public static final String AQZZ_TYPE = "15";
+  /**
+   * 弹性垫板
+   */
+  public static final String TXDB_TYPE = "16";
+  /**
+   * 套靴
+   */
+  public static final String TX_TYPE = "17";
+  /**
+   * 橡胶支座
+   */
+  public static final String XJZZ_TYPE = "18";
+  /**
+   * 桥梁支座
+   */
+  public static final String QLZZ_TYPE = "19";
+  /**
+   * 阻尼器
+   */
+  public static final String ZNQ_TYPE = "20";
+  /**
+   * 止水产品
+   */
+  public static final String ZSCP_TYPE = "21";
+  /**
+   * 发电机弹性支撑
+   */
+  public static final String FDJTXZC_TYPE = "22";
+  /**
+   * 叠簧式齿轮箱弹性支撑总成
+   */
+  public static final String DHSCLX_TYPE = "23";
+  /**
+   * 轴瓦式齿轮箱弹性支撑
+   */
+  public static final String ZWSCLX_TYPE = "24";
+  /**
+   * 其它风电
+   */
+  public static final String QTFD_TYPE = "25";
 
   public static final String[] CONDITION_KEY_LIST = {"wj", "bzgd", "lgjzdjj", "zczjj", "ngbcd", "lgzxj", "gtqtwj", "klx", "zongxgd", "jxgd",
       "gd", "gangd", "zyg", "zhouxgd", "cxgd", "vxjd", "cd", "kd"};
@@ -551,11 +626,13 @@ public class ZcProductService {
                   product.setLgzxj(value);
                 } else if (QYZZ_TYPE.equals(producyType) || VXH_TYPE.equals(producyType)
                     || QT_TYPE.equals(producyType) || AQZZ_TYPE.equals(producyType) || TXDB_TYPE.equals(producyType)
-                    || TX_TYPE.equals(producyType) || XJZZ_TYPE.equals(producyType) || QLZZ_TYPE.equals(producyType)
+                    || TX_TYPE.equals(producyType) || XJZZ_TYPE.equals(producyType)
                     || ZSCP_TYPE.equals(producyType) || DHSCLX_TYPE.equals(producyType) || QTFD_TYPE.equals(producyType)) {
                   product.setCd(value);
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setWj(value);
+                } else if (QLZZ_TYPE.equals(producyType)) {
+                  product.setSxczl(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
                   product.setZyg(value);
                 } else if (GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType)) {
@@ -589,13 +666,15 @@ public class ZcProductService {
                 } else if (ZHID_TYPE.equals(producyType)) {
                   product.setZhouxgd(value);
                 } else if (QT_TYPE.equals(producyType) || TXDB_TYPE.equals(producyType) || TX_TYPE.equals(producyType)
-                    || XJZZ_TYPE.equals(producyType) || QLZZ_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType)
+                    || XJZZ_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType)
                     || DHSCLX_TYPE.equals(producyType)) {
                   product.setKd(value);
                 } else if (GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType)) {
                   product.setZyg(value);
                 } else if (AQZZ_TYPE.equals(producyType)) {
                   product.setCskd(value);
+                } else if (QLZZ_TYPE.equals(producyType)) {
+                  product.setSpczl(value);
                 } else if (ZNQ_TYPE.equals(producyType)) {
                   product.setSdzs(value);
                 } else if (FDJTXZC_TYPE.equals(producyType)) {
@@ -623,13 +702,15 @@ public class ZcProductService {
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                   product.setSyhz(value);
                 } else if (VXH_TYPE.equals(producyType) || TXDB_TYPE.equals(producyType) || TX_TYPE.equals(producyType)
-                    || XJZZ_TYPE.equals(producyType) || QLZZ_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType)
+                    || XJZZ_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType)
                     || DHSCLX_TYPE.equals(producyType)) {
                   product.setGd(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (QT_TYPE.equals(producyType)) {
                   product.setGd(value);
+                } else if (QLZZ_TYPE.equals(producyType)) {
+                  product.setDfz(value);
                 } else if (GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType)) {
                   product.setAzkj(value);
                 } else if (AQZZ_TYPE.equals(producyType)) {
@@ -672,10 +753,12 @@ public class ZcProductService {
                 } else if (GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType) || TXDB_TYPE.equals(producyType)
                     || TX_TYPE.equals(producyType)) {
                   product.setJgd(value);
-                } else if (XJZZ_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType) || SLH_TYPE.equals(producyType)) {
+                } else if (ZWSCLX_TYPE.equals(producyType) || SLH_TYPE.equals(producyType)) {
                   product.setCxgd(value);
+                } else if (XJZZ_TYPE.equals(producyType)) {
+                  product.setZhij(value);
                 } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setSxczl(value);
+                  product.setWdwy(value);
                 } else if (ZNQ_TYPE.equals(producyType)) {
                   product.setXc(value);
                 } else if (ZSCP_TYPE.equals(producyType)) {
@@ -712,9 +795,9 @@ public class ZcProductService {
                     || TX_TYPE.equals(producyType)) {
                   product.setDjgdb(value);
                 } else if (XJZZ_TYPE.equals(producyType)) {
-                  product.setQfhgd(value);
+                  product.setDxznb(value);
                 } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setSpczl(value);
+                  product.setSypd(value);
                 } else if (ZNQ_TYPE.equals(producyType)) {
                   product.setQfl(value);
                 }
@@ -744,9 +827,9 @@ public class ZcProductService {
                 } else if (AQZZ_TYPE.equals(producyType) || FDJTXZC_TYPE.equals(producyType) || QTFD_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (XJZZ_TYPE.equals(producyType)) {
-                  product.setQfl(value);
+                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setDfz(value);
+                  product.setSywd(value);
                 } else if (ZNQ_TYPE.equals(producyType)) {
                   product.setQfwy(value);
                 }
@@ -762,7 +845,7 @@ public class ZcProductService {
                   product.setWeight(value);
                 } else if (QJGX_TYPE.equals(producyType)) {
                   product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
-                } else if (ZXH_TYPE.equals(producyType) || DC_TYPE.equals(producyType)) {
+                } else if (ZXH_TYPE.equals(producyType) || DC_TYPE.equals(producyType) || QLZZ_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setJqxxgd(value);
@@ -777,9 +860,7 @@ public class ZcProductService {
                 } else if (AQZZ_TYPE.equals(producyType) || FDJTXZC_TYPE.equals(producyType) || QTFD_TYPE.equals(producyType)) {
                   product.setRemark(value);
                 } else if (XJZZ_TYPE.equals(producyType)) {
-                  product.setSpdxgd(value);
-                } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setWdwy(value);
+                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (ZNQ_TYPE.equals(producyType)) {
                   product.setZnwy(value);
                 }
@@ -806,9 +887,9 @@ public class ZcProductService {
                 } else if (QT_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (XJZZ_TYPE.equals(producyType)) {
-                  product.setDxznb(value);
+                  product.setProvider(value);
                 } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setSypd(value);
+                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (ZNQ_TYPE.equals(producyType)) {
                   product.setSdl(value);
                 } else if (ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)) {
@@ -825,15 +906,17 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setProvider(value);
-                } else if (XJDUI_TYPE.equals(producyType) || XJZZ_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
+                } else if (XJDUI_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setZongxgd(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
+                } else if (XJZZ_TYPE.equals(producyType)) {
+                  product.setRemark(value);
                 } else if (QT_TYPE.equals(producyType)) {
                 } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setSywd(value);
+                  product.setProvider(value);
                 }
               } else if (j == 15) {
                 if (KQTH_TYPE.equals(producyType)) {
@@ -845,7 +928,7 @@ public class ZcProductService {
                   product.setProvider(value);
                 } else if (QJGX_TYPE.equals(producyType)) {
                 } else if (ZXH_TYPE.equals(producyType)) {
-                } else if (XJDUI_TYPE.equals(producyType) || XJZZ_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
+                } else if (XJDUI_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
                   product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
@@ -853,21 +936,17 @@ public class ZcProductService {
                 } else if (ZHID_TYPE.equals(producyType)) {
                 } else if (QT_TYPE.equals(producyType)) {
                 } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setRemark(value);
                 }
               } else if (j == 16) {
                 if (VXH_TYPE.equals(producyType)) {
                   product.setWeight(value);
-                } else if (XJDUI_TYPE.equals(producyType) || XJZZ_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
+                } else if (XJDUI_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
                   product.setProvider(value);
-                } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
                 }
               } else if (j == 17) {
                 if (VXH_TYPE.equals(producyType)) {
                   product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
-                } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setProvider(value);
                 }
               } else if (j == 18) {
                 if (VXH_TYPE.equals(producyType)) {
