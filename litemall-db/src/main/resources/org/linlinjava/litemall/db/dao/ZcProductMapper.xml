@@ -88,6 +88,26 @@
     <result column="azjd" jdbcType="VARCHAR" property="azjd" />
     <result column="jqxxgd" jdbcType="VARCHAR" property="jqxxgd" />
     <result column="jqyxgd" jdbcType="VARCHAR" property="jqyxgd" />
+
+    <result column="hd" jdbcType="VARCHAR" property="hd" />
+    <result column="md" jdbcType="VARCHAR" property="md" />
+    <result column="lsqd" jdbcType="VARCHAR" property="lsqd" />
+    <result column="dllsyb" jdbcType="VARCHAR" property="dllsyb" />
+    <result column="lstxml" jdbcType="VARCHAR" property="lstxml" />
+    <result column="qyhyd" jdbcType="VARCHAR" property="qyhyd" />
+    <result column="csjmcxs" jdbcType="VARCHAR" property="csjmcxs" />
+    <result column="xmhl" jdbcType="VARCHAR" property="xmhl" />
+    <result column="fhgf" jdbcType="VARCHAR" property="fhgf" />
+    <result column="xingh" jdbcType="VARCHAR" property="xingh" />
+    <result column="canb" jdbcType="VARCHAR" property="canb" />
+    <result column="gjbhd" jdbcType="VARCHAR" property="gjbhd" />
+    <result column="kybhd" jdbcType="VARCHAR" property="kybhd" />
+    <result column="yingd" jdbcType="VARCHAR" property="yingd" />
+    <result column="kbl" jdbcType="VARCHAR" property="kbl" />
+    <result column="cail" jdbcType="VARCHAR" property="cail" />
+    <result column="hda" jdbcType="VARCHAR" property="hda" />
+    <result column="hdb" jdbcType="VARCHAR" property="hdb" />
+
   </resultMap>
 
   <resultMap id="TypeResultMap" type="org.linlinjava.litemall.db.domain.ZcProducttype">
@@ -172,7 +192,8 @@
     xtgd, lgzxj, gtqtwj, klx, yzl, jxgd, cd, kd, gd, zpcc, zongxgd, zpcd, zhouxgd, kz,
     zdhz, cxgd, ysg, cxhz, syhz, gangd, vxjd, zyg, hxgd, zhij,ppggxh,azkj,jgd,djgdb,cskd,
     azkw,qfhgd,qfl,spdxgd,dxznb,sxczl,spczl,dfz,wdwy,sypd,sywd,znxs,sdzs,znl,xc,qfwy,znwy,
-    sdl,bj,azlwgg,dhzj,nj,azls
+    sdl,bj,azlwgg,dhzj,nj,azls,hd, md, lsqd, dllsyb, lstxml, qyhyd, csjmcxs, xmhl, fhgf,
+    xingh, canb, gjbhd, kybhd, yingd, kbl, cail, hda, hdb
   </sql>
   <select id="selectByExample" parameterType="org.linlinjava.litemall.db.domain.ZcProductExample" resultMap="BaseResultMap">
     <!--
