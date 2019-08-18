@@ -616,6 +616,78 @@ public class ZcProductService {
           if(!StringUtils.isEmpty(condition.getHigh())) {
             criteria.andSdzsLessThanOrEqualTo(condition.getHigh());
           }
+        } else if("zhij".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andZhijGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andZhijLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("md".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andMdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andMdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("hda".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andHdaGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andHdaLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("hdb".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andHdbGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andHdbLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("canb".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andCanbGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andCanbLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("gjbhd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andGjbhdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andGjbhdLessThanOrEqualTo(condition.getHigh());
+          }
+        }
+        else if("kybhd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andKybhdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andKybhdLessThanOrEqualTo(condition.getHigh());
+          }
+        }
+        else if("yingd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andYingdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andYingdLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("kbl".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andKblGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andKblLessThanOrEqualTo(condition.getHigh());
+          }
+        } else if("hd".equals(condition.getKey())) {
+          if(!StringUtils.isEmpty(condition.getLow())) {
+            criteria.andhdGreaterThanOrEqualTo(condition.getLow());
+          }
+          if(!StringUtils.isEmpty(condition.getHigh())) {
+            criteria.andhdLessThanOrEqualTo(condition.getHigh());
+          }
         }
       }
     }

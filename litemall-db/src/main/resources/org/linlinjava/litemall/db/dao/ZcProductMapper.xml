@@ -370,7 +370,8 @@
     cxhz, syhz, gangd,
     vxjd, zyg, hxgd, zhij,ppggxh,azkj,jgd,djgdb,cskd,
     azkw,qfhgd,qfl,spdxgd,dxznb,sxczl,spczl,dfz,wdwy,sypd,sywd,znxs,sdzs,znl,xc,qfwy,znwy,
-    sdl,bj,azlwgg,dhzj,nj,azls,jqxxgd,jqyxgd)
+    sdl,bj,azlwgg,dhzj,nj,azls,jqxxgd,jqyxgd,hd,md,lsqd,dllsyb,lstxml,qyhyd,xmhl,fhgf,xingh,
+    canb,gjbhd,kybhd,yingd,kbl,cail,hda,hdb)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.productnum,jdbcType=VARCHAR}, #{item.producttype,jdbcType=VARCHAR}, #{item.productname,jdbcType=VARCHAR},
@@ -393,7 +394,11 @@
       , #{item.znxs,jdbcType=VARCHAR}, #{item.sdzs,jdbcType=VARCHAR}, #{item.znl,jdbcType=VARCHAR}, #{item.xc,jdbcType=VARCHAR}
       , #{item.qfwy,jdbcType=VARCHAR}, #{item.znwy,jdbcType=VARCHAR}, #{item.sdl,jdbcType=VARCHAR}, #{item.bj,jdbcType=VARCHAR}
       , #{item.azlwgg,jdbcType=VARCHAR}, #{item.dhzj,jdbcType=VARCHAR}, #{item.nj,jdbcType=VARCHAR}, #{item.azls,jdbcType=VARCHAR}
-      , #{item.jqxxgd,jdbcType=VARCHAR}, #{item.jqyxgd,jdbcType=VARCHAR})
+      , #{item.jqxxgd,jdbcType=VARCHAR}, #{item.jqyxgd,jdbcType=VARCHAR}, #{item.hd,jdbcType=VARCHAR}, #{item.md,jdbcType=VARCHAR}
+      , #{item.lsqd,jdbcType=VARCHAR}, #{item.dllsyb,jdbcType=VARCHAR}, #{item.lstxml,jdbcType=VARCHAR}, #{item.qyhyd,jdbcType=VARCHAR}
+      , #{item.xmhl,jdbcType=VARCHAR}, #{item.fhgf,jdbcType=VARCHAR}, #{item.xingh,jdbcType=VARCHAR}, #{item.canb,jdbcType=VARCHAR}
+      , #{item.gjbhd,jdbcType=VARCHAR}, #{item.kybhd,jdbcType=VARCHAR}, #{item.yingd,jdbcType=VARCHAR}, #{item.kbl,jdbcType=VARCHAR}
+      , #{item.cail,jdbcType=VARCHAR}, #{item.hda,jdbcType=VARCHAR}, #{item.hdb,jdbcType=VARCHAR})
     </foreach>
   </insert>
 
@@ -1164,6 +1169,59 @@
         <if test="record.zhij != null">
           zhij = #{record.zhij,jdbcType=VARCHAR},
         </if>
+
+        <if test="record.hd != null">
+          hd = #{record.hd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.md != null">
+          md = #{record.md,jdbcType=VARCHAR},
+        </if>
+        <if test="record.lsqd != null">
+          lsqd = #{record.lsqd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.dllsyb != null">
+          dllsyb = #{record.dllsyb,jdbcType=VARCHAR},
+        </if>
+        <if test="record.lstxml != null">
+          lstxml = #{record.lstxml,jdbcType=VARCHAR},
+        </if>
+        <if test="record.qyhyd != null">
+          qyhyd = #{record.qyhyd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.xmhl != null">
+          xmhl = #{record.xmhl,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fhgf != null">
+          fhgf = #{record.fhgf,jdbcType=VARCHAR},
+        </if>
+        <if test="record.xingh != null">
+          xingh = #{record.xingh,jdbcType=VARCHAR},
+        </if>
+        <if test="record.canb != null">
+          canb = #{record.canb,jdbcType=VARCHAR},
+        </if>
+        <if test="record.gjbhd != null">
+          gjbhd = #{record.gjbhd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.kybhd != null">
+          kybhd = #{record.kybhd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.yingd != null">
+          yingd = #{record.yingd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.kbl != null">
+          kbl = #{record.kbl,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cail != null">
+          cail = #{record.cail,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hda != null">
+          hda = #{record.hda,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hdb != null">
+          hdb = #{record.hdb,jdbcType=VARCHAR},
+        </if>
+
       </set>
       where productnum = #{record.productnum,jdbcType=VARCHAR}
     </foreach>

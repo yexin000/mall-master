@@ -21,12 +21,6 @@ public class AdminDashbordController {
     @Autowired
     private LitemallUserService userService;
     @Autowired
-    private LitemallGoodsService goodsService;
-    @Autowired
-    private LitemallProductService productService;
-    @Autowired
-    private LitemallOrderService orderService;
-    @Autowired
     private ZcProductService zcProductService;
 
     @GetMapping("")
@@ -36,15 +30,9 @@ public class AdminDashbordController {
         }
 
         int userTotal = userService.count();
-        int goodsTotal = goodsService.count();
-        int productTotal = productService.count();
-        int orderTotal = orderService.count();
         int zcProductTotal = zcProductService.countSelective(null, null, null, null, null, null, null);
         Map<String, Integer> data = new HashMap<>();
         data.put("userTotal", userTotal);
-        data.put("goodsTotal", goodsTotal);
-        data.put("productTotal", productTotal);
-        data.put("orderTotal", orderTotal);
         data.put("zcProductTotal", zcProductTotal);
 
         return ResponseUtil.ok(data);

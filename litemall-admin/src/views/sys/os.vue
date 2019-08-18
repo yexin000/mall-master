@@ -20,12 +20,12 @@
 
       <el-table-column align="center" label="对象名称" prop="name">
       </el-table-column>
-      
+
       <el-table-column align="center" label="对象类型" prop="type">
-      </el-table-column>          
+      </el-table-column>
 
       <el-table-column align="center" label="对象大小" prop="size">
-      </el-table-column>   
+      </el-table-column>
 
       <el-table-column align="center" property="url" label="图片">
         <template slot-scope="scope">
