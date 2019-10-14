@@ -31,6 +31,7 @@ export const constantRouterMap = [
   { path: '/login', component: _import('login/index'), hidden: true },
   { path: '/404', component: _import('error/404'), hidden: true },
   { path: '/401', component: _import('error/401'), hidden: true },
+  { path: '/copyright', component: _import('error/copyright'), hidden: true },
   {
     path: '',
     component: Layout,
