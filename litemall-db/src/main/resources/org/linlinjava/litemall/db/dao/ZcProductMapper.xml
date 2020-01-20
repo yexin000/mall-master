@@ -180,6 +180,14 @@
           </trim>
         </if>
       </foreach>
+      <if test="platformList != null and platformList.size > 0">
+        and (
+          1!=1
+          <foreach collection="platformList" item="item">
+            or platform like concat('%', #{item}, '%')
+          </foreach>
+        )
+      </if>
     </where>
   </sql>
   <sql id="Base_Column_List">

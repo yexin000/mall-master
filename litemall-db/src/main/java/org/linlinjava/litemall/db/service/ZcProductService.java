@@ -296,12 +296,13 @@ public class ZcProductService {
       String[] platforms = platform.split(",");
       if(platforms != null && platforms.length > 0) {
         List<String> platformList = Arrays.asList(platforms);
-        criteria.andPlatformIn(platformList);
+        //criteria.andPlatformIn(platformList);
+        example.setPlatformList(Arrays.asList(platforms));
       }
     }
 
     if (!StringUtils.isEmpty(trainType)) {
-      criteria.andTraintypeEqualTo(trainType);
+      criteria.andTraintypeLike("%" + trainType + "%");
     }
 
     setSearchCondition(criteria, conditionList);
@@ -319,7 +320,7 @@ public class ZcProductService {
     ZcProductExample.Criteria criteria = example.createCriteria();
 
     if (!StringUtils.isEmpty(trainType)) {
-      criteria.andTraintypeEqualTo(trainType);
+      criteria.andTraintypeLike("%" + trainType + "%");
     }
 
     if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
@@ -375,7 +376,7 @@ public class ZcProductService {
     }
 
     if (!StringUtils.isEmpty(trainType)) {
-      criteria.andTraintypeEqualTo(trainType);
+      criteria.andTraintypeLike("%" + trainType + "%");
     }
 
     setSearchCondition(criteria, conditionList);
@@ -398,7 +399,7 @@ public class ZcProductService {
     }
 
     if (!StringUtils.isEmpty(trainType)) {
-      criteria.andTraintypeEqualTo(trainType);
+      criteria.andTraintypeLike("%" + trainType + "%");
     }
 
     if (!StringUtils.isEmpty(productType)) {
@@ -795,7 +796,7 @@ public class ZcProductService {
                 } else if (ZWSCLX_TYPE.equals(producyType)) {
                   product.setNj(value);
                 } else if (JXCP_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (DBZ_TYPE.equals(producyType) || GJDB_TYPE.equals(producyType)) {
                   product.setXingh(value);
                 } else if (GJK_TYPE.equals(producyType)) {
@@ -844,13 +845,13 @@ public class ZcProductService {
                 } else if (QTFD_TYPE.equals(producyType)) {
                   product.setZhij(value);
                 } else if (JXCP_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (DBZ_TYPE.equals(producyType)) {
                   product.setHda(value);
                 } else if (GJK_TYPE.equals(producyType)) {
                   product.setKybhd(value);
                 } else if (GJDB_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (TG_TYPE.equals(producyType)) {
                   product.setNj(value);
                 }
@@ -876,7 +877,7 @@ public class ZcProductService {
                     || DHSCLX_TYPE.equals(producyType) || CYCP_TYPE.equals(producyType) || ZG_TYPE.equals(producyType)) {
                   product.setGd(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (QT_TYPE.equals(producyType)) {
                   product.setGd(value);
                 } else if (QLZZ_TYPE.equals(producyType)) {
@@ -904,7 +905,7 @@ public class ZcProductService {
                 } else if (GJK_TYPE.equals(producyType)) {
                   product.setYingd(value);
                 } else if (GJDB_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (TG_TYPE.equals(producyType)) {
                   product.setWj(value);
                 }
@@ -928,11 +929,11 @@ public class ZcProductService {
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setVxjd(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (QT_TYPE.equals(producyType) || AQZZ_TYPE.equals(producyType) || FDJTXZC_TYPE.equals(producyType)
                     || QTFD_TYPE.equals(producyType) || JCZTXZC_TYPE.equals(producyType) || ZG_TYPE.equals(producyType)
                     || GJK_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType) || TXDB_TYPE.equals(producyType)
                     || TX_TYPE.equals(producyType)) {
                   product.setJgd(value);
@@ -979,7 +980,7 @@ public class ZcProductService {
                 } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType)
                     || ZWSCLX_TYPE.equals(producyType) || SLH_TYPE.equals(producyType) || CYCP_TYPE.equals(producyType)
                     || DBZ_TYPE.equals(producyType) ||TG_TYPE.equals(producyType) || TGDB_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setKz(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
@@ -987,7 +988,7 @@ public class ZcProductService {
                 } else if (QT_TYPE.equals(producyType) || AQZZ_TYPE.equals(producyType) || FDJTXZC_TYPE.equals(producyType)
                     || QTFD_TYPE.equals(producyType) || JCZTXZC_TYPE.equals(producyType) || ZG_TYPE.equals(producyType)
                     || GJK_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType) || TXDB_TYPE.equals(producyType)
                     || TX_TYPE.equals(producyType)) {
                   product.setDjgdb(value);
@@ -1006,7 +1007,7 @@ public class ZcProductService {
                 }
               } else if (j == 11) {
                 if (KQTH_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (KCGNG_TYPE.equals(producyType)) {
                   product.setXtgd(value);
                 } else if (LGZJ_TYPE.equals(producyType)) {
@@ -1016,7 +1017,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType) || GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType)
                     || TXDB_TYPE.equals(producyType) || TX_TYPE.equals(producyType) || DHSCLX_TYPE.equals(producyType)
                     || NZ_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setYsg(value);
                 } else if (XJDUI_TYPE.equals(producyType)) {
@@ -1024,7 +1025,7 @@ public class ZcProductService {
                 } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)
                     || SLH_TYPE.equals(producyType) || CYCP_TYPE.equals(producyType) || DBZ_TYPE.equals(producyType)
                     || TG_TYPE.equals(producyType) || TGDB_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setZdhz(value);
                 } else if (ZHID_TYPE.equals(producyType)) {
@@ -1033,7 +1034,7 @@ public class ZcProductService {
                     || JCZTXZC_TYPE.equals(producyType) || ZG_TYPE.equals(producyType) || GJK_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (XJZZ_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (QLZZ_TYPE.equals(producyType)) {
                   product.setSywd(value);
                 } else if (ZNQ_TYPE.equals(producyType)) {
@@ -1044,7 +1045,7 @@ public class ZcProductService {
               } else if (j == 12) {
                 if (KQTH_TYPE.equals(producyType) || GDJZQ_TYPE.equals(producyType) || DC_TYPE.equals(producyType)
                     || TXDB_TYPE.equals(producyType) || TX_TYPE.equals(producyType) || DHSCLX_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (KCGNG_TYPE.equals(producyType)) {
                   product.setWeight(value);
                 } else if (LGZJ_TYPE.equals(producyType)) {
@@ -1052,9 +1053,9 @@ public class ZcProductService {
                 } else if (QYZZ_TYPE.equals(producyType)) {
                   product.setWeight(value);
                 } else if (QJGX_TYPE.equals(producyType) || NZ_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (ZXH_TYPE.equals(producyType) || DC_TYPE.equals(producyType) || QLZZ_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setJqxxgd(value);
                 } else if (XJDIAN_TYPE.equals(producyType) || ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType)
@@ -1070,7 +1071,7 @@ public class ZcProductService {
                     || JCZTXZC_TYPE.equals(producyType) || ZG_TYPE.equals(producyType) || GJK_TYPE.equals(producyType)) {
                   product.setRemark(value);
                 } else if (XJZZ_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (ZNQ_TYPE.equals(producyType)) {
                   product.setZnwy(value);
                 } else if(NMB_TYPE.equals(producyType)) {
@@ -1081,15 +1082,15 @@ public class ZcProductService {
                     || TXDB_TYPE.equals(producyType) || TX_TYPE.equals(producyType) || DHSCLX_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (KCGNG_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (LGZJ_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (QYZZ_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (QJGX_TYPE.equals(producyType) ||NZ_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (ZXH_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (XJDUI_TYPE.equals(producyType)) {
                   product.setJqyxgd(value);
                 } else if (XJDIAN_TYPE.equals(producyType)) {
@@ -1101,7 +1102,7 @@ public class ZcProductService {
                 } else if (XJZZ_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (QLZZ_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (ZNQ_TYPE.equals(producyType)) {
                   product.setSdl(value);
                 } else if (ZSCP_TYPE.equals(producyType) || ZWSCLX_TYPE.equals(producyType) || CYCP_TYPE.equals(producyType)
@@ -1113,16 +1114,16 @@ public class ZcProductService {
               } else if (j == 14) {
                 if (KQTH_TYPE.equals(producyType)) {
                 } else if (KCGNG_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (LGZJ_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (QYZZ_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (QJGX_TYPE.equals(producyType)) {
                 } else if (ZXH_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (XJDUI_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setZongxgd(value);
@@ -1146,7 +1147,7 @@ public class ZcProductService {
                 } else if (QJGX_TYPE.equals(producyType)) {
                 } else if (ZXH_TYPE.equals(producyType)) {
                 } else if (XJDUI_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (XJDIAN_TYPE.equals(producyType)) {
                 } else if (VXH_TYPE.equals(producyType)) {
                   product.setYsg(value);
@@ -1163,17 +1164,17 @@ public class ZcProductService {
                 } else if (XJDUI_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 } else if (NMB_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 }
               } else if (j == 17) {
                 if (VXH_TYPE.equals(producyType)) {
-                  product.setTraintype(trainTypeMap.get(value) == null ? value : trainTypeMap.get(value).toString());
+                  product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                 } else if (NMB_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 }
               } else if (j == 18) {
                 if (VXH_TYPE.equals(producyType)) {
-                  product.setPlatform(platformMap.get(value) == null ? value : platformMap.get(value).toString());
+                  product.setPlatform(getPlatformCode(value, platformMap));
                 } else if (NMB_TYPE.equals(producyType)) {
                   product.setProvider(value);
                 }
@@ -1254,5 +1255,52 @@ public class ZcProductService {
 
   public List<String> queryPlatformsByType(String productType) {
     return zcProductMapper.queryPlatformsByType(productType);
+  }
+
+  private String getTrainTypeCode(String trainType, Map<String, Object> trainTypeMap) {
+    StringBuilder trainTypeCode = new StringBuilder();
+    String[] trainTypes = trainType.replaceAll("；", ";").split(";");
+    for(String type : trainTypes) {
+      if(trainTypeMap.get(type) != null) {
+        trainTypeCode.append(trainTypeMap.get(type) + ";");
+      }
+    }
+
+    if(trainTypeCode.length() > 0) {
+      return trainTypeCode.substring(0, trainTypeCode.length() - 1);
+    }
+
+    return trainType;
+  }
+
+  private String getPlatformCode(String platformName, Map<String, Object> platformMap) {
+    StringBuilder platformCode = new StringBuilder();
+    String[] platformNames = platformName.replaceAll("；", ";").split(";");
+    for(String name : platformNames) {
+      if(platformMap.get(name) != null) {
+        platformCode.append(platformMap.get(name) + ";");
+      }
+
+    }
+
+    if(platformCode.length() > 0) {
+      return platformCode.substring(0, platformCode.length() - 1);
+    }
+
+    return platformName;
+  }
+
+  public static void main(String[] args) {
+    Map<String, Object> trainTypeMap = new HashMap<>();
+    trainTypeMap.put("铁路桥梁","08001");
+    trainTypeMap.put("公路桥梁","08002");
+
+    ZcProductService service = new ZcProductService();
+    System.out.println(service.getTrainTypeCode("铁路桥梁;公路桥梁", trainTypeMap));
+
+    Map<String, Object> platformMap = new HashMap<>();
+    platformMap.put("桥建","08");
+    platformMap.put("其他","09");
+    System.out.println(service.getTrainTypeCode("其他;桥建", platformMap));
   }
 }

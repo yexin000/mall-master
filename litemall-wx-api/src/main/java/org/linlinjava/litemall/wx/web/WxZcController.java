@@ -284,6 +284,45 @@ public class WxZcController {
       productInfo.setNj(productInfo.getCd());
       productInfo.setCd(null);
     }
+
+    if(!StringUtils.isEmpty(productInfo.getTraintype())) {
+      String trainType = productInfo.getTraintype().replaceAll("；", ";");
+      String[] trainTypes = trainType.split(";");
+      List<ZcCategory> l2CatList = zcCategoryService.queryL2();
+      StringBuilder trainTypeName = new StringBuilder();
+      for(String type : trainTypes) {
+        for(ZcCategory category : l2CatList) {
+          if(category.getCode().equals(type)) {
+            trainTypeName.append(category.getName() + ";");
+            break;
+          }
+        }
+      }
+
+      if(trainTypeName.length() > 0) {
+        productInfo.setTraintypename(trainTypeName.substring(0, trainTypeName.length() - 1));
+      }
+    }
+
+    if(!StringUtils.isEmpty(productInfo.getPlatform())) {
+      String platform = productInfo.getPlatform().replaceAll("；", ";");
+      String[] platforms = platform.split(";");
+      List<ZcCategory> l1CatList = zcCategoryService.queryL1();
+      StringBuilder platformName = new StringBuilder();
+      for(String plat : platforms) {
+        for(ZcCategory category : l1CatList) {
+          if(category.getCode().equals(plat)) {
+            platformName.append(category.getName() + ";");
+            break;
+          }
+        }
+      }
+
+      if(platformName.length() > 0) {
+        productInfo.setPlatformname(platformName.substring(0, platformName.length() - 1));
+      }
+    }
+
     Map<String, Object> result = new HashMap<String, Object>();
     result.put("productInfo", productInfo);
 

@@ -3,7 +3,7 @@
     <div class="wscn-http404">
 
       <div class="bullshit" style="width: 100%;">
-        <div class="bullshit__headline">湖南米粒网络科技有限公司</div>
+        <div class="bullshit__headline">轨道产品查询</div>
         <!--<div class="bullshit__oops">欢迎</div>-->
         <div class="bullshit__info">
           <a class='link-type' target='_blank'></a>
@@ -14,8 +14,8 @@
         <div class="bullshit__info">公司地址
           <a class='link-type' target='_blank'>株洲天元区美的时代广场C塔20F</a>
         </div>
-        <div class="bullshit__headline">公司介绍</div>
-        <div class="bullshit__info" style="width: 100%;">湖南米粒网络科技有限公司，致力打造株洲最专业的移动互联网O2O互动营销整合品牌“米粒互动”。全力助推传统企业转型移动互联网+。 公司主要业务：移动互联网开发与代运营、移动商业场景互动技术、新媒体互动整合推广、企业网站和APP开发维护。</div>
+        <div class="bullshit__headline">项目介绍</div>
+        <div class="bullshit__info" style="width: 100%;">中车时代新材车线桥减振系统产品选型平台,可方便用户精准搜索产品,并查看产品信息。</div>
         <div class="bullshit__info">
           <a class='link-type' href='http://www.beian.miit.gov.cn' target='_blank'>湘ICP备16013507号-2</a>
         </div>
