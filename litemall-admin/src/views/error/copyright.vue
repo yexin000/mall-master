@@ -9,10 +9,10 @@
           <a class='link-type' target='_blank'></a>
         </div>
         <div class="bullshit__info">联系人
-          <a class='link-type' target='_blank'>谢总</a>
+          <a class='link-type' target='_blank'>张工</a>
         </div>
         <div class="bullshit__info">公司地址
-          <a class='link-type' target='_blank'>株洲天元区美的时代广场C塔20F</a>
+          <a class='link-type' target='_blank'>湖南省株洲市天元区海天路18号时代新材</a>
         </div>
         <div class="bullshit__headline">项目介绍</div>
         <div class="bullshit__info" style="width: 100%;">中车时代新材车线桥减振系统产品选型平台,可方便用户精准搜索产品,并查看产品信息。</div>
