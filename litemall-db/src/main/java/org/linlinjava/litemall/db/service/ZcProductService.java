@@ -296,8 +296,8 @@ public class ZcProductService {
       String[] platforms = platform.split(",");
       if(platforms != null && platforms.length > 0) {
         List<String> platformList = Arrays.asList(platforms);
-        //criteria.andPlatformIn(platformList);
-        example.setPlatformList(Arrays.asList(platforms));
+        criteria.andPlatformIn(platformList);
+        //example.setPlatformList(Arrays.asList(platforms));
       }
     }
 
@@ -1258,33 +1258,37 @@ public class ZcProductService {
   }
 
   private String getTrainTypeCode(String trainType, Map<String, Object> trainTypeMap) {
-    StringBuilder trainTypeCode = new StringBuilder();
-    String[] trainTypes = trainType.replaceAll("；", ";").split(";");
-    for(String type : trainTypes) {
-      if(trainTypeMap.get(type) != null) {
-        trainTypeCode.append(trainTypeMap.get(type) + ";");
+    if(!StringUtils.isEmpty(trainType)) {
+      StringBuilder trainTypeCode = new StringBuilder();
+      String[] trainTypes = trainType.replaceAll("；", ";").split(";");
+      for (String type : trainTypes) {
+        if (trainTypeMap.get(type) != null) {
+          trainTypeCode.append(trainTypeMap.get(type) + ";");
+        }
       }
-    }
 
-    if(trainTypeCode.length() > 0) {
-      return trainTypeCode.substring(0, trainTypeCode.length() - 1);
+      if (trainTypeCode.length() > 0) {
+        return trainTypeCode.substring(0, trainTypeCode.length() - 1);
+      }
     }
 
     return trainType;
   }
 
   private String getPlatformCode(String platformName, Map<String, Object> platformMap) {
-    StringBuilder platformCode = new StringBuilder();
-    String[] platformNames = platformName.replaceAll("；", ";").split(";");
-    for(String name : platformNames) {
-      if(platformMap.get(name) != null) {
-        platformCode.append(platformMap.get(name) + ";");
+    if(!StringUtils.isEmpty(platformName)) {
+      StringBuilder platformCode = new StringBuilder();
+      String[] platformNames = platformName.replaceAll("；", ";").split(";");
+      for (String name : platformNames) {
+        if (platformMap.get(name) != null) {
+          platformCode.append(platformMap.get(name) + ";");
+        }
+
       }
 
-    }
-
-    if(platformCode.length() > 0) {
-      return platformCode.substring(0, platformCode.length() - 1);
+      if (platformCode.length() > 0) {
+        return platformCode.substring(0, platformCode.length() - 1);
+      }
     }
 
     return platformName;
