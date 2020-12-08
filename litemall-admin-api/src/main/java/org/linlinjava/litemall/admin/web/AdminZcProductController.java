@@ -28,172 +28,192 @@ import java.util.Map;
 
 /**
  * 中车产品信息控制层
+ *
  * @author yx
  */
 @RestController
 @RequestMapping("/admin/product")
 @Validated
 public class AdminZcProductController {
-  private final Log logger = LogFactory.getLog(AdminZcProductController.class);
+    private final Log logger = LogFactory.getLog(AdminZcProductController.class);
+    @Autowired
+    private StorageService storageService;
+    @Autowired
+    private PlatformTransactionManager txManager;
+    @Autowired
+    private ZcProductService zcProductService;
+    @Autowired
+    private ZcProducttypeService zcProducttypeService;
 
-  @Autowired
-  private ZcProductService zcProductService;
-  @Autowired
-  private StorageService storageService;
-  @Autowired
-  private ZcProducttypeService zcProducttypeService;
-  @Autowired
-  private PlatformTransactionManager txManager;
+    @PostMapping("/create")
+    public Object create(@LoginAdmin Integer adminId, @RequestBody ZcProduct product) {
+        if (adminId == null) {
+            return ResponseUtil.unlogin();
+        }
 
-  @GetMapping("/list")
-  public Object list(String productNum, String productName, String productType,
-                     @RequestParam(defaultValue = "1") Integer page,
-                     @RequestParam(defaultValue = "10") Integer limit,
-                     @Sort @RequestParam(defaultValue = "productnum") String sort,
-                     @Order @RequestParam(defaultValue = "asc") String order) {
+        // 开启事务管理
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+        TransactionStatus status = txManager.getTransaction(def);
 
-    List<ZcProduct> productList = zcProductService.querySelective(productNum, productName, productType, null, null, page, limit, sort, order, null, null);
-    int total = zcProductService.countSelective(productNum, productName, productType, null, null, null, null);
-    Map<String, Object> data = new HashMap<>();
-    data.put("total", total);
-    data.put("items", productList);
+        try {
+            zcProductService.add(product);
+        } catch (Exception ex) {
+            txManager.rollback(status);
+            logger.error("系统内部错误", ex);
+        }
+        txManager.commit(status);
 
-    return ResponseUtil.ok(data);
-  }
-
-  @PostMapping("/create")
-  public Object create(@LoginAdmin Integer adminId, @RequestBody ZcProduct product) {
-    if (adminId == null) {
-      return ResponseUtil.unlogin();
+        return ResponseUtil.ok();
     }
 
-    // 开启事务管理
-    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-    TransactionStatus status = txManager.getTransaction(def);
+    @PostMapping("/import")
+    public Object create(@LoginAdmin Integer adminId, @RequestParam("file") MultipartFile file) throws Exception {
+        if (adminId == null) {
+            return ResponseUtil.unlogin();
+        }
+        String fileName = file.getOriginalFilename();
+        zcProductService.batchImport(fileName, file);
 
-    try {
-      zcProductService.add(product);
-    } catch (Exception ex) {
-      txManager.rollback(status);
-      logger.error("系统内部错误", ex);
-    }
-    txManager.commit(status);
-
-    return ResponseUtil.ok();
-  }
-
-  @GetMapping("/detail")
-  public Object detail(@LoginAdmin Integer adminId, @NotNull Integer id) {
-    if (adminId == null) {
-      return ResponseUtil.unlogin();
+        Map<String, Object> data = new HashMap<>();
+        return ResponseUtil.ok(data);
     }
 
-    ZcProduct product = zcProductService.findById(id);
+    @PostMapping("/delete")
+    public Object delete(@LoginAdmin Integer adminId, @RequestBody ZcProduct product) {
+        if (adminId == null) {
+            return ResponseUtil.unlogin();
+        }
 
-    Map<String, Object> data = new HashMap<>();
-    data.put("product", product);
+        // 开启事务管理
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+        TransactionStatus status = txManager.getTransaction(def);
+        try {
 
-    return ResponseUtil.ok(data);
-  }
-
-  @PostMapping("/update")
-  public Object update(@LoginAdmin Integer adminId, @RequestBody ZcProduct product) {
-    if (adminId == null) {
-      return ResponseUtil.unlogin();
+            Integer productId = product.getId();
+            zcProductService.deleteById(productId);
+        } catch (Exception ex) {
+            txManager.rollback(status);
+            logger.error("系统内部错误", ex);
+        }
+        txManager.commit(status);
+        return ResponseUtil.ok();
     }
 
-    // 开启事务管理
-    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-    TransactionStatus status = txManager.getTransaction(def);
+    @GetMapping("/detail")
+    public Object detail(@LoginAdmin Integer adminId, @NotNull Integer id) {
+        if (adminId == null) {
+            return ResponseUtil.unlogin();
+        }
 
-    try {
-      zcProductService.updateById(product);
-    } catch (Exception ex) {
-      txManager.rollback(status);
-      logger.error("系统内部错误", ex);
-    }
-    txManager.commit(status);
+        ZcProduct product = zcProductService.findById(id);
 
-    return ResponseUtil.ok();
-  }
+        Map<String, Object> data = new HashMap<>();
+        data.put("product", product);
 
-  @PostMapping("/delete")
-  public Object delete(@LoginAdmin Integer adminId, @RequestBody ZcProduct product) {
-    if (adminId == null) {
-      return ResponseUtil.unlogin();
+        return ResponseUtil.ok(data);
     }
 
-    // 开启事务管理
-    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-    TransactionStatus status = txManager.getTransaction(def);
-    try {
-
-      Integer productId = product.getId();
-      zcProductService.deleteById(productId);
-    } catch (Exception ex) {
-      txManager.rollback(status);
-      logger.error("系统内部错误", ex);
-    }
-    txManager.commit(status);
-    return ResponseUtil.ok();
-  }
-
-  @PostMapping("/import")
-  public Object create(@LoginAdmin Integer adminId, @RequestParam("file") MultipartFile file) throws Exception {
-    if (adminId == null) {
-      return ResponseUtil.unlogin();
-    }
-    String fileName = file.getOriginalFilename();
-    zcProductService.batchImport(fileName, file);
-
-    Map<String, Object> data = new HashMap<>();
-    return ResponseUtil.ok(data);
-  }
-
-
-  @PostMapping("/importPics")
-  public Object importPics(@LoginAdmin Integer adminId, @RequestParam("file") MultipartFile file) throws Exception {
-    if (adminId == null) {
-      return ResponseUtil.unlogin();
+    /**
+     * 查询产品类型列表
+     *
+     * @return
+     */
+    @GetMapping("getProductTypes")
+    public Object getProductTypes() {
+        List<ZcProducttype> producttypes = zcProducttypeService.queryAllType();
+        return ResponseUtil.ok(producttypes);
     }
 
-    String originalFilename = file.getOriginalFilename();
-    String extUpp = StringUtil.toUpperCase(originalFilename.substring(originalFilename.lastIndexOf(".") + 1));
-    if (!extUpp.matches("^[(JPG)|(PNG)]+$")) {
-      return ResponseUtil.fail();
+    @PostMapping("/importPics")
+    public Object importPics(@LoginAdmin Integer adminId, @RequestParam("file") MultipartFile file) throws Exception {
+        if (adminId == null) {
+            return ResponseUtil.unlogin();
+        }
+
+        String originalFilename = file.getOriginalFilename();
+        String extUpp = StringUtil.toUpperCase(originalFilename.substring(originalFilename.lastIndexOf(".") + 1));
+        if (!extUpp.matches("^[(JPG)|(PNG)]+$")) {
+            return ResponseUtil.fail();
+        }
+
+        if (file.getSize() > 5 * 1024 * 1024) {
+            return ResponseUtil.fail();
+        }
+
+        String fileName = originalFilename.substring(0, originalFilename.lastIndexOf("."));
+        String[] fileNameFilters = fileName.split("_");
+        if (fileNameFilters.length == 2 && ("1".equals(fileNameFilters[1]) || "2".equals(fileNameFilters[1]))) {
+            String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), originalFilename);
+            if ("1".equals(fileNameFilters[1])) {
+                zcProductService.updateRealpicByProductNum(fileNameFilters[0], url);
+            } else if ("2".equals(fileNameFilters[1])) {
+                zcProductService.updateSnapshotByProductNum(fileNameFilters[0], url);
+            }
+        } else {
+            return ResponseUtil.fail();
+        }
+
+        Map<String, Object> data = new HashMap<>();
+        return ResponseUtil.ok(data);
     }
 
-    if (file.getSize() > 5 * 1024 * 1024) {
-      return ResponseUtil.fail();
+    @GetMapping("/list")
+    public Object list(String productNum, String productName, String productType,
+                       @RequestParam(defaultValue = "1") Integer page,
+                       @RequestParam(defaultValue = "10") Integer limit,
+                       @Sort @RequestParam(defaultValue = "productnum") String sort,
+                       @Order @RequestParam(defaultValue = "asc") String order) {
+
+        List<ZcProduct> productList = zcProductService.querySelective(productNum, productName, productType, null, null, page, limit, sort, order, null, null);
+        int total = zcProductService.countSelective(productNum, productName, productType, null, null, null, null);
+        Map<String, Object> data = new HashMap<>();
+        data.put("total", total);
+        data.put("items", productList);
+
+        return ResponseUtil.ok(data);
     }
 
-    String fileName = originalFilename.substring(0, originalFilename.lastIndexOf("."));
-    String[] fileNameFilters = fileName.split("_");
-    if (fileNameFilters.length == 2 && ("1".equals(fileNameFilters[1]) || "2".equals(fileNameFilters[1]))) {
-      String url = storageService.store(file.getInputStream(), file.getSize(), file.getContentType(), originalFilename);
-      if ("1".equals(fileNameFilters[1])) {
-        zcProductService.updateRealpicByProductNum(fileNameFilters[0], url);
-      } else if ("2".equals(fileNameFilters[1])) {
-        zcProductService.updateSnapshotByProductNum(fileNameFilters[0], url);
-      }
-    } else {
-      return ResponseUtil.fail();
+    @PostMapping("/update")
+    public Object update(@LoginAdmin Integer adminId, @RequestBody ZcProduct product) {
+        if (adminId == null) {
+            return ResponseUtil.unlogin();
+        }
+
+        // 开启事务管理
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+        TransactionStatus status = txManager.getTransaction(def);
+
+        try {
+            zcProductService.updateById(product);
+        } catch (Exception ex) {
+            txManager.rollback(status);
+            logger.error("系统内部错误", ex);
+        }
+        txManager.commit(status);
+
+        return ResponseUtil.ok();
     }
 
-    Map<String, Object> data = new HashMap<>();
-    return ResponseUtil.ok(data);
-  }
+    /**
+     * 更新产品备注
+     *
+     * @param adminId
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/updateRemark")
+    public Object updateRemark(@LoginAdmin Integer adminId, @RequestParam("file") MultipartFile file) throws Exception {
+        if (adminId == null) {
+            return ResponseUtil.unlogin();
+        }
+        String fileName = file.getOriginalFilename();
+        Map<String, Object> data = zcProductService.updateRemark(fileName, file);
 
-  /**
-   * 查询产品类型列表
-   * @return
-   */
-  @GetMapping("getProductTypes")
-  public Object getProductTypes() {
-    List<ZcProducttype> producttypes = zcProducttypeService.queryAllType();
-    return ResponseUtil.ok(producttypes);
-  }
+        return ResponseUtil.ok(data);
+    }
+
 }

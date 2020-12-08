@@ -15,6 +15,10 @@
         <el-button type="primary" :loading="importing" icon="el-icon-download">导入产品</el-button>
       </el-upload>
       <el-button class="filter-item" type="primary" icon="el-icon-download" @click="handleUploadPics">上传产品图片</el-button>
+      <el-upload class="filter-item" :action="importRemarkExcel" :show-file-list="false" :headers="headers"
+                 accept=".xls,.xlsx" :before-upload="handleNumPreview" :on-success="handleNumSuccess">
+        <el-button type="primary" :loading="importingNum" icon="el-icon-download">更新产品备注</el-button>
+      </el-upload>
     </div>
     <!-- 查询结果 -->
     <el-dialog :visible.sync="dialogVisible"><img width="100%" :src="dialogImageUrl" alt=""></el-dialog>
@@ -253,7 +257,7 @@
 </style>
 
 <script>
-  import { listProducts, deleteProduct, importExcel, importPics, getProductTypes } from '@/api/product'
+  import { listProducts, deleteProduct, importExcel, importPics, getProductTypes, importRemarkExcel } from '@/api/product'
   import BackToTop from '@/components/BackToTop'
   import { getToken } from '@/utils/auth'
 
@@ -285,6 +289,7 @@
       return {
         importExcel,
         importPics,
+        importRemarkExcel,
         list: [],
         total: 0,
         listLoading: true,
@@ -304,6 +309,7 @@
         goodsDetail: '',
         detailDialogVisible: false,
         importing: false,
+        importingNum: false,
         importingPics: false
       }
     },
@@ -366,6 +372,9 @@
       handlePreview() {
         this.importing = true
       },
+      handleNumPreview() {
+        this.importingNum = true
+      },
       handleImportingPics() {
         this.importingPics = true
       },
@@ -378,6 +387,13 @@
           type: 'success',
           duration: 2000
         })
+      },
+      handleNumSuccess(response) {
+        this.importingNum = false
+
+        this.$alert(response.data.message, '成功', {
+          confirmButtonText: '确定'
+        });
       },
       handleImportingPicsSuccess(response, file, fileList) {
         this.importingPics = false

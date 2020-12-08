@@ -43,6 +43,9 @@ export function deleteProduct(data) {
 const importExcel = process.env.BASE_API + '/product/import'
 export { importExcel }
 
+const importRemarkExcel = process.env.BASE_API + '/product/updateRemark'
+export { importRemarkExcel }
+
 const importPics = process.env.BASE_API + '/product/importPics'
 export { importPics }
 
