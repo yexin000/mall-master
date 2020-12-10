@@ -85,10 +85,14 @@
           <el-form-item label="压缩高（AWO）/mm" prop="ysg"><el-input v-model="zcProduct.ysg"></el-input></el-form-item>
         </div>
         <div v-if="zcProduct.producttype == '10'">
-          <el-form-item label="长度A/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
-          <el-form-item label="宽度B/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
-          <el-form-item label="高度C/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
-          <el-form-item label="V形角度α/°" prop="vxjd"><el-input v-model="zcProduct.vxjd"></el-input></el-form-item>
+          <el-form-item label="A/mm" prop="cd"><el-input v-model="zcProduct.cd"></el-input></el-form-item>
+          <el-form-item label="B/mm" prop="kd"><el-input v-model="zcProduct.kd"></el-input></el-form-item>
+          <el-form-item label="C/mm" prop="gd"><el-input v-model="zcProduct.gd"></el-input></el-form-item>
+          <el-form-item label="D/mm" prop="vd"><el-input v-model="zcProduct.vd"></el-input></el-form-item>
+          <el-form-item label="E/mm" prop="ve"><el-input v-model="zcProduct.ve"></el-input></el-form-item>
+          <el-form-item label="F/mm" prop="vf"><el-input v-model="zcProduct.vf"></el-input></el-form-item>
+          <el-form-item label="V形角度/°" prop="vxjd"><el-input v-model="zcProduct.vxjd"></el-input></el-form-item>
+          <el-form-item label="安装角度α/°" prop="azjd"><el-input v-model="zcProduct.azjd"></el-input></el-form-item>
           <el-form-item label="空载/kN" prop="kz"><el-input v-model="zcProduct.kz"></el-input></el-form-item>
           <el-form-item label="最大荷载/kN" prop="zdhz"><el-input v-model="zcProduct.zdhz"></el-input></el-form-item>
           <el-form-item label="垂向刚度/kN/mm" prop="cxgd"><el-input v-model="zcProduct.cxgd"></el-input></el-form-item>
@@ -215,6 +219,10 @@
           <el-select v-model="selectedTrainType" multiple placeholder="请选择" @change="handleTrainTypeChange">
             <el-option v-for="item in trainTypeList" :key="item.code" :label="item.label" :value="item.code"></el-option>
           </el-select>
+        </el-form-item>
+
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="zcProduct.remark"></el-input>
         </el-form-item>
       </el-form>
     </el-card>

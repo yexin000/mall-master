@@ -525,7 +525,7 @@ public class ZcProductService {
                                 } else if (XJDIAN_TYPE.equals(producyType)) {
                                     product.setGangd(value);
                                 } else if (VXH_TYPE.equals(producyType)) {
-                                    product.setVxjd(value);
+                                    product.setVd(value);
                                 } else if (ZHID_TYPE.equals(producyType)) {
                                     product.setPlatform(getPlatformCode(value, platformMap));
                                 } else if (QT_TYPE.equals(producyType) || AQZZ_TYPE.equals(producyType) || FDJTXZC_TYPE.equals(producyType)
@@ -580,7 +580,7 @@ public class ZcProductService {
                                         || DBZ_TYPE.equals(producyType) || TG_TYPE.equals(producyType) || TGDB_TYPE.equals(producyType)) {
                                     product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                                 } else if (VXH_TYPE.equals(producyType)) {
-                                    product.setKz(value);
+                                    product.setVe(value);
                                 } else if (ZHID_TYPE.equals(producyType)) {
                                     product.setProvider(value);
                                 } else if (QT_TYPE.equals(producyType) || AQZZ_TYPE.equals(producyType) || FDJTXZC_TYPE.equals(producyType)
@@ -625,7 +625,7 @@ public class ZcProductService {
                                         || TG_TYPE.equals(producyType) || TGDB_TYPE.equals(producyType)) {
                                     product.setPlatform(getPlatformCode(value, platformMap));
                                 } else if (VXH_TYPE.equals(producyType)) {
-                                    product.setZdhz(value);
+                                    product.setVf(value);
                                 } else if (ZHID_TYPE.equals(producyType)) {
                                 } else if (QT_TYPE.equals(producyType)) {
                                 } else if (AQZZ_TYPE.equals(producyType) || FDJTXZC_TYPE.equals(producyType) || QTFD_TYPE.equals(producyType)
@@ -661,7 +661,7 @@ public class ZcProductService {
                                         || TG_TYPE.equals(producyType) || TGDB_TYPE.equals(producyType)) {
                                     product.setProvider(value);
                                 } else if (VXH_TYPE.equals(producyType)) {
-                                    product.setCxgd(value);
+                                    product.setVxjd(value);
                                 } else if (ZHID_TYPE.equals(producyType)) {
                                 } else if (QT_TYPE.equals(producyType)) {
 
@@ -693,7 +693,7 @@ public class ZcProductService {
                                     product.setJqyxgd(value);
                                 } else if (XJDIAN_TYPE.equals(producyType)) {
                                 } else if (VXH_TYPE.equals(producyType)) {
-                                    product.setHxgd(value);
+                                    product.setAzjd(value);
                                 } else if (ZHID_TYPE.equals(producyType)) {
                                 } else if (QT_TYPE.equals(producyType)) {
                                     product.setProvider(value);
@@ -724,7 +724,7 @@ public class ZcProductService {
                                     product.setTraintype(getTrainTypeCode(value, trainTypeMap));
                                 } else if (XJDIAN_TYPE.equals(producyType)) {
                                 } else if (VXH_TYPE.equals(producyType)) {
-                                    product.setZongxgd(value);
+                                    product.setKz(value);
                                 } else if (ZHID_TYPE.equals(producyType)) {
                                 } else if (XJZZ_TYPE.equals(producyType) || NZ_TYPE.equals(producyType)) {
                                     product.setRemark(value);
@@ -748,7 +748,7 @@ public class ZcProductService {
                                     product.setPlatform(getPlatformCode(value, platformMap));
                                 } else if (XJDIAN_TYPE.equals(producyType)) {
                                 } else if (VXH_TYPE.equals(producyType)) {
-                                    product.setYsg(value);
+                                    product.setZdhz(value);
                                 } else if (ZHID_TYPE.equals(producyType)) {
                                 } else if (QT_TYPE.equals(producyType)) {
                                 } else if (QLZZ_TYPE.equals(producyType)) {
@@ -758,7 +758,7 @@ public class ZcProductService {
                                 }
                             } else if (j == 16) {
                                 if (VXH_TYPE.equals(producyType)) {
-                                    product.setWeight(value);
+                                    product.setCxgd(value);
                                 } else if (XJDUI_TYPE.equals(producyType) || ZNQ_TYPE.equals(producyType)) {
                                     product.setProvider(value);
                                 } else if (NMB_TYPE.equals(producyType)) {
@@ -766,23 +766,40 @@ public class ZcProductService {
                                 }
                             } else if (j == 17) {
                                 if (VXH_TYPE.equals(producyType)) {
-                                    product.setTraintype(getTrainTypeCode(value, trainTypeMap));
+                                    product.setHxgd(value);
                                 } else if (NMB_TYPE.equals(producyType)) {
                                     product.setPlatform(getPlatformCode(value, platformMap));
                                 }
                             } else if (j == 18) {
                                 if (VXH_TYPE.equals(producyType)) {
-                                    product.setPlatform(getPlatformCode(value, platformMap));
+                                    product.setZongxgd(value);
                                 } else if (NMB_TYPE.equals(producyType)) {
                                     product.setProvider(value);
                                 }
                             } else if (j == 19) {
                                 if (VXH_TYPE.equals(producyType)) {
-                                    product.setProvider(value);
+                                    product.setYsg(value);
                                 } else if (NMB_TYPE.equals(producyType)) {
                                     product.setRemark(value);
                                 }
+                            } else if (j == 20) {
+                                if (VXH_TYPE.equals(producyType)) {
+                                    product.setWeight(value);
+                                }
+                            } else if (j == 21) {
+                                if (VXH_TYPE.equals(producyType)) {
+                                    product.setTraintype(getTrainTypeCode(value, trainTypeMap));
+                                }
+                            } else if (j == 22) {
+                                if (VXH_TYPE.equals(producyType)) {
+                                    product.setPlatform(getPlatformCode(value, platformMap));
+                                }
+                            } else if (j == 23) {
+                                if (VXH_TYPE.equals(producyType)) {
+                                    product.setProvider(value);
+                                }
                             }
+
                         }
                         if (!StringUtils.isEmpty(product.getProductnum()) && !StringUtils.isEmpty(product.getProductname())) {
                             productList.add(product);
@@ -1322,6 +1339,8 @@ public class ZcProductService {
                         ZcProduct product = new ZcProduct();
                         product.setProductnum(getValue(row.getCell(0)));
                         product.setRemark(getValue(row.getCell(1)));
+                        product.setRealpic(null);
+                        product.setSnapshot(null);
                         if (!StringUtils.isEmpty(product.getProductnum())) {
                             productList.add(product);
                         }

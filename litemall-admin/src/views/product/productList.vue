@@ -393,7 +393,7 @@
 
         this.$alert(response.data.message, '成功', {
           confirmButtonText: '确定'
-        });
+        })
       },
       handleImportingPicsSuccess(response, file, fileList) {
         this.importingPics = false

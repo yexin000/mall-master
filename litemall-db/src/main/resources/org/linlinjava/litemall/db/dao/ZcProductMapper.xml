@@ -379,7 +379,7 @@
     vxjd, zyg, hxgd, zhij,ppggxh,azkj,jgd,djgdb,cskd,
     azkw,qfhgd,qfl,spdxgd,dxznb,sxczl,spczl,dfz,wdwy,sypd,sywd,znxs,sdzs,znl,xc,qfwy,znwy,
     sdl,bj,azlwgg,dhzj,nj,azls,jqxxgd,jqyxgd,hd,md,lsqd,dllsyb,lstxml,qyhyd,xmhl,fhgf,xingh,
-    canb,gjbhd,kybhd,yingd,kbl,cail,hda,hdb)
+    canb,gjbhd,kybhd,yingd,kbl,cail,hda,hdb,vd,ve,vf,azjd)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.productnum,jdbcType=VARCHAR}, #{item.producttype,jdbcType=VARCHAR}, #{item.productname,jdbcType=VARCHAR},
@@ -406,7 +406,8 @@
       , #{item.lsqd,jdbcType=VARCHAR}, #{item.dllsyb,jdbcType=VARCHAR}, #{item.lstxml,jdbcType=VARCHAR}, #{item.qyhyd,jdbcType=VARCHAR}
       , #{item.xmhl,jdbcType=VARCHAR}, #{item.fhgf,jdbcType=VARCHAR}, #{item.xingh,jdbcType=VARCHAR}, #{item.canb,jdbcType=VARCHAR}
       , #{item.gjbhd,jdbcType=VARCHAR}, #{item.kybhd,jdbcType=VARCHAR}, #{item.yingd,jdbcType=VARCHAR}, #{item.kbl,jdbcType=VARCHAR}
-      , #{item.cail,jdbcType=VARCHAR}, #{item.hda,jdbcType=VARCHAR}, #{item.hdb,jdbcType=VARCHAR})
+      , #{item.cail,jdbcType=VARCHAR}, #{item.hda,jdbcType=VARCHAR}, #{item.hdb,jdbcType=VARCHAR}, #{item.vd,jdbcType=VARCHAR}
+      , #{item.ve,jdbcType=VARCHAR}, #{item.vf,jdbcType=VARCHAR}, #{item.azjd,jdbcType=VARCHAR})
     </foreach>
   </insert>
 
@@ -1228,6 +1229,18 @@
         </if>
         <if test="record.hdb != null">
           hdb = #{record.hdb,jdbcType=VARCHAR},
+        </if>
+        <if test="record.vd != null">
+          vd = #{record.vd,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ve != null">
+          ve = #{record.ve,jdbcType=VARCHAR},
+        </if>
+        <if test="record.vf != null">
+          vf = #{record.vf,jdbcType=VARCHAR},
+        </if>
+        <if test="record.azjd != null">
+          azjd = #{record.azjd,jdbcType=VARCHAR},
         </if>
 
       </set>
